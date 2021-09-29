@@ -1,0 +1,1 @@
+This folder and its contents are only needed if you have linked the GUI library to your application.

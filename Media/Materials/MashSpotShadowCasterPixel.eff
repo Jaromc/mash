@@ -1,0 +1,14 @@
+
+autos
+{
+	float4 autoSpotLightInvRange
+}
+
+source
+{
+	float4 MashShadowCasterPixel(PIN input)
+	{
+		//returns linear depth
+		return input.lightViewSpaceDepth * autoSpotLightInvRange.x;
+	}
+}

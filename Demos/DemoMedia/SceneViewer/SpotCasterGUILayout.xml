@@ -1,0 +1,170 @@
+<root>
+    <guielement type="window" name="ShadowCasterSettingsWindow" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Caster Settings" closebuttonenabled="1" minimizebuttonenabled="1" mousedragenabled="1" hscrollenabled="1" vscrollenabled="1" renderbackground="1">
+        <destinationregion>
+            <left scale="0" offset="185" />
+            <right scale="0" offset="410" />
+            <top scale="0" offset="10" />
+            <bottom scale="0" offset="340" />
+        </destinationregion>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Render Backface" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="5" />
+                <right scale="0" offset="125" />
+                <top scale="0" offset="275" />
+                <bottom scale="0" offset="295" />
+            </destinationregion>
+        </guielement>
+        <guielement type="checkbox" name="SpotShadowBackfaceCB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" checked="0">
+            <destinationregion>
+                <left scale="0" offset="135" />
+                <right scale="0" offset="155" />
+                <top scale="0" offset="275" />
+                <bottom scale="0" offset="295" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="ESM Darkening" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="5" />
+                <right scale="0" offset="120" />
+                <top scale="0" offset="250" />
+                <bottom scale="0" offset="270" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Sample Size" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="5" />
+                <right scale="0" offset="105" />
+                <top scale="0" offset="225" />
+                <bottom scale="0" offset="245" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Texture Format" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="5" />
+                <right scale="0" offset="115" />
+                <top scale="0" offset="100" />
+                <bottom scale="0" offset="120" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Samples" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="5" />
+                <right scale="0" offset="95" />
+                <top scale="0" offset="155" />
+                <bottom scale="0" offset="175" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="SpotShadowESMDarkeningTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="30" textformat="int" precision="1" usenumberbuttons="1" minnumber="0" maxnumber="10000">
+            <destinationregion>
+                <left scale="0" offset="130" />
+                <right scale="0" offset="220" />
+                <top scale="0" offset="250" />
+                <bottom scale="0" offset="270" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="SpotShadowSampleSizeTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00090" textformat="float" precision="5" usenumberbuttons="1" minnumber="0" maxnumber="1">
+            <destinationregion>
+                <left scale="0" offset="130" />
+                <right scale="0" offset="220" />
+                <top scale="0" offset="225" />
+                <bottom scale="0" offset="245" />
+            </destinationregion>
+        </guielement>
+        <guielement type="listbox" name="SpotShadowSamplesLB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" itemheight="25" iconsenabled="0">
+            <destinationregion>
+                <left scale="0" offset="130" />
+                <right scale="0" offset="220" />
+                <top scale="0" offset="155" />
+                <bottom scale="0" offset="220" />
+            </destinationregion>
+            <itemiconregion>
+                <left scale="0" offset="0" />
+                <right scale="0" offset="20" />
+                <top scale="0" offset="0" />
+                <bottom scale="0" offset="20" />
+            </itemiconregion>
+            <itemtextregion>
+                <left scale="0" offset="5" />
+                <right scale="1" offset="-5" />
+                <top scale="0" offset="5" />
+                <bottom scale="1" offset="-5" />
+            </itemtextregion>
+            <item text="5" value="5" />
+            <item text="15" value="15" />
+            <item text="25" value="25" />
+            <item text="45" value="45" />
+        </guielement>
+        <guielement type="listbox" name="SpotShadowTexFormatLB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" itemheight="25" iconsenabled="0">
+            <destinationregion>
+                <left scale="0" offset="130" />
+                <right scale="0" offset="220" />
+                <top scale="0" offset="100" />
+                <bottom scale="0" offset="150" />
+            </destinationregion>
+            <itemiconregion>
+                <left scale="0" offset="0" />
+                <right scale="0" offset="20" />
+                <top scale="0" offset="0" />
+                <bottom scale="0" offset="20" />
+            </itemiconregion>
+            <itemtextregion>
+                <left scale="0" offset="5" />
+                <right scale="1" offset="-5" />
+                <top scale="0" offset="5" />
+                <bottom scale="1" offset="-5" />
+            </itemtextregion>
+            <item text="16bit" value="0" />
+            <item text="32bit" value="1" />
+        </guielement>
+        <guielement type="listbox" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" itemheight="25" iconsenabled="0">
+            <destinationregion>
+                <left scale="0" offset="130" />
+                <right scale="0" offset="220" />
+                <top scale="0" offset="30" />
+                <bottom scale="0" offset="95" />
+            </destinationregion>
+            <itemiconregion>
+                <left scale="0" offset="0" />
+                <right scale="0" offset="20" />
+                <top scale="0" offset="0" />
+                <bottom scale="0" offset="20" />
+            </itemiconregion>
+            <itemtextregion>
+                <left scale="0" offset="5" />
+                <right scale="1" offset="-5" />
+                <top scale="0" offset="5" />
+                <bottom scale="1" offset="-5" />
+            </itemtextregion>
+            <item text="256" value="256" />
+            <item text="512" value="512" />
+            <item text="1024" value="1024" />
+            <item text="2048" value="2048" />
+            <item text="4096" value="4096" />
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Bias" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="5" />
+                <right scale="0" offset="70" />
+                <top scale="0" offset="5" />
+                <bottom scale="0" offset="25" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Texture Size" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="5" />
+                <right scale="0" offset="100" />
+                <top scale="0" offset="30" />
+                <bottom scale="0" offset="50" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="SpotShadowBiasTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.05000" textformat="float" precision="5" usenumberbuttons="1" minnumber="0" maxnumber="1">
+            <destinationregion>
+                <left scale="0" offset="130" />
+                <right scale="0" offset="220" />
+                <top scale="0" offset="5" />
+                <bottom scale="0" offset="25" />
+            </destinationregion>
+        </guielement>
+    </guielement>
+</root>
+  

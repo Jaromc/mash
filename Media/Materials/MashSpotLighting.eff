@@ -1,0 +1,57 @@
+
+include
+{
+	MashLightStructures.eff
+	//runtime generated shading data is added here
+}
+
+source
+{
+	sLightOutput MashSpotLighting(sLight currentLight, float3 surfaceNormal, float3 viewSpacePosition, float4 specularIntensity, float shadowFactor)
+	{
+		float3 lightVec = currentLight.viewSpacePosition - viewSpacePosition;
+		float surfaceToLightDist = length(lightVec);
+		
+		sLightOutput output = (sLightOutput)0;
+		if (surfaceToLightDist < MASH_LIGHT_RANGE)
+		{
+			lightVec /= surfaceToLightDist;
+				
+			float cosAlpha = max( 0.0f, dot( lightVec, -currentLight.viewSpaceDirection.xyz ) );
+			  // Compute the spot attenuation factor
+			float spotAtten = 0.0f;
+			if(cosAlpha > MASH_LIGHT_THETA)
+			{
+				spotAtten = 1.0f;
+			}
+			else if(cosAlpha > MASH_LIGHT_PHI)
+			{
+				spotAtten = pow((cosAlpha - MASH_LIGHT_PHI) / (MASH_LIGHT_THETA - MASH_LIGHT_PHI), MASH_LIGHT_FALLOFF);
+			}
+			
+			float quadAtten = 1.0f / (currentLight.attenuation.x * 
+				surfaceToLightDist * surfaceToLightDist + 
+				currentLight.attenuation.y * surfaceToLightDist + 
+				currentLight.attenuation.z);
+			
+			//final attenuation
+			float attenuation = quadAtten * spotAtten;
+			
+			float diffuseFactor = saturate(dot(lightVec, surfaceNormal));	
+			if (diffuseFactor > 0.0f)
+			{
+				output = MashComputeShading(lightVec, surfaceNormal, normalize(-viewSpacePosition), specularIntensity, currentLight.diffuse.xyz, currentLight.specular.xyz);
+				output.diffuse *= diffuseFactor * attenuation * shadowFactor;
+				output.specular *= attenuation * shadowFactor;
+			}
+			
+			output.diffuse += (attenuation * currentLight.ambient.rgb);
+		}
+		
+		
+		output.diffuse = saturate(output.diffuse);
+		output.specular = saturate(output.specular);
+		
+		return output;
+	}
+}

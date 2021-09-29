@@ -1,0 +1,38 @@
+include
+{
+	MashTexCoords.eff
+}
+
+vertexInput
+{
+	float3 position : position
+	float2 texcoords : texcoord
+}
+
+vertexOutput
+{
+	float4 viewposition : viewposition
+	float3 viewnormal : viewnormal
+	float2 texcoords : texcoord pass
+}
+
+autos
+{
+	float3 autoWorldPosition
+	float4x4 autoInvView
+	float4x4 autoView
+}
+
+source
+{	
+	VOUT vertexmain(VIN input)
+	{
+		VOUT output;
+		float3 billboardPos = mul((float3x3)autoInvView, input.position);
+		billboardPos += autoWorldPosition;
+		output.viewposition = mul(autoView, float4(billboardPos, 1.0f));
+		output.viewnormal = float3(0.0, 0.0, -1);//billboard normals in viewspace always face the camera
+		output.texcoords = mashGetTexcoords(input.texcoords);
+		return output;
+	}
+}

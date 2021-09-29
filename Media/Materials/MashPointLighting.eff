@@ -1,0 +1,43 @@
+include
+{
+	MashLightStructures.eff
+	//runtime generated shading data is added here
+}
+
+source
+{
+	sLightOutput MashPointLighting(sLight currentLight, float3 surfaceNormal, float3 viewSpacePosition, float4 specularIntensity, float shadowFactor)
+	{
+		sLightOutput output = (sLightOutput)0;
+		
+		float3 lightVec = currentLight.viewSpacePosition - viewSpacePosition;
+		float surfaceToLightDist = length(lightVec);
+		
+		
+		if (surfaceToLightDist < MASH_LIGHT_RANGE)
+		{
+			lightVec /= surfaceToLightDist;
+			
+			float attenuation = 1.0f / ( currentLight.attenuation.x * 
+				surfaceToLightDist * surfaceToLightDist + 
+				currentLight.attenuation.y * surfaceToLightDist + 
+				currentLight.attenuation.z );
+				
+			float diffuseFactor = saturate(dot(lightVec, surfaceNormal));	
+			if (diffuseFactor > 0.0f)
+			{
+				output = MashComputeShading(lightVec, surfaceNormal, normalize(-viewSpacePosition), specularIntensity, currentLight.diffuse.xyz, currentLight.specular.xyz);
+				output.diffuse *= diffuseFactor * attenuation * shadowFactor;
+				output.specular *= attenuation * shadowFactor;
+			}
+			
+			output.diffuse += currentLight.ambient.rgb;
+		}
+		
+		
+		output.diffuse = saturate(output.diffuse);
+		output.specular = saturate(output.specular);
+
+		return output;
+	}
+}

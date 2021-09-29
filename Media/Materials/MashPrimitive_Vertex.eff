@@ -1,0 +1,27 @@
+
+autos
+{
+	float4x4 autoViewProjection
+}
+
+source
+{
+	struct VS_INPUT
+	{
+		float3 Position : POSITION0;
+		float4 colour : COLOR0;
+	};
+	struct VS_OUTPUT
+	{
+		float4 colour : COLOR0;
+		float4 PositionH : SV_POSITION;
+	};
+
+	VS_OUTPUT vsmain( VS_INPUT Input)
+	{
+		VS_OUTPUT Output;
+		Output.PositionH = mul(autoViewProjection, float4(Input.Position, 1.0f));
+		Output.colour = Input.colour;
+	   return Output ;
+	}
+}

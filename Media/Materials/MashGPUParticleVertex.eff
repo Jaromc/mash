@@ -1,0 +1,84 @@
+include
+{
+	MashTexCoords.eff
+}
+
+autos
+{
+	float4x4 autoInvView
+	float4x4 autoView;
+	float4 autoParticleBuffer
+	float3 autoLightWorldPosition
+}
+
+vertexInput
+{
+	float4 position : position
+	float3 velocity : custom
+	float2 scale : custom
+	float2 time : custom //creations time and destroy time
+	float torque : custom
+	float4 startColour : colour
+	float4 endColour : colour
+}
+
+vertexOutput
+{
+	float4 position : viewposition
+	float3 normal : viewnormal
+	float4 specular : specular
+	
+	float2 texcoords : texcoord pass
+	float4 colour : colour pass
+}
+
+source
+{
+	#define d_currentSystemTime autoParticleBuffer.x
+	#define d_gravity autoParticleBuffer.yzw
+
+	VOUT vertexmain(VIN input)
+	{
+		//create in main to get around mac issues
+		float2 particleTextureCoords[4] = {float2(0.0, 0.0), float2(1.0, 0.0), float2(1.0, 1.0), float2(0.0, 1.0)};
+		float2 particleCornerPosition[4] = {float2(-0.5, 0.5), float2(0.5, 0.5), float2(0.5, -0.5), float2(-0.5, -0.5)};
+	
+		VOUT output;
+		float timeElapseSinceCreation = d_currentSystemTime - input.time.x;
+		float normalizedAge = timeElapseSinceCreation / (input.time.y - input.time.x);
+		
+		float rotationAmount = input.torque * normalizedAge;
+		float s = sin(rotationAmount);
+		float c = cos(rotationAmount);
+		
+		output.specular = float4(0,0,0,0);
+		
+		output.position.xy = particleCornerPosition[(int)input.position.w];
+		output.position.zw = 0;
+		
+		//scale
+		output.position.xy *= lerp(input.scale.x, input.scale.y, normalizedAge);
+		
+		//rotate
+		float2x2 transformMatrix = float2x2(c, s, -s, c);
+		output.position.xy = mul(transformMatrix, output.position.xy);
+		
+		//billboard particle
+		//(float3x3)autoInvView doesnt play well on osx
+		output.position.xyz = mul(autoInvView, float4(output.position.xyz, 0.0f));
+		
+		//integrate position
+		output.position.xyz = input.position.xyz + output.position.xyz + (input.velocity * timeElapseSinceCreation);
+		output.position.xyz += 0.5f * d_gravity * timeElapseSinceCreation * timeElapseSinceCreation;
+		output.position.w = 1.0f;
+		
+		//particle normal is always directed at the main light
+		output.normal = mul(autoView, float4(autoLightWorldPosition - output.position.xyz, 1.0f));
+		output.position = mul(autoView, output.position);		
+		
+		output.colour = lerp(input.startColour, input.endColour, normalizedAge);
+		output.texcoords = mashGetTexcoords(particleTextureCoords[(int)input.position.w]);
+		
+		return output;
+	}
+}

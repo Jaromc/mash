@@ -1,0 +1,40 @@
+
+material SkinnedMeshMaterial
+{	
+	vertex
+	{
+		position rgb32float //stream  stepRate
+		normal rgb32float
+		blendweight rgba32float
+		blendindex rgba32float
+		texcoord rg32float
+	}
+
+	technique Standard
+	{
+		vertexprogram "auto" "SkinnedMeshVertexProgram.eff" "vertexmain"
+		pixelprogram "auto" "BasePixelProgram.eff" "pixelmain"
+		shadowvertexprogram "auto" "SkinnedMeshVertexProgram.eff" "vertexmain"
+
+		lighting auto
+
+		blendstate
+		{
+			blendingenabled false
+			srcblend one
+			destblend zero
+			blendop add
+			srcblendalpha zero
+			destblendalpha zero
+			blendopalpha add
+			writemask all
+		}
+		
+		rasteriser
+		{
+			depthcmp lessequal
+			depthtestenabled true
+			depthwriteenabled true
+		}
+	}
+}

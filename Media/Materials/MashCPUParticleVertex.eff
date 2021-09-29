@@ -1,0 +1,46 @@
+include
+{
+	MashTexCoords.eff
+}
+
+autos
+{
+	float4x4 autoView
+	float3 autoLightWorldPosition
+}
+
+vertexInput
+{
+	float3 position : position
+	float2 texcoords : texcoord
+	float4 colour : colour
+}
+
+vertexOutput
+{
+	float4 viewposition : viewposition
+	float3 viewnormal : viewnormal
+	float4 specular : specular
+	
+	float2 texcoords : texcoord pass
+	float4 colour : colour pass
+}
+
+source
+{	
+	VOUT vertexmain(VIN input)
+	{
+		VOUT output;
+		
+		output.colour = input.colour;
+		output.texcoords = mashGetTexcoords(input.texcoords);
+		//set specular here incase of vertex lighting
+		output.specular = float4(0.0f, 0.0f, 0.0f, 0.0f);
+		
+		output.viewposition = mul(autoView, float4(input.position, 1.0f));
+		//particle normal is always directed at the main light
+		output.viewnormal = mul(autoView, float4(autoLightWorldPosition - input.position, 1.0f));
+		output.viewnormal = normalize(output.viewnormal);
+		return output;
+	}
+}

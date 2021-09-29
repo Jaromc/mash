@@ -1,0 +1,20 @@
+
+autos
+{
+	sampler2D autoSampler0
+	float4 autoGUIFontColour
+}
+
+source
+{
+	struct PS_INPUT
+	{
+		float2 texcoords : TEXCOORD0;
+	};
+
+	float4 psmain(PS_INPUT Input) : SV_TARGET0
+	{
+		float alpha = tex2D(autoSampler0, Input.texcoords).a;
+		return float4(autoGUIFontColour.rgb, alpha * autoGUIFontColour.a);
+	}
+}

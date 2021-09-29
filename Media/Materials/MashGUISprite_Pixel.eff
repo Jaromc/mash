@@ -1,0 +1,24 @@
+
+autos
+{
+	sampler2D autoSampler0
+	float autoGUIAlphaMaskThreshold
+}
+
+source
+{
+	struct PS_INPUT
+	{
+		float2 baseTex : TEXCOORD0;
+		float4 colour : COLOR0;
+	};
+
+	float4 psmain(PS_INPUT Input) : SV_TARGET0
+	{	
+		float4 outColour = tex2D(autoSampler0, Input.baseTex);
+
+		outColour *= Input.colour;
+		clip(outColour.a < autoGUIAlphaMaskThreshold ? -1:1);
+		return outColour;
+	}
+}

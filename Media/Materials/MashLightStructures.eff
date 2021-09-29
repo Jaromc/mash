@@ -1,0 +1,26 @@
+source
+{
+	struct sLight
+	{
+		float4 ambient;
+		float4 diffuse;
+		float4 specular;
+		float4 position;
+		float4 viewSpacePosition;
+		float4 direction;
+		float4 viewSpaceDirection;
+		float4 attenuation;
+		float4 extendedValues;
+	};
+	
+	#define MASH_LIGHT_RANGE currentLight.extendedValues.x
+	#define MASH_LIGHT_PHI currentLight.extendedValues.y
+	#define MASH_LIGHT_THETA currentLight.extendedValues.z
+	#define MASH_LIGHT_FALLOFF currentLight.extendedValues.w
+	
+	struct sLightOutput
+	{
+		float3 diffuse;
+		float3 specular;
+	};
+}

@@ -1,0 +1,58 @@
+include
+{
+	MashPointDeferredLighting_g.eff
+}
+
+autos
+{
+	sampler2D autoGBufferDepthSampler0
+	sampler2D autoGBufferNormalSampler1
+	sampler2D autoGBufferSpecularSampler2
+	float2 autoCameraNearFar
+}
+
+source
+{	
+	struct PS_INPUT
+	{
+		float2 texCoord : TEXCOORD0;
+		float3 projTexCoords : TEXCOORD1;
+	};
+
+	struct PS_OUTPUT
+	{
+		float4 lighting : SV_TARGET0;
+		float4 specular : SV_TARGET1;
+	};
+
+	PS_OUTPUT psmain(PS_INPUT input)
+	{
+		float3 normalVS = tex2D(autoGBufferNormalSampler1, input.texCoord);
+		normalVS = 2.0f * normalVS - 1.0f;
+		normalVS = normalize(normalVS);
+		
+		/*
+			Recreate the view position.
+			From the depth and screen coords we create a ray that gives us the view position.
+		*/
+		//sample the linear depth
+		float depth = tex2D(autoGBufferDepthSampler0, input.texCoord).r;
+		/*
+			The viewspace xy is scaled by the perspective depth. The z coord is simply set
+			to its max value.
+		*/
+		//create the view ray
+		float3 viewRay = float3(input.projTexCoords.xy * (autoCameraNearFar.y / input.projTexCoords.z), autoCameraNearFar.y);
+		//scale the ray back by the sampled depth. This gives us the view space pos.
+		float3 positionVS = viewRay * depth;
+
+		float4 specular = tex2D(autoGBufferSpecularSampler2, input.texCoord);
+		sLightOutput lightOutput = MashDeferredPointLighting(normalVS, positionVS, specular);
+		
+		PS_OUTPUT output;
+		output.lighting = float4(lightOutput.diffuse, 1.0f);
+		output.specular = float4(lightOutput.specular, 1.0f);
+		
+		return output;
+	}
+}

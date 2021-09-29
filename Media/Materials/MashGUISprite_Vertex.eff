@@ -1,0 +1,34 @@
+include
+{
+	MashTexCoords.eff
+}
+
+autos
+{
+	float4x4 autoViewProjection
+}
+
+source
+{
+	struct VS_INPUT
+	{
+		float3 position : POSITION0;
+		float2 baseTex : TEXCOORD0;
+		float4 colour : COLOR0;
+	};
+	struct VS_OUTPUT
+	{
+		float2 baseTex : TEXCOORD0;
+		float4 colour : COLOR0;
+		float4 positionH : SV_POSITION;
+	};
+
+	VS_OUTPUT vsmain( VS_INPUT Input)
+	{
+		VS_OUTPUT Output;
+		Output.positionH = mul(autoViewProjection, float4(Input.position, 1.0));
+		Output.baseTex = mashGetTexcoords(Input.baseTex);
+		Output.colour = Input.colour;
+		return( Output );
+	}
+}

@@ -1,0 +1,34 @@
+<root>
+    <guielement type="window" name="ChangeParentWindow" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="1" text="Change Parent To..." closebuttonenabled="0" minimizebuttonenabled="0" mousedragenabled="1" hscrollenabled="1" vscrollenabled="1" renderbackground="1">
+        <destinationregion>
+            <left scale="0" offset="0" />
+            <right scale="0" offset="360" />
+            <top scale="0" offset="0" />
+            <bottom scale="0" offset="240" />
+        </destinationregion>
+        <guielement type="button" name="ChangeParentCancelBtn" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Cancel" isswitch="0">
+            <destinationregion>
+                <left scale="0" offset="260" />
+                <right scale="0" offset="350" />
+                <top scale="0" offset="175" />
+                <bottom scale="0" offset="205" />
+            </destinationregion>
+        </guielement>
+        <guielement type="button" name="ChangeParentSelectBtn" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Select" isswitch="0">
+            <destinationregion>
+                <left scale="0" offset="165" />
+                <right scale="0" offset="255" />
+                <top scale="0" offset="175" />
+                <bottom scale="0" offset="205" />
+            </destinationregion>
+        </guielement>
+        <guielement type="tree" name="ChangeParentTree" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="350" />
+                <top scale="0" offset="10" />
+                <bottom scale="0" offset="160" />
+            </destinationregion>
+        </guielement>
+    </guielement>
+</root>

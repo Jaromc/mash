@@ -1,0 +1,92 @@
+<root>
+    <guielement type="window" name="ParticleCreationWindow" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="1" text="Particle Creation" closebuttonenabled="0" minimizebuttonenabled="0" mousedragenabled="1" hscrollenabled="1" vscrollenabled="1" renderbackground="1">
+        <destinationregion>
+            <left scale="0" offset="0" />
+            <right scale="0" offset="310" />
+            <top scale="0" offset="0" />
+            <bottom scale="0" offset="240" />
+        </destinationregion>
+        <guielement type="listbox" name="ParticleCreationLightTypeLB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" itemheight="25" iconsenabled="0">
+            <destinationregion>
+                <left scale="0" offset="165" />
+                <right scale="0" offset="295" />
+                <top scale="0" offset="35" />
+                <bottom scale="0" offset="160" />
+            </destinationregion>
+            <itemiconregion>
+                <left scale="0" offset="0" />
+                <right scale="0" offset="20" />
+                <top scale="0" offset="0" />
+                <bottom scale="0" offset="20" />
+            </itemiconregion>
+            <itemtextregion>
+                <left scale="0" offset="5" />
+                <right scale="1" offset="-5" />
+                <top scale="0" offset="5" />
+                <bottom scale="1" offset="-5" />
+            </itemtextregion>
+            <item text="Vertex" value="2" />
+            <item text="Pixel" value="3" />
+            <item text="Deferred" value="4" />
+            <item text="Auto" value="1" />
+            <item text="None" value="0" />
+        </guielement>
+        <guielement type="button" name="ParticleCreationAddBtn" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Add" isswitch="0">
+            <destinationregion>
+                <left scale="0" offset="110" />
+                <right scale="0" offset="200" />
+                <top scale="0" offset="175" />
+                <bottom scale="0" offset="200" />
+            </destinationregion>
+        </guielement>
+        <guielement type="button" name="ParticleCreationCancelBtn" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Cancel" isswitch="0">
+            <destinationregion>
+                <left scale="0" offset="205" />
+                <right scale="0" offset="295" />
+                <top scale="0" offset="175" />
+                <bottom scale="0" offset="200" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Particle Type" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="135" />
+                <top scale="0" offset="15" />
+                <bottom scale="0" offset="35" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Lighting Type" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="165" />
+                <right scale="0" offset="300" />
+                <top scale="0" offset="15" />
+                <bottom scale="0" offset="35" />
+            </destinationregion>
+        </guielement>
+        <guielement type="listbox" name="ParticleCreationTypeLB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" itemheight="25" iconsenabled="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="155" />
+                <top scale="0" offset="35" />
+                <bottom scale="0" offset="160" />
+            </destinationregion>
+            <itemiconregion>
+                <left scale="0" offset="0" />
+                <right scale="0" offset="20" />
+                <top scale="0" offset="0" />
+                <bottom scale="0" offset="20" />
+            </itemiconregion>
+            <itemtextregion>
+                <left scale="0" offset="5" />
+                <right scale="1" offset="-5" />
+                <top scale="0" offset="5" />
+                <bottom scale="1" offset="-5" />
+            </itemtextregion>
+            <item text="CPU" value="0" />
+            <item text="GPU" value="1" />
+            <item text="Mesh" value="2" />
+            <item text="CPU Soft Deferred" value="3" />
+            <item text="GPU Soft Deferred" value="4" />
+        </guielement>
+    </guielement>
+</root>

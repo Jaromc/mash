@@ -1,0 +1,22 @@
+autos
+{
+	sampler2D autoSampler0
+}
+
+pixelOutput
+{
+	float4 diffuse : diffuse
+	float4 specular : specular
+}
+
+source
+{
+	POUT pixelmain(PIN input)
+	{
+		POUT output;
+		float4 texColour = tex2D(autoSampler0, input.texcoords);
+		output.diffuse = float4(texColour.rgb, 1.0f) * input.colour;
+		output.specular = float4(texColour.a, texColour.a, texColour.a, texColour.a);
+		return output;
+	}
+}

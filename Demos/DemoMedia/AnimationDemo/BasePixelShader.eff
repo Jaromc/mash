@@ -1,0 +1,17 @@
+
+pixelOutput
+{
+	float4 diffuse : diffuse
+	float4 specular : specular
+}
+
+source
+{
+	POUT pixelmain(PIN input)
+	{
+		POUT output;
+		output.diffuse = float4(0.5, 0.5, 0.5, 1.0);
+		output.specular = float4(1.0, 1.0, 1.0, 1.0);
+		return output;
+	}
+}

@@ -1,0 +1,106 @@
+<root>
+    <guielement type="window" name="CameraSettingsWindow" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Camera" closebuttonenabled="0" minimizebuttonenabled="0" mousedragenabled="0" hscrollenabled="1" vscrollenabled="1" renderbackground="1">
+        <destinationregion>
+            <left scale="0" offset="0" />
+            <right scale="0" offset="300" />
+            <top scale="0" offset="0" />
+            <bottom scale="0" offset="200" />
+        </destinationregion>
+        <guielement type="checkbox" name="CameraIsMainCB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" checked="0">
+            <destinationregion>
+                <left scale="0" offset="160" />
+                <right scale="0" offset="180" />
+                <top scale="0" offset="20" />
+                <bottom scale="0" offset="40" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Main Camera" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="15" />
+                <right scale="0" offset="120" />
+                <top scale="0" offset="20" />
+                <bottom scale="0" offset="35" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Z Far" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="15" />
+                <right scale="0" offset="70" />
+                <top scale="0" offset="120" />
+                <bottom scale="0" offset="135" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Z Near" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="15" />
+                <right scale="0" offset="70" />
+                <top scale="0" offset="95" />
+                <bottom scale="0" offset="110" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Aspect" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="15" />
+                <right scale="0" offset="75" />
+                <top scale="0" offset="70" />
+                <bottom scale="0" offset="85" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="FOV" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="15" />
+                <right scale="0" offset="60" />
+                <top scale="0" offset="45" />
+                <bottom scale="0" offset="60" />
+            </destinationregion>
+        </guielement>
+        <guielement type="checkbox" name="CameraAutoAspectCB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" checked="0">
+            <destinationregion>
+                <left scale="0" offset="235" />
+                <right scale="0" offset="255" />
+                <top scale="0" offset="70" />
+                <bottom scale="0" offset="90" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Auto" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="190" />
+                <right scale="0" offset="230" />
+                <top scale="0" offset="70" />
+                <bottom scale="0" offset="90" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="CameraFOVTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00" textformat="float" precision="2" usenumberbuttons="1" wordwrap="0" minnumber="-2147483648" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="80" />
+                <right scale="0" offset="180" />
+                <top scale="0" offset="45" />
+                <bottom scale="0" offset="65" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="CameraAspectTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00000" textformat="float" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="-2147483648" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="80" />
+                <right scale="0" offset="180" />
+                <top scale="0" offset="70" />
+                <bottom scale="0" offset="90" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="CameraZNearTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00" textformat="float" precision="2" usenumberbuttons="1" wordwrap="0" minnumber="-2147483648" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="80" />
+                <right scale="0" offset="180" />
+                <top scale="0" offset="95" />
+                <bottom scale="0" offset="115" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="CameraZFarTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00" textformat="float" precision="2" usenumberbuttons="1" wordwrap="0" minnumber="-2147483648" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="80" />
+                <right scale="0" offset="180" />
+                <top scale="0" offset="120" />
+                <bottom scale="0" offset="140" />
+            </destinationregion>
+        </guielement>
+    </guielement>
+</root>

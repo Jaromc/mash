@@ -1,0 +1,15 @@
+
+autos
+{
+	//holds camera near and far data. .x = znear, .y = zfar
+	float2 autoCameraNearFar
+}
+
+source
+{
+	float4 MashShadowCasterPixel(PIN input)
+	{
+		//returns linear depth
+		return (input.lightViewSpacePos - autoCameraNearFar.x) / (autoCameraNearFar.y - autoCameraNearFar.x);
+	}
+}

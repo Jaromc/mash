@@ -1,0 +1,313 @@
+<root>
+    <guielement type="window" name="LightSettingsWindow" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Light" closebuttonenabled="0" minimizebuttonenabled="0" mousedragenabled="0" hscrollenabled="1" vscrollenabled="1" renderbackground="1">
+        <destinationregion>
+            <left scale="0" offset="0" />
+            <right scale="0" offset="300" />
+            <top scale="0" offset="0" />
+            <bottom scale="0" offset="510" />
+        </destinationregion>
+        <guielement type="checkbox" name="LightIsEnabledCB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" checked="0">
+            <destinationregion>
+                <left scale="0" offset="155" />
+                <right scale="0" offset="175" />
+                <top scale="0" offset="360" />
+                <bottom scale="0" offset="380" />
+            </destinationregion>
+        </guielement>
+        <guielement type="checkbox" name="LightIsMainCB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" checked="0">
+            <destinationregion>
+                <left scale="0" offset="155" />
+                <right scale="0" offset="175" />
+                <top scale="0" offset="385" />
+                <bottom scale="0" offset="405" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Is Enabled" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="15" />
+                <right scale="0" offset="115" />
+                <top scale="0" offset="365" />
+                <bottom scale="0" offset="380" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Forward Rendered" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="15" />
+                <right scale="0" offset="150" />
+                <top scale="0" offset="415" />
+                <bottom scale="0" offset="430" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Main Light" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="15" />
+                <right scale="0" offset="100" />
+                <top scale="0" offset="390" />
+                <bottom scale="0" offset="405" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Shadows Enabled" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="15" />
+                <right scale="0" offset="145" />
+                <top scale="0" offset="440" />
+                <bottom scale="0" offset="455" />
+            </destinationregion>
+        </guielement>
+        <guielement type="checkbox" name="ForwardRenderedLightCB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" checked="0">
+            <destinationregion>
+                <left scale="0" offset="155" />
+                <right scale="0" offset="175" />
+                <top scale="0" offset="410" />
+                <bottom scale="0" offset="430" />
+            </destinationregion>
+        </guielement>
+        <guielement type="checkbox" name="ShadowsEnabledCB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" checked="0">
+            <destinationregion>
+                <left scale="0" offset="155" />
+                <right scale="0" offset="175" />
+                <top scale="0" offset="435" />
+                <bottom scale="0" offset="455" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="LightOuterConeTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00" textformat="float" precision="2" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="15" />
+                <right scale="0" offset="95" />
+                <top scale="0" offset="250" />
+                <bottom scale="0" offset="270" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="LightInnerConeTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00" textformat="float" precision="2" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="100" />
+                <right scale="0" offset="180" />
+                <top scale="0" offset="250" />
+                <bottom scale="0" offset="270" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="LightFalloffTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00" textformat="float" precision="2" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="185" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="250" />
+                <bottom scale="0" offset="270" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="LightAtten2TB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00000" textformat="float" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="185" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="290" />
+                <bottom scale="0" offset="310" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="LightAtten1TB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00000" textformat="float" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="100" />
+                <right scale="0" offset="180" />
+                <top scale="0" offset="290" />
+                <bottom scale="0" offset="310" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="LightRangeTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00" textformat="float" precision="2" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="15" />
+                <right scale="0" offset="95" />
+                <top scale="0" offset="330" />
+                <bottom scale="0" offset="350" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="LightAtten0TB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00000" textformat="float" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="15" />
+                <right scale="0" offset="95" />
+                <top scale="0" offset="290" />
+                <bottom scale="0" offset="310" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Ambient rgb" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="15" />
+                <right scale="0" offset="100" />
+                <top scale="0" offset="115" />
+                <bottom scale="0" offset="130" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Diffuse rgb" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="15" />
+                <right scale="0" offset="105" />
+                <top scale="0" offset="155" />
+                <bottom scale="0" offset="175" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Specular rgb" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="15" />
+                <right scale="0" offset="120" />
+                <top scale="0" offset="195" />
+                <bottom scale="0" offset="210" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Outer Cone" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="15" />
+                <right scale="0" offset="100" />
+                <top scale="0" offset="235" />
+                <bottom scale="0" offset="255" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Inner Cone" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="100" />
+                <right scale="0" offset="185" />
+                <top scale="0" offset="235" />
+                <bottom scale="0" offset="255" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Falloff" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="185" />
+                <right scale="0" offset="247" />
+                <top scale="0" offset="235" />
+                <bottom scale="0" offset="256" />
+            </destinationregion>
+        </guielement>
+        <guielement type="listbox" name="LightTypeLB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" itemheight="25" iconsenabled="0">
+            <destinationregion>
+                <left scale="0" offset="100" />
+                <right scale="0" offset="230" />
+                <top scale="0" offset="20" />
+                <bottom scale="0" offset="95" />
+            </destinationregion>
+            <itemiconregion>
+                <left scale="0" offset="0" />
+                <right scale="0" offset="20" />
+                <top scale="0" offset="0" />
+                <bottom scale="0" offset="20" />
+            </itemiconregion>
+            <itemtextregion>
+                <left scale="0" offset="5" />
+                <right scale="1" offset="-5" />
+                <top scale="0" offset="5" />
+                <bottom scale="1" offset="-5" />
+            </itemtextregion>
+            <item text="Directional" value="0" />
+            <item text="Spot" value="1" />
+            <item text="Point" value="2" />
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Atten2" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="185" />
+                <right scale="0" offset="250" />
+                <top scale="0" offset="275" />
+                <bottom scale="0" offset="290" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Atten0" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="15" />
+                <right scale="0" offset="80" />
+                <top scale="0" offset="275" />
+                <bottom scale="0" offset="290" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Atten1" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="100" />
+                <right scale="0" offset="165" />
+                <top scale="0" offset="275" />
+                <bottom scale="0" offset="290" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Range" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="15" />
+                <right scale="0" offset="95" />
+                <top scale="0" offset="315" />
+                <bottom scale="0" offset="330" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Light Type" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="95" />
+                <top scale="0" offset="20" />
+                <bottom scale="0" offset="40" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="LightAmbientRTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00" textformat="int" precision="2" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="15" />
+                <right scale="0" offset="95" />
+                <top scale="0" offset="130" />
+                <bottom scale="0" offset="150" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="LightAmbientGTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00" textformat="int" precision="2" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="100" />
+                <right scale="0" offset="180" />
+                <top scale="0" offset="130" />
+                <bottom scale="0" offset="150" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="LightAmbientBTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00" textformat="int" precision="2" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="185" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="130" />
+                <bottom scale="0" offset="150" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="LightDiffuseRTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00" textformat="int" precision="2" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="15" />
+                <right scale="0" offset="95" />
+                <top scale="0" offset="170" />
+                <bottom scale="0" offset="190" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="LightDiffuseGTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00" textformat="int" precision="2" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="100" />
+                <right scale="0" offset="180" />
+                <top scale="0" offset="170" />
+                <bottom scale="0" offset="190" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="LightDiffuseBTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00" textformat="int" precision="2" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="185" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="170" />
+                <bottom scale="0" offset="190" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="LightSpecularRTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00" textformat="int" precision="2" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="15" />
+                <right scale="0" offset="95" />
+                <top scale="0" offset="210" />
+                <bottom scale="0" offset="230" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="LightSpecularGTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00" textformat="int" precision="2" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="100" />
+                <right scale="0" offset="180" />
+                <top scale="0" offset="210" />
+                <bottom scale="0" offset="230" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="LightSpecularBTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00" textformat="int" precision="2" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="185" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="210" />
+                <bottom scale="0" offset="230" />
+            </destinationregion>
+        </guielement>
+    </guielement>
+</root>

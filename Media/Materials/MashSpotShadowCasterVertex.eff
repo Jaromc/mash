@@ -1,0 +1,23 @@
+autos
+{
+	float4x4 autoSpotCamViewToLightView
+	float4x4 autoSpotLightProjection
+}
+
+vertexOutput
+{
+	float4 posH : hposition
+	float lightViewSpaceDepth : custom pass
+}
+
+source
+{
+	SVOUT MashShadowCasterVertex(float3 viewSpacePosition)
+	{
+		SVOUT shadowOut;
+		float3 lightViewPos = mul(autoSpotCamViewToLightView, float4(viewSpacePosition, 1.0f)).xyz;
+		shadowOut.lightViewSpaceDepth = lightViewPos.z;
+		shadowOut.posH = mul(autoSpotLightProjection, float4(lightViewPos, 1.0f));
+		return shadowOut;
+	}
+}

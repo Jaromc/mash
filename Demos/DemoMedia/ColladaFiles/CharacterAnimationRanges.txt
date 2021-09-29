@@ -1,0 +1,4 @@
+idle 297 520
+walk 10 104
+leanleft 160 200
+leanright 115 155

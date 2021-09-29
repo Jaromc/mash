@@ -1,0 +1,83 @@
+<root>
+    <style name="DefaultStyle" fonttexture="FontTexture.DDS" fontformat="FontTextureData.bin">
+        <element name="button">
+            <attribute name="buttonup" texture="MashGUIDefault.png" sourcetop="416" sourceleft="0" sourcebottom="480" sourceright="96" colour="-8882056" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="buttondown" texture="MashGUIDefault.png" sourcetop="416" sourceleft="128" sourcebottom="480" sourceright="224" colour="-13631" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="buttonhover" texture="MashGUIDefault.png" sourcetop="416" sourceleft="128" sourcebottom="480" sourceright="224" colour="-13631" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+        </element>
+        <element name="checkbox">
+            <attribute name="checkboxon" texture="MashGUIDefault.png" sourcetop="0" sourceleft="192" sourcebottom="64" sourceright="256" colour="-8882056" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="checkboxoff" texture="MashGUIDefault.png" sourcetop="0" sourceleft="288" sourcebottom="64" sourceright="352" colour="-8882056" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+        </element>
+        <element name="filedialog">
+            <attribute name="file" texture="MashGUIDefault.png" sourcetop="288" sourceleft="224" sourcebottom="320" sourceright="256" colour="-1" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="folder" texture="MashGUIDefault.png" sourcetop="288" sourceleft="256" sourcebottom="320" sourceright="288" colour="-1" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+        </element>
+        <element name="listbox">
+            <attribute name="iteminactive" texture="MashGUIDefault.png" sourcetop="0" sourceleft="96" sourcebottom="64" sourceright="160" colour="-8882056" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="itemactive" texture="MashGUIDefault.png" sourcetop="0" sourceleft="0" sourcebottom="64" sourceright="64" colour="-13631" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="background" texture="MashGUIDefault.png" sourcetop="192" sourceleft="96" sourcebottom="256" sourceright="160" colour="-1" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+        </element>
+        <element name="menubar">
+            <attribute name="iteminactive" texture="MashGUIDefault.png" sourcetop="0" sourceleft="96" sourcebottom="64" sourceright="160" colour="-8882056" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="itemactive" texture="MashGUIDefault.png" sourcetop="0" sourceleft="0" sourcebottom="64" sourceright="64" colour="-13631" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="background" texture="MashGUIDefault.png" sourcetop="352" sourceleft="0" sourcebottom="384" sourceright="192" colour="-1" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+        </element>
+        <element name="popup">
+            <attribute name="iteminactive" texture="MashGUIDefault.png" sourcetop="0" sourceleft="96" sourcebottom="64" sourceright="160" colour="-8882056" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="itemactive" texture="MashGUIDefault.png" sourcetop="0" sourceleft="0" sourcebottom="64" sourceright="64" colour="-13631" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="background" texture="MashGUIDefault.png" sourcetop="192" sourceleft="192" sourcebottom="256" sourceright="256" colour="-1" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+        </element>
+        <element name="scrollbar">
+            <attribute name="uparrowup" texture="MashGUIDefault.png" sourcetop="96" sourceleft="0" sourcebottom="160" sourceright="64" colour="-8882056" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="uparrowdown" texture="MashGUIDefault.png" sourcetop="96" sourceleft="0" sourcebottom="160" sourceright="64" colour="-13631" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="uparrowhover" texture="MashGUIDefault.png" sourcetop="96" sourceleft="0" sourcebottom="160" sourceright="64" colour="-13631" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="downarrowup" texture="MashGUIDefault.png" sourcetop="96" sourceleft="288" sourcebottom="160" sourceright="352" colour="-8882056" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="downarrowdown" texture="MashGUIDefault.png" sourcetop="96" sourceleft="288" sourcebottom="160" sourceright="352" colour="-13631" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="downarrowhover" texture="MashGUIDefault.png" sourcetop="96" sourceleft="288" sourcebottom="160" sourceright="352" colour="-13631" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="leftarrowup" texture="MashGUIDefault.png" sourcetop="96" sourceleft="96" sourcebottom="160" sourceright="160" colour="-8882056" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="leftarrowdown" texture="MashGUIDefault.png" sourcetop="96" sourceleft="96" sourcebottom="160" sourceright="160" colour="-13631" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="leftarrowhover" texture="MashGUIDefault.png" sourcetop="96" sourceleft="96" sourcebottom="160" sourceright="160" colour="-13631" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="rightarrowup" texture="MashGUIDefault.png" sourcetop="96" sourceleft="192" sourcebottom="160" sourceright="256" colour="-8882056" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="rightarrowdown" texture="MashGUIDefault.png" sourcetop="96" sourceleft="192" sourcebottom="160" sourceright="256" colour="-13631" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="rightarrowhover" texture="MashGUIDefault.png" sourcetop="96" sourceleft="192" sourcebottom="160" sourceright="256" colour="-13631" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="sliderup" texture="MashGUIDefault.png" sourcetop="192" sourceleft="448" sourcebottom="384" sourceright="480" colour="-8882056" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="sliderdown" texture="MashGUIDefault.png" sourcetop="192" sourceleft="448" sourcebottom="384" sourceright="480" colour="-13631" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="sliderhover" texture="MashGUIDefault.png" sourcetop="192" sourceleft="448" sourcebottom="384" sourceright="480" colour="-13631" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="sliderbackground" texture="MashGUIDefault.png" sourcetop="192" sourceleft="384" sourcebottom="384" sourceright="416" colour="-1" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="endcap" texture="MashGUIDefault.png" sourcetop="0" sourceleft="480" sourcebottom="32" sourceright="512" colour="-1" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+        </element>
+        <element name="sprite">
+            <attribute name="background" sourcetop="0" sourceleft="0" sourcebottom="1" sourceright="1" colour="-1" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+        </element>
+        <element name="statictextbox">
+            <attribute name="background" texture="MashGUIDefault.png" sourcetop="192" sourceleft="288" sourcebottom="256" sourceright="352" colour="-1" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+        </element>
+        <element name="tab">
+            <attribute name="tabactive" texture="MashGUIDefault.png" sourcetop="416" sourceleft="256" sourcebottom="480" sourceright="352" colour="-13631" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="tabhover" texture="MashGUIDefault.png" sourcetop="416" sourceleft="256" sourcebottom="480" sourceright="352" colour="-13631" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="tabinactive" texture="MashGUIDefault.png" sourcetop="416" sourceleft="384" sourcebottom="480" sourceright="480" colour="-8882056" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="background" texture="MashGUIDefault.png" sourcetop="352" sourceleft="0" sourcebottom="384" sourceright="192" colour="-1" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+        </element>
+        <element name="textbox">
+            <attribute name="background" texture="MashGUIDefault.png" sourcetop="192" sourceleft="288" sourcebottom="256" sourceright="352" colour="-1" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+        </element>
+        <element name="tree">
+            <attribute name="increment" texture="MashGUIDefault.png" sourcetop="0" sourceleft="384" sourcebottom="64" sourceright="448" colour="-8882056" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="decrement" texture="MashGUIDefault.png" sourcetop="96" sourceleft="384" sourcebottom="160" sourceright="448" colour="-8882056" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="iteminactive" texture="MashGUIDefault.png" sourcetop="0" sourceleft="96" sourcebottom="64" sourceright="160" colour="-8882056" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="itemactive" texture="MashGUIDefault.png" sourcetop="0" sourceleft="0" sourcebottom="64" sourceright="64" colour="-13631" istransparent="0" alphamaskthreshold="0.5" fontcolour="-39836" bordercolour="-1" drawborder="0" />
+            <attribute name="background" texture="MashGUIDefault.png" sourcetop="192" sourceleft="96" sourcebottom="256" sourceright="160" colour="-1" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+        </element>
+        <element name="window">
+            <attribute name="closeup" texture="MashGUIDefault.png" sourcetop="0" sourceleft="192" sourcebottom="64" sourceright="256" colour="-8882056" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="closedown" texture="MashGUIDefault.png" sourcetop="0" sourceleft="192" sourcebottom="64" sourceright="256" colour="-13631" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="closehover" texture="MashGUIDefault.png" sourcetop="0" sourceleft="192" sourcebottom="64" sourceright="256" colour="-13631" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="minimizeup" texture="MashGUIDefault.png" sourcetop="96" sourceleft="384" sourcebottom="160" sourceright="448" colour="-8882056" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="minimizedown" texture="MashGUIDefault.png" sourcetop="96" sourceleft="384" sourcebottom="160" sourceright="448" colour="-13631" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="minimizehover" texture="MashGUIDefault.png" sourcetop="96" sourceleft="384" sourcebottom="160" sourceright="448" colour="-13631" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="0" />
+            <attribute name="titlebar" texture="MashGUIDefault.png" sourcetop="288" sourceleft="0" sourcebottom="320" sourceright="192" colour="-1" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="1" />
+            <attribute name="background" texture="MashGUIDefault.png" sourcetop="192" sourceleft="0" sourcebottom="256" sourceright="64" colour="-1" istransparent="0" alphamaskthreshold="0.5" fontcolour="-1" bordercolour="-1" drawborder="1" />
+        </element>
+    </style>
+</root>

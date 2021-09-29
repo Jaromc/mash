@@ -1,0 +1,50 @@
+source
+{
+	#ifdef _DEFINE_DIRECTX
+		float2 mashGetTexcoords(float2 t)
+		{
+			return t;
+		}
+		
+		float3 mashGetTexcoords(float3 t)
+		{
+			return t;
+		}
+		
+		float3 mashGetCubeTexcoords(float3 t)
+		{
+			return t;
+		}
+	#endif
+	
+	#ifdef _DEFINE_OPENGL
+		float2 mashGetTexcoords(float2 t)
+		{
+			return float2(t.x, 1.0f - t.y);
+		}
+		
+		float3 mashGetTexcoords(float3 t)
+		{
+			return float3(t.x, 1.0f - t.y, t.z);
+		}
+		
+		float3 mashGetCubeTexcoords(float3 t)
+		{
+			/*
+				The following first determines if the top or bottom textures
+				are being accessed. If not then we simply flip the .y element.
+				Otherwise we need to flip the .z element.
+			*/
+			if ((abs(t.y) > abs(t.x)) && (abs(t.y) > abs(t.z)))
+			{
+				t.z = -t.z;
+			}
+			else
+			{
+				t.y = -t.y;
+			}
+			
+			return t;
+		}
+	#endif
+}

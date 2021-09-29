@@ -1,0 +1,32 @@
+include
+{
+	MashLightStructures.eff
+}
+
+source
+{
+	sLightOutput MashComputeShading(float3 lightVec, float3 normal, float3 toEye, float4 specularIntensity,
+		float3 lightDiffuseValue, float3 lightSpecularValue)
+	{
+		sLightOutput output = (sLightOutput)0;
+		
+		// Compute the reflection vector
+		float3 reflection = normalize( 2.0f * normal * dot( normal, lightVec ) - lightVec );
+		// Compute the angle between the reflection and the viewer
+		float  RdotV = saturate(max( dot( reflection, toEye ), 0.0f ));
+		//compute spec value
+		if (RdotV > 0.0f)
+		{
+			float specularPower = max(specularIntensity.w, 1.0f);
+			specularPower *= 255;
+			//Compute the specular colour
+			output.specular = lightSpecularValue * specularIntensity.xyz * pow( RdotV, specularPower );
+		}
+		
+		//Compute the diffuse term
+		output.diffuse += lightDiffuseValue;
+
+		return output;
+	}
+
+}

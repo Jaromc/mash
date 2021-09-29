@@ -1,0 +1,79 @@
+
+material BarrelMaterial
+{	
+	vertex
+	{
+		position rgb32float
+		normal rgb32float
+		tangent rgb32float
+		texcoord rg32float
+	}
+	
+	technique Standard
+	{
+		vertexprogram "auto" "NormalMapVertexProgram.eff" "vertexmain"
+		pixelprogram "auto" "NormalMapPixelProgram.eff" "pixelmain"
+		shadowvertexprogram "auto" "NormalMapVertexProgram.eff" "vertexmain"
+
+		lighting auto
+		
+		sampler2D DiffuseSampler
+		{
+			index 0
+			texture "BarrelDiffuse.DDS"
+			minmagfilter linear
+			mipfilter linear
+			addressu wrap
+			addressv wrap
+		}
+		
+		sampler2D NormalSampler
+		{
+			index 1
+			texture "BarrelNormal.DDS"
+			minmagfilter linear
+			mipfilter linear
+			addressu wrap
+			addressv wrap
+		}
+	}
+}
+
+material WallMaterial
+{	
+	vertex
+	{
+		position rgb32float
+		normal rgb32float
+		tangent rgb32float
+		texcoord rg32float
+	}
+	
+	technique Standard
+	{
+		vertexprogram "auto" "NormalMapVertexProgram.eff" "vertexmain"
+		pixelprogram "auto" "NormalMapPixelProgram.eff" "pixelmain"
+
+		lighting auto
+
+		sampler2D DiffuseSampler
+		{
+			index 0
+			texture "WallDiffuse.DDS"
+			minmagfilter linear
+			mipfilter linear
+			addressu wrap
+			addressv wrap
+		}
+		
+		sampler2D NormalSampler
+		{
+			index 1
+			texture "WallNormal.DDS"
+			minmagfilter linear
+			mipfilter linear
+			addressu wrap
+			addressv wrap
+		}
+	}
+}

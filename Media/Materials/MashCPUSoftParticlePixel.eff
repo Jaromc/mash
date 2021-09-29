@@ -1,0 +1,39 @@
+include
+{
+	MashTexCoords.eff
+}
+
+autos
+{
+	sampler2D autoSampler0
+	sampler2D autoGBufferDepthSampler1
+	float2 autoCameraNearFar
+	float autoSoftParticleScale
+}
+
+pixelOutput
+{
+	float4 diffuse : diffuse
+	float4 specular : specular
+}
+
+source
+{
+	POUT pixelmain(PIN input)
+	{	
+		POUT output;
+		
+		input.projectedTexCoords.xy /= input.projectedTexCoords.w;
+		
+		input.projectedTexCoords.x = 0.5f*input.projectedTexCoords.x+0.5f;
+		input.projectedTexCoords.y = -0.5f*input.projectedTexCoords.y+0.5f;
+		
+		float particleLinearDepth = (input.viewSpaceDepth - autoCameraNearFar.x) / (autoCameraNearFar.y - autoCameraNearFar.x);
+		float depthBufferValue = tex2D(autoGBufferDepthSampler1, mashGetTexcoords(input.projectedTexCoords.xy));
+		float softAlpha = saturate((depthBufferValue - particleLinearDepth) * autoSoftParticleScale);
+		output.diffuse = tex2D(autoSampler0, input.texcoords) * input.colour;
+		output.diffuse.a *= softAlpha;
+		output.specular = float4(0.0f, 0.0f, 0.0f, 0.0f);
+		return output;
+	}
+}

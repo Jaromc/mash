@@ -1,0 +1,50 @@
+include
+{
+	MashTexCoords.eff
+}
+
+autos
+{
+	sampler2D autoSampler0//scene diffuse image
+	sampler2D autoSampler1//scene depth
+	float4x4 autoInvView
+	float4x4 lastViewProjection
+	float2 autoCameraNearFar
+}
+
+source
+{
+	struct VS_OUTPUT
+	{
+		float2 texcoord : TEXCOORD0;
+		float4 vsPosition : TEXCOORD1;
+	};
+	
+	static int g_blurSamples = 10;
+	static float g_fixedUpdateDt = 1.0f / 60.0f;
+	static float g_blurAmount = 10.0f;
+
+	float4 psmain(VS_OUTPUT input) : SV_TARGET0
+	{
+		float depthValue = tex2D(autoSampler1, input.texcoord).r;
+		float3 viewRay = float3(input.vsPosition.xy * (autoCameraNearFar.y / input.vsPosition.z), autoCameraNearFar.y);
+		float3 currentViewSpacePosition = viewRay * depthValue;
+
+		float4 currentWorldSpacePos = mul(autoInvView, float4(currentViewSpacePosition, 1.0f));
+		float4 previousHPosition = mul(lastViewProjection, float4(currentWorldSpacePos.xyz, 1.0));
+		previousHPosition /= previousHPosition.w;
+		
+		float2 lastTexcoords = mashGetTexcoords(float2(0.5f * previousHPosition.x + 0.5f, -0.5f * previousHPosition.y + 0.5f));
+		float2 velocity = (lastTexcoords - input.texcoord) * g_fixedUpdateDt * g_blurAmount;
+		
+		float4 colour = tex2D(autoSampler0, input.texcoord);
+
+		input.texcoord += velocity;
+		for(int i = 1; i < g_blurSamples; ++i, input.texcoord += velocity)
+		{
+			colour += tex2D(autoSampler0, input.texcoord);
+		}
+
+		return (colour / g_blurSamples);
+	}
+}

@@ -1,0 +1,50 @@
+
+material SkinnedDecalMaterial
+{	
+	vertex
+	{
+		position rgb32float //stream  stepRate
+		normal rgb32float
+		blendweight rgba32float
+		blendindex rgba32float
+		texcoord rg32float
+	}
+
+	technique NormalTech
+	{
+		vertexprogram "auto" "SkinnedMeshVertexProgram.eff" "vertexmain"
+		pixelprogram "auto" "DecalPixelProgram.eff"  "pixelmain"
+
+		lighting auto
+		
+		sampler2D DiffuseSampler
+		{
+			index 0
+			texture "DecalTexture.DDS"
+			minmagfilter linear
+			mipfilter none
+			addressu clamp
+			addressv clamp
+		}
+		
+		blendstate
+		{
+			blendingenabled true
+			srcblend srcalpha
+			destblend invsrcalpha
+			blendop add
+			srcblendalpha zero
+			destblendalpha zero
+			blendopalpha add
+			writemask all
+		}
+		
+		rasteriser
+		{
+			depthbias -10
+			depthcmp lessequal
+			depthtestenabled true
+			depthwriteenabled false
+		}
+	}
+}

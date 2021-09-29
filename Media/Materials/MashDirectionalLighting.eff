@@ -1,0 +1,22 @@
+include
+{
+	MashLightStructures.eff
+	//runtime generated shading data is added here
+}
+
+source
+{
+	sLightOutput MashDirectionalLighting(sLight currentLight, float3 surfaceNormal, float3 viewSpacePosition, float4 specularIntensity, float shadowFactor)
+	{
+		float3 lightVec = -currentLight.viewSpaceDirection;//normalized on the cpu
+		sLightOutput output = (sLightOutput)0;
+		float diffuseFactor = saturate(dot(lightVec, surfaceNormal));
+		float3 toEye = normalize(-viewSpacePosition);
+		output = MashComputeShading(lightVec, surfaceNormal, toEye, specularIntensity, currentLight.diffuse, currentLight.specular);
+		output.diffuse *= diffuseFactor * shadowFactor;
+		output.diffuse += currentLight.ambient;
+		output.diffuse = saturate(output.diffuse);
+		output.specular = saturate(output.specular * shadowFactor);
+		return output;
+	}
+}

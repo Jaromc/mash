@@ -1,0 +1,218 @@
+<root>
+    <guielement type="window" name="EntitySettingsWindow" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Entity" closebuttonenabled="0" minimizebuttonenabled="0" mousedragenabled="0" hscrollenabled="1" vscrollenabled="1" renderbackground="1">
+        <destinationregion>
+            <left scale="0" offset="0" />
+            <right scale="0" offset="300" />
+            <top scale="0" offset="0" />
+            <bottom scale="0" offset="480" />
+        </destinationregion>
+        <guielement type="button" name="EntityTriBufferRemoveBtn" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Remove Collider" isswitch="0">
+            <destinationregion>
+                <left scale="0" offset="145" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="405" />
+                <bottom scale="0" offset="430" />
+            </destinationregion>
+        </guielement>
+        <guielement type="button" name="EntityTriBufferModifyBtn" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Modify Collider" isswitch="0">
+            <destinationregion>
+                <left scale="0" offset="20" />
+                <right scale="0" offset="140" />
+                <top scale="0" offset="405" />
+                <bottom scale="0" offset="430" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="LOD Distance" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="20" />
+                <right scale="0" offset="120" />
+                <top scale="0" offset="189" />
+                <bottom scale="0" offset="209" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Mesh Triangles" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="20" />
+                <right scale="0" offset="140" />
+                <top scale="0" offset="164" />
+                <bottom scale="0" offset="184" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Lod Triangles" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="20" />
+                <right scale="0" offset="140" />
+                <top scale="0" offset="139" />
+                <bottom scale="0" offset="159" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Sub Entities" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="150" />
+                <right scale="0" offset="250" />
+                <top scale="0" offset="9" />
+                <bottom scale="0" offset="29" />
+            </destinationregion>
+        </guielement>
+        <guielement type="listbox" name="SubEntityLB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" itemheight="25" iconsenabled="0">
+            <destinationregion>
+                <left scale="0" offset="150" />
+                <right scale="0" offset="250" />
+                <top scale="0" offset="29" />
+                <bottom scale="0" offset="129" />
+            </destinationregion>
+            <itemiconregion>
+                <left scale="0" offset="0" />
+                <right scale="0" offset="20" />
+                <top scale="0" offset="0" />
+                <bottom scale="0" offset="20" />
+            </itemiconregion>
+            <itemtextregion>
+                <left scale="0" offset="5" />
+                <right scale="1" offset="-5" />
+                <top scale="0" offset="5" />
+                <bottom scale="1" offset="-5" />
+            </itemtextregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="LODs" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="20" />
+                <right scale="0" offset="110" />
+                <top scale="0" offset="9" />
+                <bottom scale="0" offset="29" />
+            </destinationregion>
+        </guielement>
+        <guielement type="listbox" name="EntityLodLB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" itemheight="25" iconsenabled="0">
+            <destinationregion>
+                <left scale="0" offset="20" />
+                <right scale="0" offset="120" />
+                <top scale="0" offset="29" />
+                <bottom scale="0" offset="129" />
+            </destinationregion>
+            <itemiconregion>
+                <left scale="0" offset="0" />
+                <right scale="0" offset="20" />
+                <top scale="0" offset="0" />
+                <bottom scale="0" offset="20" />
+            </itemiconregion>
+            <itemtextregion>
+                <left scale="0" offset="5" />
+                <right scale="1" offset="-5" />
+                <top scale="0" offset="5" />
+                <bottom scale="1" offset="-5" />
+            </itemtextregion>
+        </guielement>
+        <guielement type="textbox" name="EntityLodDistanceTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="140" />
+                <right scale="0" offset="240" />
+                <top scale="0" offset="189" />
+                <bottom scale="0" offset="209" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Enable Sub Entity" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="20" />
+                <right scale="0" offset="150" />
+                <top scale="0" offset="214" />
+                <bottom scale="0" offset="234" />
+            </destinationregion>
+        </guielement>
+        <guielement type="checkbox" name="SubEntityEnabledCB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" checked="0">
+            <destinationregion>
+                <left scale="0" offset="160" />
+                <right scale="0" offset="180" />
+                <top scale="0" offset="214" />
+                <bottom scale="0" offset="234" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Material Name" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="20" />
+                <right scale="0" offset="130" />
+                <top scale="0" offset="239" />
+                <bottom scale="0" offset="259" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="MaterialNameTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="any" precision="5" usenumberbuttons="0" wordwrap="0" minnumber="1" maxnumber="1">
+            <destinationregion>
+                <left scale="0" offset="140" />
+                <right scale="0" offset="275" />
+                <top scale="0" offset="239" />
+                <bottom scale="0" offset="260" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="EntityMeshTrianglesST" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="150" />
+                <right scale="0" offset="275" />
+                <top scale="0" offset="164" />
+                <bottom scale="0" offset="185" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="EntityLodTrianglesST" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="150" />
+                <right scale="0" offset="275" />
+                <top scale="0" offset="139" />
+                <bottom scale="0" offset="160" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Triangle Collider" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="20" />
+                <right scale="0" offset="150" />
+                <top scale="0" offset="330" />
+                <bottom scale="0" offset="350" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Type" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="20" />
+                <right scale="0" offset="90" />
+                <top scale="0" offset="355" />
+                <bottom scale="0" offset="375" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="EntityTriColliderTypeST" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="125" />
+                <right scale="0" offset="275" />
+                <top scale="0" offset="355" />
+                <bottom scale="0" offset="375" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Triangles" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="20" />
+                <right scale="0" offset="120" />
+                <top scale="0" offset="380" />
+                <bottom scale="0" offset="401" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="EntityTriColliderCountST" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="125" />
+                <right scale="0" offset="275" />
+                <top scale="0" offset="380" />
+                <bottom scale="0" offset="400" />
+            </destinationregion>
+        </guielement>
+        <guielement type="button" name="EntityApplyMaterialBtn" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Apply Material (Sub Only)" isswitch="0">
+            <destinationregion>
+                <left scale="0" offset="20" />
+                <right scale="0" offset="205" />
+                <top scale="0" offset="265" />
+                <bottom scale="0" offset="290" />
+            </destinationregion>
+        </guielement>
+        <guielement type="button" name="EntityApplyMaterialAllBtn" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Apply Materal (All)" isswitch="0">
+            <destinationregion>
+                <left scale="0" offset="20" />
+                <right scale="0" offset="205" />
+                <top scale="0" offset="295" />
+                <bottom scale="0" offset="320" />
+            </destinationregion>
+        </guielement>
+    </guielement>
+</root>

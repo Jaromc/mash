@@ -1,0 +1,37 @@
+
+material MashDefaultExporterMaterial
+{	
+	vertex
+	{
+		position rgb32float
+		normal rgb32float
+		texcoord rg32float
+	}
+	
+	technique Standard
+	{
+		lighting auto
+		vertexprogram "auto" "MashDefaultVertex.eff" "vertexmain"
+		pixelprogram "auto" "MashDefaultPixel.eff" "pixelmain"
+		shadowvertexprogram "auto" "MashDefaultVertex.eff" "vertexmain"
+	}
+	
+	blendstate
+	{
+		blendingenabled false
+		srcblend one
+		destblend zero
+		blendop add
+		srcblendalpha zero
+		destblendalpha zero
+		blendopalpha add
+		writemask all
+	}
+	
+	rasteriser
+	{
+		depthtestenabled true
+		depthwriteenabled true
+		depthcmp lessequal
+	}
+}

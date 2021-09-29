@@ -1,0 +1,568 @@
+<root>
+    <guielement type="window" name="ParticleSettingsWindow" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Particle System" closebuttonenabled="0" minimizebuttonenabled="0" mousedragenabled="1" hscrollenabled="1" vscrollenabled="1" renderbackground="1">
+        <destinationregion>
+            <left scale="0" offset="0" />
+            <right scale="0" offset="300" />
+            <top scale="0" offset="0" />
+            <bottom scale="0" offset="825" />
+        </destinationregion>
+        <guielement type="textbox" name="ParticleMaxCountTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="165" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="90" />
+                <bottom scale="0" offset="110" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleStartTimeTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="165" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="65" />
+                <bottom scale="0" offset="85" />
+            </destinationregion>
+        </guielement>
+        <guielement type="checkbox" name="ParticleIsPlayingCB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" checked="0">
+            <destinationregion>
+                <left scale="0" offset="165" />
+                <right scale="0" offset="185" />
+                <top scale="0" offset="40" />
+                <bottom scale="0" offset="60" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Texture" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="70" />
+                <top scale="0" offset="675" />
+                <bottom scale="0" offset="690" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Texture Wrap Mode" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="175" />
+                <top scale="0" offset="700" />
+                <bottom scale="0" offset="715" />
+            </destinationregion>
+        </guielement>
+        <guielement type="listbox" name="ParticleTextureWrapModeLB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" itemheight="25" iconsenabled="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="140" />
+                <top scale="0" offset="715" />
+                <bottom scale="0" offset="765" />
+            </destinationregion>
+            <itemiconregion>
+                <left scale="0" offset="0" />
+                <right scale="0" offset="20" />
+                <top scale="0" offset="0" />
+                <bottom scale="0" offset="20" />
+            </itemiconregion>
+            <itemtextregion>
+                <left scale="0" offset="5" />
+                <right scale="1" offset="-5" />
+                <top scale="0" offset="5" />
+                <bottom scale="1" offset="-5" />
+            </itemtextregion>
+            <item text="Wrap" value="0" />
+            <item text="Clamp" value="1" />
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Mesh" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="60" />
+                <top scale="0" offset="650" />
+                <bottom scale="0" offset="665" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMeshTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="any" precision="5" usenumberbuttons="0" wordwrap="0" minnumber="-2147483648" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="70" />
+                <right scale="0" offset="225" />
+                <top scale="0" offset="650" />
+                <bottom scale="0" offset="670" />
+            </destinationregion>
+        </guielement>
+        <guielement type="button" name="ParticleTextureBtn" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="..." isswitch="0">
+            <destinationregion>
+                <left scale="0" offset="230" />
+                <right scale="0" offset="260" />
+                <top scale="0" offset="675" />
+                <bottom scale="0" offset="695" />
+            </destinationregion>
+        </guielement>
+        <guielement type="button" name="ParticleMeshBtn" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="..." isswitch="0">
+            <destinationregion>
+                <left scale="0" offset="230" />
+                <right scale="0" offset="260" />
+                <top scale="0" offset="650" />
+                <bottom scale="0" offset="670" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleTextureTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="any" precision="5" usenumberbuttons="0" wordwrap="0" minnumber="-2147483648" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="70" />
+                <right scale="0" offset="225" />
+                <top scale="0" offset="675" />
+                <bottom scale="0" offset="695" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleGravityZTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00" textformat="float" precision="2" usenumberbuttons="1" wordwrap="0" minnumber="-2147483648" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="180" />
+                <right scale="0" offset="260" />
+                <top scale="0" offset="620" />
+                <bottom scale="0" offset="640" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleGravityYTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00" textformat="float" precision="2" usenumberbuttons="1" wordwrap="0" minnumber="-2147483648" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="95" />
+                <right scale="0" offset="175" />
+                <top scale="0" offset="620" />
+                <bottom scale="0" offset="640" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleGravityXTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00" textformat="float" precision="2" usenumberbuttons="1" wordwrap="0" minnumber="-2147483648" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="90" />
+                <top scale="0" offset="620" />
+                <bottom scale="0" offset="640" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Gravity xyz" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="100" />
+                <top scale="0" offset="605" />
+                <bottom scale="0" offset="620" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMaxVelocityZTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="-2147483648" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="180" />
+                <right scale="0" offset="260" />
+                <top scale="0" offset="580" />
+                <bottom scale="0" offset="600" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMaxVelocityYTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00" textformat="int" precision="2" usenumberbuttons="1" wordwrap="0" minnumber="-2147483648" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="95" />
+                <right scale="0" offset="175" />
+                <top scale="0" offset="580" />
+                <bottom scale="0" offset="600" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMaxVelocityXTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00" textformat="int" precision="2" usenumberbuttons="1" wordwrap="0" minnumber="-2147483648" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="90" />
+                <top scale="0" offset="580" />
+                <bottom scale="0" offset="600" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Max Velocity xyz" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="150" />
+                <top scale="0" offset="565" />
+                <bottom scale="0" offset="580" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMinVelocityZTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="-2147483648" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="180" />
+                <right scale="0" offset="260" />
+                <top scale="0" offset="540" />
+                <bottom scale="0" offset="560" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMinVelocityYTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="-2147483648" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="95" />
+                <right scale="0" offset="175" />
+                <top scale="0" offset="540" />
+                <bottom scale="0" offset="560" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMinVelocityXTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="-2147483648" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="90" />
+                <top scale="0" offset="540" />
+                <bottom scale="0" offset="560" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Min Velocity xyz" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="150" />
+                <top scale="0" offset="525" />
+                <bottom scale="0" offset="540" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMaxEndColATB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="205" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="500" />
+                <bottom scale="0" offset="520" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMaxEndColBTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="140" />
+                <right scale="0" offset="200" />
+                <top scale="0" offset="500" />
+                <bottom scale="0" offset="520" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMaxEndColGTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="75" />
+                <right scale="0" offset="135" />
+                <top scale="0" offset="500" />
+                <bottom scale="0" offset="520" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMaxEndColRTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="70" />
+                <top scale="0" offset="500" />
+                <bottom scale="0" offset="520" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Max End Colour rgba" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="165" />
+                <top scale="0" offset="485" />
+                <bottom scale="0" offset="500" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMinEndColATB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="205" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="460" />
+                <bottom scale="0" offset="480" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMinEndColBTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="-1" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="140" />
+                <right scale="0" offset="200" />
+                <top scale="0" offset="460" />
+                <bottom scale="0" offset="480" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMinEndColGTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="75" />
+                <right scale="0" offset="135" />
+                <top scale="0" offset="460" />
+                <bottom scale="0" offset="480" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMinEndColRTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="70" />
+                <top scale="0" offset="460" />
+                <bottom scale="0" offset="480" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Min End Colour rgba" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="165" />
+                <top scale="0" offset="445" />
+                <bottom scale="0" offset="460" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMaxStartColATB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="205" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="420" />
+                <bottom scale="0" offset="440" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMaxStartColBTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="140" />
+                <right scale="0" offset="200" />
+                <top scale="0" offset="420" />
+                <bottom scale="0" offset="440" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMaxStartColGTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="75" />
+                <right scale="0" offset="135" />
+                <top scale="0" offset="420" />
+                <bottom scale="0" offset="440" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMaxStartColRTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="70" />
+                <top scale="0" offset="420" />
+                <bottom scale="0" offset="440" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Max Start Colour rgba" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="170" />
+                <top scale="0" offset="405" />
+                <bottom scale="0" offset="420" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMinStartColATB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="205" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="380" />
+                <bottom scale="0" offset="400" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMinStartColBTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="140" />
+                <right scale="0" offset="200" />
+                <top scale="0" offset="380" />
+                <bottom scale="0" offset="400" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMinStartColGTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="-1" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="75" />
+                <right scale="0" offset="135" />
+                <top scale="0" offset="380" />
+                <bottom scale="0" offset="400" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMinStartColRTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="2" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="255">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="70" />
+                <top scale="0" offset="380" />
+                <bottom scale="0" offset="400" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Min Start Colour rgba" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="170" />
+                <top scale="0" offset="365" />
+                <bottom scale="0" offset="380" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleSoftScaleTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="-2147483648" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="165" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="340" />
+                <bottom scale="0" offset="360" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMaxDurationTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00000" textformat="float" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="165" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="315" />
+                <bottom scale="0" offset="335" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMinDurationTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0.00000" textformat="float" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="165" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="290" />
+                <bottom scale="0" offset="310" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMaxRotateTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="-2147483648" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="165" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="265" />
+                <bottom scale="0" offset="285" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMinRotateTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="-2147483648" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="165" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="240" />
+                <bottom scale="0" offset="260" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMaxEndSizeTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="165" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="215" />
+                <bottom scale="0" offset="235" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMinEndSizeTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="165" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="190" />
+                <bottom scale="0" offset="210" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMaxStartSizeTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="165" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="165" />
+                <bottom scale="0" offset="185" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticleMinStartSizeTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="165" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="140" />
+                <bottom scale="0" offset="160" />
+            </destinationregion>
+        </guielement>
+        <guielement type="textbox" name="ParticlePerSecondTB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="0" textformat="int" precision="5" usenumberbuttons="1" wordwrap="0" minnumber="0" maxnumber="2147483647">
+            <destinationregion>
+                <left scale="0" offset="165" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="115" />
+                <bottom scale="0" offset="135" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Soft Particle Scale" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="150" />
+                <top scale="0" offset="340" />
+                <bottom scale="0" offset="360" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Max Duration" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="145" />
+                <top scale="0" offset="315" />
+                <bottom scale="0" offset="335" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Min Duration" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="145" />
+                <top scale="0" offset="290" />
+                <bottom scale="0" offset="310" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Max Rotate Speed" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="145" />
+                <top scale="0" offset="265" />
+                <bottom scale="0" offset="285" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Min Rotate Speed" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="140" />
+                <top scale="0" offset="240" />
+                <bottom scale="0" offset="260" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Max End Size" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="140" />
+                <top scale="0" offset="215" />
+                <bottom scale="0" offset="235" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Min End Size" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="140" />
+                <top scale="0" offset="190" />
+                <bottom scale="0" offset="210" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Max Start Size" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="140" />
+                <top scale="0" offset="165" />
+                <bottom scale="0" offset="185" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Min Start Size" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="155" />
+                <top scale="0" offset="140" />
+                <bottom scale="0" offset="160" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Particles Per Second" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="165" />
+                <top scale="0" offset="115" />
+                <bottom scale="0" offset="135" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Max Particles" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="115" />
+                <top scale="0" offset="90" />
+                <bottom scale="0" offset="110" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Type" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="65" />
+                <top scale="0" offset="15" />
+                <bottom scale="0" offset="35" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="ParticleTypeST" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="75" />
+                <right scale="0" offset="265" />
+                <top scale="0" offset="15" />
+                <bottom scale="0" offset="35" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Playing" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="85" />
+                <top scale="0" offset="40" />
+                <bottom scale="0" offset="60" />
+            </destinationregion>
+        </guielement>
+        <guielement type="statictext" name="" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" text="Start Time" wordwrap="0">
+            <destinationregion>
+                <left scale="0" offset="10" />
+                <right scale="0" offset="110" />
+                <top scale="0" offset="65" />
+                <bottom scale="0" offset="85" />
+            </destinationregion>
+        </guielement>
+    </guielement>
+</root>

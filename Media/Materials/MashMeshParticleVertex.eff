@@ -1,0 +1,51 @@
+include
+{
+	MashTexCoords.eff
+}
+
+autos
+{
+	float4x4 autoView
+}
+
+vertexInput
+{
+	float3 position : position
+	float3 normal : normal
+	float2 texcoord : texcoord
+	
+	float4 matrixA : custom
+	float4 matrixB : custom
+	float4 matrixC : custom
+	float4 matrixD : custom
+	float4 colour : colour
+}
+
+vertexOutput
+{
+	float4 position : viewposition
+	float3 normal : viewnormal
+	float2 texcoords : texcoord pass
+	float4 colour : colour pass
+}
+
+source
+{	
+	VOUT vertexmain( VIN input)
+	{
+		VOUT output;
+		
+		/*
+			Note : Matrix constructors in HLSL place data in row-major order. So we need to transpose
+			the data here to match the auto vars.
+		*/
+		float4x4 worldMat = transpose(float4x4(input.matrixA, input.matrixB, input.matrixC, input.matrixD));
+		float4x4 worldViewMat = mul(autoView, worldMat);
+		output.position = mul(worldViewMat, float4(input.position, 1.0));
+		output.normal = mul(worldViewMat, float4(input.normal, 0.0)).xyz;
+		output.colour = input.colour;
+		output.texcoords = mashGetTexcoords(input.texcoord);
+		
+		return output;
+	}
+}

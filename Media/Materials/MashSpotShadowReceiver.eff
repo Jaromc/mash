@@ -1,0 +1,87 @@
+include
+{
+	MashShadowPoissonDisks.eff
+	MashTexCoords.eff
+}
+
+autos
+{
+	sampler2D autoSceneShadowMap
+	float4x4 autoSpotCamViewToLightView
+	float4x4 autoSpotLightProjection
+	float4 autoSpotLightInvRange;
+}
+
+source
+{	
+
+#ifndef MASH_SHADOW_BIAS
+#define MASH_SHADOW_BIAS 0.0002
+#endif
+
+#ifndef MASH_FILTER_SIZE
+#define MASH_FILTER_SIZE 0.0009
+#endif
+
+#ifdef MASH_USE_ESM
+
+#ifndef MASH_DARKENING
+#define MASH_DARKENING 10
+#endif
+
+float GetShadowAmount(float2 uv, float depth)
+{
+	float lit = 0.0f;
+	float occ = 0.0f;
+	float litTemp = 0.0f;
+	for(int i = 0; i < MASH_SAMPLES; ++i)
+	{
+		occ = tex2Dlod(autoSceneShadowMap, float4(uv + (poissonDisk[i] * MASH_FILTER_SIZE), 1, 1)).r + MASH_SHADOW_BIAS;		
+		litTemp = exp(MASH_DARKENING * (occ - depth));
+		lit += saturate(litTemp);
+	}
+	
+	lit /= MASH_SAMPLES;
+	return lit;
+}
+
+#else
+
+float GetShadowAmount(float2 uv, float depth)
+{	
+	float shadowAmount = 0.0;
+	for(int i = 0; i < MASH_SAMPLES; ++i)
+	{
+		float2 texCoord = uv + (poissonDisk[i] * MASH_FILTER_SIZE);
+		if (depth < tex2Dlod(autoSceneShadowMap, float4(texCoord, 1, 1)).r + MASH_SHADOW_BIAS)
+			shadowAmount += 1.0f;
+	}
+	
+	return shadowAmount / MASH_SAMPLES;
+}
+
+#endif
+
+	float MashSpotShadows(float3 viewSpacePos)
+	{
+		float3 lightViewPosition = mul(autoSpotCamViewToLightView, float4(viewSpacePos , 1.0f));
+		float4 shadowTexCoords = mul(autoSpotLightProjection, float4(lightViewPosition , 1.0f));
+		shadowTexCoords.xyz /= shadowTexCoords.w;
+		
+		if (shadowTexCoords.x < -1.0f || shadowTexCoords.x > 1.0f ||
+			shadowTexCoords.y < -1.0f || shadowTexCoords.y > 1.0f ||
+			shadowTexCoords.z < 0.0f)
+		{
+			return 1.0f;
+		}
+		
+		float depth = lightViewPosition.z * autoSpotLightInvRange.x;
+		
+		shadowTexCoords.x = 0.5f*shadowTexCoords.x+0.5f;
+		shadowTexCoords.y = -0.5f*shadowTexCoords.y+0.5f;
+
+		float2 uv = mashGetTexcoords(shadowTexCoords.xy);
+		
+		return GetShadowAmount(uv, depth);
+	}
+}

@@ -1,0 +1,37 @@
+
+material SkinningMaterial
+{	
+	vertex
+	{
+		position rgb32float //stream  stepRate
+		normal rgb32float
+		blendweight rgba32float
+		blendindex rgba32float
+		texcoord rg32float
+	}
+
+	loddistance 0 100
+
+	technique HighDetailTechnique
+	{
+		//add auto param for profile
+		vertexprogram "auto" "VertexSkinningShader.eff" "vertexmain"
+		pixelprogram "auto" "pixel.eff" "pixelmain"
+		shadowvertexprogram "auto" "VertexSkinningShader.eff" "vertexmain"
+
+		lighting pixel
+
+		lodlevel 1
+	}
+	
+	technique LowDetailTechnique
+	{
+		//add auto param for profile
+		vertexprogram "auto" "VertexSkinningShader.eff" "vertexmain"
+		pixelprogram "auto" "pixel.eff" "pixelmain"
+
+		lighting vertex
+		
+		lodlevel 2
+	}
+}

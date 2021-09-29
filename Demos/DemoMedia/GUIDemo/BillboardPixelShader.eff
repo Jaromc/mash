@@ -1,0 +1,20 @@
+
+pixelOutput
+{
+	float4 diffuse : diffuse
+}
+
+autos
+{
+	sampler2D autoSampler0
+}
+
+source
+{
+	POUT pixelmain(PIN input)
+	{
+		POUT output;
+		output.diffuse = tex2D(autoSampler0, input.texcoords);
+		return output;
+	}
+}

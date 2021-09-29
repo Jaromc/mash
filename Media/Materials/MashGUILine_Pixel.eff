@@ -1,0 +1,13 @@
+
+source
+{
+	struct PS_INPUT
+	{
+		float4 colour : COLOR0;
+	};
+
+	float4 psmain(PS_INPUT Input) : SV_TARGET0
+	{
+		return float4(Input.colour.rgb, 1.0f);
+	}
+}

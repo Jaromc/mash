@@ -1,0 +1,40 @@
+pixelOutput
+{
+	float4 diffuse : diffuse
+	float4 specular : specular
+	float3 normal : viewnormal
+}
+
+autos
+{
+	sampler2D autoSampler0
+	sampler2D autoSampler1
+}
+
+source
+{
+	POUT pixelmain(PIN input)
+	{
+		POUT output;
+		
+		float3 normalT = tex2D(autoSampler1, input.texcoord).xyz;
+		//transform into -1.0 to 1.0 range
+		normalT = 2.0 * normalT - 1.0;
+		
+		float3 n = normalize(input.viewnormal);
+		/*
+			Cross n and t to produce the bitangent
+		*/
+		float3 b = cross(n, input.viewtangent);
+		
+		float3x3 tbn = float3x3(input.viewtangent, b, n);
+		/*
+			Transform the normal from tangent space to world view space
+		*/
+		output.normal = normalize(mul(normalT, tbn));
+		
+		output.diffuse =  tex2D(autoSampler0, input.texcoord);		
+		output.specular = float4(1,1,1,1);
+		return output;
+	}
+}

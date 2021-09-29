@@ -1,0 +1,34 @@
+
+vertexInput
+{
+	float3 position : position
+	float3 normal : normal
+	float2 texcoord : texcoord
+}
+
+vertexOutput
+{
+	float4 viewposition : viewposition
+	float3 viewnormal : viewnormal
+	float2 texcoord : texcoord pass
+}
+
+autos
+{
+	float4x4 _autoView
+}
+
+source
+{	
+	VOUT vertexmain(VIN input)
+	{
+		VOUT output;
+		
+		//position and normal are already in world space so just pass them on. TODO : Transform into viewspace on the cpu
+		output.viewposition = mul(_autoView, float4(input.position, 1.0f));
+		output.viewnormal = mul(_autoView, input.normal);
+		output.texcoord = input.texcoord;
+		
+		return output;
+	}
+}

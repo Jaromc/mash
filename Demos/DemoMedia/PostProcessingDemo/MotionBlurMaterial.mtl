@@ -1,0 +1,52 @@
+
+material MotionBlurMaterial
+{	
+	vertex
+	{
+		position rgb32float //stream  stepRate
+		texcoord rg32float
+	}
+
+	technique Standard
+	{
+        vertexprogram "auto" "MotionBlurVertex.eff" "vsmain"
+		pixelprogram "auto" "MotionBlurPixel.eff" "psmain"
+	}
+
+	sampler2D SceneSampler
+	{
+		index 0
+		minmagfilter point
+		mipfilter none
+		addressu clamp
+		addressv clamp
+	}
+	
+	sampler2D DepthSampler
+	{
+		index 1
+		minmagfilter point
+		mipfilter none
+		addressu clamp
+		addressv clamp
+	}
+	
+	blendstate
+	{
+		blendingenabled false
+		srcblend one
+		destblend zero
+		blendop add
+		srcblendalpha zero
+		destblendalpha zero
+		blendopalpha add
+		writemask all
+	}
+	
+	rasteriser
+	{
+		depthtestenabled false
+		depthwriteenabled false
+		depthcmp never
+	}
+}

@@ -1,0 +1,19 @@
+
+material StaticMeshMaterial
+{	
+	vertex
+	{
+		position rgb32float //stream  stepRate
+		normal rgb32float
+		texcoord rg32float
+	}
+	
+	technique Standard
+	{
+		vertexprogram "auto" "StaticMeshVertexProgram.eff" "vertexmain"
+		pixelprogram "auto" "StaticMeshPixelProgram.eff" "pixelmain"
+		shadowvertexprogram "auto" "StaticMeshVertexProgram.eff" "vertexmain"
+
+		lighting auto
+	}
+}

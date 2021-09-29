@@ -1,0 +1,36 @@
+
+material BaseMaterial
+{	
+	vertex
+	{
+		position rgb32float //stream  stepRate
+		normal rgb32float
+	}
+
+	technique NormalTech
+	{
+		vertexprogram "auto" "BaseVertexShader.eff" "vertexmain"
+		pixelprogram "auto" "BasePixelShader.eff" "pixelmain"
+
+		lighting auto
+		
+		blendstate
+		{
+			blendingenabled false
+			srcblend one
+			destblend zero
+			blendop add
+			srcblendalpha zero
+			destblendalpha zero
+			blendopalpha add
+			writemask all
+		}
+		
+		rasteriser
+		{
+			depthcmp lessequal
+			depthtestenabled true
+			depthwriteenabled true
+		}
+	}
+}

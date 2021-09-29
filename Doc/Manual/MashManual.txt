@@ -1,0 +1,1750 @@
+Mash 3D Guide
+==============
+:toc:
+:numbered:
+
+Getting Started
+---------------
+
+SDK
+~~~
+Check out the compiled examples and source code in the SDK.
+To start your own project, in the SDK there are 4 main folders you will want to copy into your project directory:
+
+ Include
+ Lib
+ Media
+ SupportLib
+
+Include
+^^^^^^^
+Holds all the header files. There are also some subfolders within that hold headers for optional libraries.
+
+Lib
+^^^
+Contains all the library (.lib) files. These are separated into Debug and Release folders. Release libraries have some debugging helpers and loggers compiled out so they should only be used once your application has been built and tested with the Debug libraries. 
+Only 3 libs are needed for a basic application:
+
++MashMain+ - Contains the core library.
+
++MashMaterialCompiler+ - Compiles material files and generates runtime effects.
+
++MashD3DRenderer+ or +MashOGLRenderer+ - API specific rendering. You can include one or both into the sample application.
+
+Optional libs are:
+
++MashGUI+ - Basic GUI library.
+
++MashPhysics+ - Adds physics to scene nodes and meshes. Uses the bullet physics library.
+
++MashScript+ - Adds the ability to attach LUA scripts to scene nodes.
+
+Media
+^^^^^
+Contains all the default material and effect files the engine may need to load. These are runtime resources so the folder location should be given to the engine when the application loads. The example source files demonstrate this. Alternatively, Mash has a virtual file system built-in so these files (or any file/resource you wish) could be compiled into an application.
+There is also a folder for default GUI items. This only needs to be added if you have compiled an application with the GUI library.
+
+SupportLib
+^^^^^^^^^^
+Contains some header and source files that can be used to quickly get started.
+
+Creating a Basic Mash Application in XCode
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Create a new workspace.
+- Create an empty project within that workspace.
+- Add a .cpp source file to your project. This is where you will add main() and start your application.
+- Add a target to the project and select Cocoa Application. 
+- Add the Mash include paths under "Build Settings->Header Search Paths".
+- Add the Mash library files under "Build Phases->Link Binary With Libraries". You will also need to link with the OpenGL framework found on your computer.
+- Under "Build Phases->Compile Sources" add the source file you created with main(), also add SupportLib/MemoryAllocator/MashDefaultMemoryAllocator.cpp (from the SDK)
+- Start coding from main()
+- Libraries were compiled using GCC 4.2.
+
+When Xcode creates a new target it will create a few default files (AppDelegate.m and AppDelegate.h). You do not need these files. Remove any references to them from Targets->Build Phases->Compile Sources. If these files are compiled into your application it will fail to start.
+
+Creating a Basic Mash Application in Visual Studio
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Create a new Win32 Console Application.
+- Add the location of the Mash header files under "Project->Properites->C/C++->General->Additional Include Directories".
+- Add Mash library files under "Project->Properties->Linker->Input->Addition Dependencies".
+- Right click on your project then go to "Add->Existing Item" then add SupportLib/MemoryAllocator/MashDefaultMemoryAllocator.cpp (from the SDK) to your project.
+- If a default .cpp source file was not created automatically then add one to the project and start coding from main().
+
+Creating a Basic Mash Application in QtCreator
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- File->New File or Project
+- In the Projects section select "Non-Qt Project", then select "Plain C++ Project".
+- Then follow the rest of the prompts to create the project, main.cpp should be created for you.
+- Right click on your newly created project folder and select "Add Existing Files". Then add SupportLib/MemoryAllocator/MashDefaultMemoryAllocator.cpp (from the SDK).
+- In your .pro file you will need to link to Mash library and include files, look at the Qt SDK examples on how to do this.
+- You will also need to link to some system libraries depending on your OS, again this is shown in the Qt SDK examples.
+- Libraries were compiled using GCC.
+
+The demo projects in the Qt SDK have been setup so you only need to supply an argument to qmake to build the correct target.
+For example, to build the 32bit development build you would add to the "Additional arguments" section "CONFIG+=Development32".
+Other targets can be seen in the projects .pro and .pri files.
+
+Additional notes for Ubuntu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Mash has been tested with Ubuntu 13.04 and Opengl version 3.1. 
+- You will need to give the pre-built demo projects executable permissions before they will run.
+- Installing qtCreator should install most of the packages required for the SDK.
+- Consult the .pro files in the qt demos for additional dependencies needed.
+
+Having Problems?
+~~~~~~~~~~~~~~~~
+If the prebuilt demos arn't launching, a debug.txt file should be created in the same directory of the application that may help in finding the problem. Consult this log for more information.
+This log will also be produced in development versions of your application, you can set the debug file path when creating a new device. 
+Any memory allocated using Mash's memory management and not being freed before the devices destruction will also be logged at the end of this file.
+
+Example Main File
+~~~~~~~~~~~~~~~~~
+The following shows the minimum amount of work needed to get an a Mash3D application running. You should use this as a template for your first project. This has been taken from the Hello World exmaple.
+
+[source,c]
+----------------------------------------------------------------------------------------------------
+#include "MashInclude.h"
+
+#include "MemoryAllocator/MashDefaultMemoryAllocator.h"
+#include "D3D10/MashD3D10Creation.h"
+#include "OpenGL3/MashOpenGL3Creation.h"
+
+#if defined (MASH_WINDOWS) && !defined(__MINGW32__)
+    #define USE_DIRECTX
+#endif
+
+using namespace mash;
+
+class MainLoop : public mash::MashGameLoop
+{
+private:
+	MashDevice *m_device;
+	MashCamera *m_camera;
+public:
+	MainLoop(mash::MashDevice *device):m_device(device){}
+	virtual ~MainLoop(){}
+
+	/*
+		All scene setup should be done in this function. This includes:
+		- material loading
+		- applying materials to a mesh
+		- mesh construction
+		- loading scene nodes from a file
+		- adding lights and light/shadow settings
+
+		After this function exits the engine compiles all materials and shaders loaded, and also
+		compiles some internal API specific objects.
+
+		Lighting values can be changed after this function but some lighting values will force
+		some materials to be recompiled to reflect those changes. This will affect runtime 
+        
+		performance. These values include:
+		- enable/disable shadows
+		- adding/removing lights
+		- changing light types
+		- changing what light is considered as the main forward rendering light
+
+		Simply changing light colours, direction, attenuation, position at runtime is fine, 
+		and won't affect performance.
+	*/
+	bool Initialise()
+	{
+		/*
+			There always needs to be one active camera in the current scene.
+			The first camera created is set as the active camera by default. The active
+			camera can be changed by calling SceneManager::SetActiveCamera()
+		*/
+		m_camera = m_device->GetSceneManager()->AddCamera(0, "Camera01");
+		m_camera->SetZFar(1000);
+		m_camera->SetZNear(1.0f);
+		m_camera->SetPosition(MashVector3(0, 0, 0));
+
+		//return true to abort the application loading further.
+		return false;
+	}
+
+	/*
+		This function is called in fixed time steps, normally 0.016ms (60fps)
+        
+		but this step can be changed if needed when the device is created.
+		From here you would do all scene updating from this function.
+     
+		This function may be called mutiple times per frame or not at all depending
+		on the speed of the application in relation to the fixed time step.
+	*/
+	bool Update(f32 dt)
+	{
+		/*
+			Updates the given scenes animations and positions.
+
+			SceneManager::UpdateScene() can be called multiple times to update
+			different scene graphs.
+		*/
+		m_device->GetSceneManager()->UpdateScene(dt, m_camera);
+		
+		//return true to quit the application.
+		return false;
+	}
+
+	/*
+		Called once every frame (not at fixed time steps).
+	*/
+	void LateUpdate(f32 dt)
+	{
+	}
+		
+	/*
+		This is where all rendering occurs.
+		Call MashSceneManager::CullScene() once per scene graph you want rendered, this fills 
+		the internal render buckets. Than call MashSceneManager::DrawScene() to render 
+		everything to the current render target and empty the buckets.
+	*/
+	void Render()
+	{        
+		/*
+			Culls the given scene for rendering. SceneManager::CullScene() can be called
+			multiple times for different scene graphs. This can be handy if you wanted
+			to cull different graphs using different culling techniques. Nodes that pass
+			culling will be added to internal render buckets and drawn to the screen
+			when MashSceneManager::DrawScene() is called.
+
+			Some scene node data is delayed till a node passes culling. This is to save on
+			unncessary processing. After this function has been called for a scene graph, 
+			all nodes that passed culling will be completly updated.
+         
+			Nodes that pass culling have their render/interpolated position updated forward towards
+			MashSceneNode::GetWorldTransformState().
+			This interpolation reduces any jitter that may be noticable in a nodes movement due to 
+			changing frame rates. A nodes render position can be accessed by calling 
+			MashSceneNode::GetRenderTransformState().
+		*/
+		m_device->GetSceneManager()->CullScene(m_camera);
+
+		/*
+			Draws the culled objects to the screen. This function will choose forward or deferred
+			rendering based on material and lighting settings, and generate shadow maps if needed.
+			Finally the scene will be rendered to the render target set.
+		*/
+		m_device->GetSceneManager()->DrawScene();
+		
+		/*
+			The default render target is your main backbuffer. If you were to render
+ 			to another render target at some point then you will need to call this
+			before this function exits to render the final scene to the backbuffer.
+			In this case it's not necessary to call it because we haven't changed render
+			targets, it's just here for your information.
+		*/
+		m_device->GetRenderer()->SetRenderTargetDefault();
+	}
+};
+
+int main()
+{
+	/*
+		Loads the engine with these settings. Optionally you could load
+		these in from a file for easy settings changes.
+
+		The function pointers create the main and optional components to the engine.
+		The gui, physics and script managers are all optional and can be null.
+		This saves on .exe size and runtime memory if these are things you
+		are not going to use.
+	*/
+	sMashDeviceSettings deviceSettings;
+#ifdef USE_DIRECTX
+	deviceSettings.rendererFunctPtr = CreateMashD3D10Device;
+#else
+	deviceSettings.rendererFunctPtr = CreateMashOpenGL3Device;
+#endif
+	//deviceSettings.guiManagerFunctPtr = CreateMashGUI;
+	//deviceSettings.physicsManagerFunctPtr = CreateMashPhysics;
+	//deviceSettings.scriptManagerFunctPtr = CreateMashScriptManager;
+
+	deviceSettings.fullScreen = false;
+	deviceSettings.screenWidth = 800;
+	deviceSettings.screenHeight = 600;
+	deviceSettings.enableVSync = false;
+	deviceSettings.preferredLightingMode = aLIGHT_TYPE_PIXEL;
+	deviceSettings.antiAliasType = aANTIALIAS_TYPE_NONE;
+
+	/*
+		Root paths tell the engine where to look for files. You should include at least
+		the paths stated below to the engine data. Then add paths to any of your 
+		application files (texture, models, sounds, etc...).
+		Eg, Your sound path may be "../GameMedia/Sounds". Then throught your code you can
+		load these sounds by simply calling "ShootSound.mp3". The root paths will be searched
+		for your sound.
+		This behavior can be handy for easy path changes. But be aware of files that share the
+		same name in different paths as the wrong file could be loaded. Smart name choices will
+		avoid any issues here.
+	*/
+	deviceSettings.rootPaths.PushBack("../../Media/Materials");
+    
+	//The following is only needed if GUI is used.
+	//deviceSettings.rootPaths.push_back("../../Media/GUI");
+    
+	//You can set up paths that debug material information will be written to. Eg,
+	//deviceSettings.compiledShaderOutputDirectory = "../MaterialDebug";
+	//deviceSettings.intermediateShaderOutputDirectory = "../MaterialDebug";
+
+	//Creates the device
+	MashDevice *device = CreateDevice(deviceSettings);
+
+	if (!device)
+		return 1;
+
+	device->SetWindowCaption("Hello World Demo");
+
+	/*
+		Sets the game loop.
+		This can be called multiple times throught your application life
+		for different loops. Maybe a different loop per game level?
+	*/
+	MainLoop *mainLoop = MASH_NEW_COMMON MainLoop(device);
+	device->SetGameLoop(mainLoop);
+	mainLoop->Drop();
+
+	device->Drop();
+    
+	return 0;
+}
+----------------------------------------------------------------------------------------------------
+
+Materials
+---------
+
+Material (`.mtl`) files are scripts that contains information for how a mesh should be rendered and the structure of its vertices. A material files structure is as follows:
+
+-----------------------------------------------
+material <material_name>
+{
+	vertex
+	{
+	}
+
+	technique <technique_name>
+	{
+		sampler2D <sampler_name>
+		{
+		}
+
+		rasteriser
+		{
+		}
+
+		blendstate
+		{
+		}
+	}
+}
+-----------------------------------------------
+
+
+A material file may contain many material blocks if needed. This can be handy for grouping similar materials together, or for <<mtr_ref_index,deriving materials>> from a base material. All materials MUST have unique names.
+
+[[mtr_vertex_index]]
+Vertex Declaration
+~~~~~~~~~~~~~~~~~~
+
+This block defines the vertex structure that will be used for this material. It is assumed that any mesh using this material will also be created using this vertex declaration. When assigning a material to sub entities, their mesh will automatically be recreated using this vertex declaration. There are also methods in +MashMeshBuilder+ that can change the format of a mesh.
+
+The structure of the vertex block is as follows:
+
+-------------------------------------
+vertex
+{
+	<format> <usage> <stream> <steprate>
+	/*Add a new line for each vertex element*/
+}
+-------------------------------------
+
+
+Each line in the vertex block describes 1 element. So to state position, normal, and texture coordinates you would have 3 separate lines in the block, 1 for each element. 
+
+
+[[format_index]]
+<format>
+^^^^^^^
+
+Describes the layout and format of an element. Valid layouts are:
+
+[width="80%",cols="3,10",options="header"]
+|=========================================================
+|Keyword |Layout
+
+|r32float |1x 32bit floats.
+
+|rg32float |2x 32bit floats.
+
+|rgb32float |3x 32bit floats.
+
+|rgba32float |4x 32bit floats.
+
+|rgba8unorm |4x 8bit chars. This is used for 8 bit colour values that will expand to a +float4+ on the GPU in the range of 0.0 - 1.0.
+
+|rgba8uint |4x 8bit unsigned chars.
+
+|rg16sint |2x 16bit signed ints.
+
+|rgba16sint |4x 16bit signed ints.
+
+|=========================================================
+
+[[vertex_usage_index]]
+<usage>
+^^^^^^^
+
+Tells the application what the element is being used for. Usually any format can be used for any usage, but some examples are given below. Valid elements are:
+
+[width="80%",cols="3,10",options="header"]
+|=========================================================
+|Keyword |Layout
+
+|position |All vertex declarations must start with this usage. This is the vertex position. Normally this uses the <<format_index,rgb32float>> format.
+
+|normal |Vertex normal. Normally this uses the <<format_index,rgb32float>> format. 
+
+|texcoord |Texture coordinates. Normally this uses the <<format_index,rg32float>> format.
+
+|binormal |Used for normal mapping.
+
+|custom |This is custom data you want to access on the GPU. This can be anything from colour information to an instances world position.
+
+|boneIndex |This is a rgba32float format used for skinning that holds up to 4 bone indices that affect this vertex.
+
+|boneWeight |This is a rgba32float format used for skinning that holds up to 4 bone weights that affect this vertex.
+
+|=========================================================	
+
+[[vertex_stream_index]]
+<stream>
+^^^^^^^^
+This may be omitted and is 0 by default. This is the stream to which this element belongs. Stream 0 is known as the geometry stream, it's used as the main buffer for a mesh and is normally a static buffer because the data shouldn't change. Streams greater than 0 are mainly used for instancing data and are created as dynamic buffers, these can be updated regularly. If you access the vertex buffers from +MashMeshBuffer+, there will be one vertex buffer per stream.
+
+<stepRate>
+^^^^^^^^^^
+This may be omitted only if <<vertex_stream_index,stream>> has been omitted. This value is 0 by default. This is used for instancing data and streams greater than 0. Normally for instanced data this would be set to 1, meaning the instancing stream index will advance forward by 1 per instance. 
+
+Vertex Declaration Examples:
+++++++++++++++++++++++++++++
+A vertex declaration with one stream and position, normal, and texture coordinate information.
+
+------------------------------
+
+vertex
+{
+	rgb32float position
+	rgb32float normal
+	rg32float texcoord
+}
+------------------------------
+
+A vertex declaration with two streams. The first stream (geometry stream) contains position, normal, and texture coordinate information. The second stream is used to hold instancing information, in this case, one 4x4 transform matrix per instance.
+
+---------------------------------
+vertex
+{
+	rgb32float position 0 0
+	rgb32float normal 0 0
+	rg32float texcoord 0 0
+
+	rgba32float custom 1 1
+	rgba32float custom 1 1
+	rgba32float custom 1 1
+	rgba32float custom 1 1
+}
+---------------------------------
+
+Mesh buffers that use the above vertex declaration will have two vertex buffers, one for each stream. The first contains a static buffer filled with the geometry of the mesh. The second buffer would be a dynamic buffer that's regularly updated with new instance data.
+
+Technique Blocks
+~~~~~~~~~~~~~~~~
+Techniques hold all the data that defines the "look" of a mesh. Multiple techniques can be added to a material to support different APIs, low, med, and high graphic options and LODing. 
+
+Defining Technique Programs
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Within techniques you can define the vertex and pixel programs (among others) that will be used during rendering. Programs are declared in the following format:
+
+------------------------------------------------------------
+technique <technique_name>
+{
+	<programType> <"profile string"> <"effect path string"> <"entry string">
+}
+------------------------------------------------------------
+
+A technique at the very least must define a vertex and pixel program. Example:
+
+------------------------------------------------------------
+technique Normal
+{
+	vertexprogram "glslv" "RuntimeVertex.glsl" "vsmain"
+	pixelprogram "glslp" "RuntimePixel.glsl" "psmain"
+}
+------------------------------------------------------------
+
+[[program_type_index]]
+<programType>
++++++++++++++
+Defines the effect that will be used for different stages of the rendering process. Valid program types are:
+
+[width="80%",cols="3,10",options="header"]
+|=========================================================
+
+|Keyword |Usage
+
+|vertexprogram |Vertex program.
+
+|pixelprogram |Pixel/fragment program.
+
+|geometryprogram |Geometry program (optional). Note, the engine does not do any conversions into hlsl or glsl for geometry shaders. This must be supplied as a +.glsl+ or +.hlsl+ file. +.eff+ files should not be used for geometry programs. See <<tech_file_path_index,here>> for more information about file extensions.
+
+|shadowvertexprogram |Vertex program for shadow casting (optional). This maybe the same as +vertexprogram+ or you could optimise it for shadow generation only. If you don't want this technique casting shadows then don't define +shadowvertexprogram+.
+
+|=========================================================
+
+<"profile string"> 
+++++++++++++++++++
+Defines the API profile the effect should be compiled to.
+
+Valid DirectX vertex strings are:
+
+ vs_3_0
+ vs_4_0
+ vs_5_0
+
+Valid DirectX pixel strings are:
+
+ ps_3_0
+ ps_4_0
+ ps_5_0
+
+Valid DirectX geometry strings are:
+
+ gs_4_0
+ gs_5_0
+
+Valid OpenGL strings are:
+
+ glslv
+ glslp
+ glslg
+
+To determine the appropriate profile string at runtime (it's recommended you use this for +.eff+ files) use:
+
+ auto
+
+[[tech_file_path_index]]
+<"effect path string">
+++++++++++++++++++++++
+The effect path string is the path to the shader that will be used. This can be a local path, the file system will search the root paths to find the file. The file extension is important as it informs the engine on how to compile it. There are three extension options:
+
+[width="80%",cols="3,10",options="header"]
+|=========================================================
+
+|Extension |Notes
+
+|eff |Tells the engine the file is in <<effect_index,effect>> format. This format will be compiled into hlsl or glsl depending on the current system. This format must also be used if you want runtime lighting information added to the shader code (usually for scene nodes). If the vertex program is in +eff+ format then the pixel program must also be in +eff+ format, and vice versa.
+
+|glsl |Tells the engine the file is in native OpenGL glsl format. No format conversions will occur. The files contents will be sent directly to the API for compiling.
+
+|hlsl |Tells the engine the file is in native DirectX hlsl format. No format conversion will occur. The files contents will be sent directly to the API for compiling.
+
+|=========================================================
+
+<"entry string">
+++++++++++++++++
+This is the entry point (function) to this shader.
+
+Blend States
+^^^^^^^^^^^^
+
+Contains the values that will blend the final image with the back buffer. You would use this for alpha blending and other special effects. Blend states can contain one or more of the following states. Example block:
+
+----------------------------------
+blendstate
+{
+	blendingenabled <value>
+	srcblend <value>
+	destblend <value>
+	blendop <value>
+	srcblendalpha <value>
+	destblendalpha <value>
+	blendopalpha <value>
+	writemask <value>
+}
+----------------------------------
+
+blendingenabled <value>
++++++++++++++++++++++++
+Set this to true to enable alpha blending. Valid parameters to <value> are:
+
+ true
+ false
+
+srcblend, destblend, srcblendalpha, destblendalpha, blendopalpha <value>
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Blending options. Valid parameters to <value> are:
+
+ srcalpha
+ invsrcalpha
+ destalpha
+ destcolor
+ invdestalpha
+ invsrccolor
+ one
+ srcalphasat
+ srccolor
+ zero
+ invdestcolor
+
+blendop, blendopalpha <value>
++++++++++++++++++++++++++++++
+Blending operators. Valid parameters to <value> are:
+
+ add
+ max
+ min
+ subtract
+ revsubtract
+
+writemask <value>
++++++++++++++++++
+Defines which colour channels to write to. If your only writing to specific channels then setting this can improve performance.
+Valid parameters to <value> are one or more of the following separated by a space:
+
+ red
+ green
+ blue
+ alpha
+ all
+
+Example Blend States
++++++++++++++++++++++
+A blend state for regular non transparent objects:
+
+---------------------------------
+blendstate
+{
+	blendingenabled false
+	srcblend one
+	destblend zero
+	blendop add
+	srcblendalpha zero
+	destblendalpha zero
+	blendopalpha add
+	writemask all
+}
+---------------------------------
+
+A blend state for a transparent object:
+
+---------------------------------
+blendstate
+{
+	blendingenabled true
+	srcblend srcalpha
+	destblend invsrcalpha
+	blendop add
+	srcblendalpha zero
+	destblendalpha zero
+	blendopalpha add
+	writemask all
+}
+---------------------------------
+
+Rasteriser
+^^^^^^^^^^
+Sets rasteriser settings. Rasteriser blocks can contain one or more of the following states. Example block:
+
+------------------------------------
+rasteriser
+{
+	depthtestenabled <value>
+	depthwriteenabled <value>
+	depthcmp <value>
+	depthbias <value>
+	depthbiasclamp <value>
+	slopescaledbias <value>
+	fill <value>
+	cull <value>
+}
+------------------------------------
+
+depthtestenabled <value>
+++++++++++++++++++++++++
+Enables depth testing against the depth buffer. Valid parameters to <value> are:
+
+ true
+ false
+
+Full screen quads or post processing effects would normally disable depth testing.
+
+depthwriteenabled <value>
++++++++++++++++++++++++++
+Enables depth writing to the depth buffer. Valid parameters to <value> are:
+
+ true
+ false
+
+Full screen quads or post processing effects would normally disable depth writing.
+
+depthcmp <value>
+++++++++++++++++
+Depth comparison mode. A pixel must pass this test to be written to the buffer. Valid parameters to <value> are:
+
+ never
+ less
+ equal
+ lessequal
+ greater
+ notequal
+ greaterequal
+ always
+
+depthbias <value>
++++++++++++++++++
+Adds a bias to the depth value. <value> is of float type.
+
+slopescaledbias <value>
++++++++++++++++++++++++
+Adds a bias to the depth value. <value> is of float type.
+
+depthbiasclamp <value>
+++++++++++++++++++++++
+Sets the max depth bias. <value> is of float type.
+
+fill <value>
+++++++++++++
+Sets the fill mode. Valid parameters to <value> are:
+
+ wireframe
+ solid
+
+cull <value>
+++++++++++++
+Sets the triangle direction that will be culled. Mash defines clockwise triangles as front facing, so by default the cull value is +counterclockwise+. Valid parameters to <value> are:
+
+ clockwise
+ counterclockwise
+
+Example Rasteriser States
++++++++++++++++++++++++++
+A rasteriser block for a material that does no depth testing or writing:
+
+---------------------------------
+rasteriser
+{
+	depthtestenabled false
+	depthwriteenabled false
+	depthcmp never
+}
+---------------------------------
+
+Samplers
+^^^^^^^^
+Samplers define a texture and its options for sampling in a vertex and/or pixel program. Sampler blocks can contain one or more of the following settings. Sampler format:
+
+------------------------------------------
+<sampler_type> <sampler_name>
+{
+	index <sampler index>
+	texture <"texture path string">
+	minmagfilter <value>
+	mipfilter <value>
+	addressu <value>
+	addressv <value>
+}
+------------------------------------------
+
+<sampler_type>
+++++++++++++++
+Defines the sampler type to use. Valid values are:
+
+ sampler2D
+ samplerCUBE
+
+<sampler_name>
+++++++++++++++
+A name given to this sampler by the user for identification only.
+
+index <sampler index>
++++++++++++++++++++++
++<sampler index>+ is the index given to the sampler within the shader program. For example, the following uniform parameter is given an index of 0:
+
+ sampler2D autoSampler0
+
+This parameter would then use the sampler within the technique of the same index. Also note, This will be the index used for calls such as +MashTechniqueInstance::GetTexture(0)+ and MashTechniqueInstance::SetTexture(0);
+
+texture <"texture path string">
++++++++++++++++++++++++++++++++
++<"texture path string">+ is the texture path that's assigned to this sampler. This can be a local path and the file system will search the root directories for the texture. Optionally the texture can be set using +MashTechniqueInstance::SetTexture(textureIndex, myTexture)+ or +MashMaterial::SetTexture(textureIndex, myTexture)+.
+
+minmagfilter <value>
+++++++++++++++++++++
+Specifies the texture min and mag texture filter. Valid parameters to <value> are:
+
+ linear
+ point
+
+mipfilter <value>
++++++++++++++++++
+Specifies the mipmapping filter. Selecting none will disable mipmapping. Valid parameters to <value> are:
+
+ linear
+ point
+ none
+
+addressu <value>
+++++++++++++++++
+Texture address method for the u value. Valid parameters to <value> are:
+
+ clamp
+ wrap
+
+addressv <value>
+++++++++++++++++
+Texture address method for the v value. Valid parameters to <value> are:
+
+ clamp
+ wrap
+
+Example Sampler Usage
++++++++++++++++++++++
+
+----------------------------------------
+sampler2D DiffuseSampler
+{
+	index 0
+	texture "DiffuseTexture.DDS"
+	minmagfilter linear
+	mipfilter linear
+	addressu clamp
+	addressv clamp
+}
+----------------------------------------
+
+[[other_tech_params_index]]
+Other Technique Parameters
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lighting <lighting type>
+++++++++++++++++++++++++
+Defines the lighting type that will be used in this technique. This is used for +.eff+ files only. Lighting shader code will be generated and added to the effects at runtime based on this setting. Valid <lighting type> values are:
+
+[width="90%",cols="3,10",options="header"]
+|=========================================================
+|Keyword |Notes
+
+|auto |Gives you the ability to compile this technique to what ever the preferred lighting mode is within the engine. This allows you to change the lighting types of many techniques with one value.
+
+|vertex |This technique will use only vertex shading. This is good for techniques made for lower graphics settings.
+
+|pixel |This technique will use only pixel shading. Normal or high graphics mode techniques should use this.
+
+|deferred |This technique will use only deferred lighting. The graphics quality is the same as pixel in most cases, however, deferred mode is more performance heavy than pixel lighting. If you have only one or two lights in your scene then pixel lighting maybe a better option than deferred. Deferred lighting would be used in scenes with many lights, or if you wanted to utilise the gbuffer data for post processing.
+
+|=========================================================
+
+[[lodlevel_index]]
+lodlevel <lod level>
+++++++++++++++++++++
+Defines the lod levels this technique can be used for. This keyword is followed by one, or many numbers separated by a space. The lod index must start at 1. For example, a technique that supports lod levels 1 and 2 would write:
+
+ lodlevel 1 2
+
+The distances which correspond to these values are set using <<lod_distance_index,loddistance>>. The material will then update its lod at draw time to that which matches the current distance from the camera. Using this, you could have one technique for lod levels 1 and 2. Then another technique for lod levels 3 and 4. If you define this, then be sure to set the lod distances as well. There should be one lod for each element in <<lod_distance_index,loddistance>>.
+
+group <"user defined string">
++++++++++++++++++++++++++++++
+This keyword is followed by a string that can be used to activate a technique group from within the engine using +MashMaterial::SetActiveGroup()+. An example declaration from within a technique would be:
+
+ group "LowGraphics"
+ 
+Groups allow you to have specific options and lods set up for different graphics options. An example would be to give the user the option between low and high end graphics, then have LODing within each group. In this example, techA and techB are used only for the "low" group. techC and techD are used only for the "high" group:
+
+--------------------------------------------------------
+material MyMaterial
+{
+	loddistance 0 100
+
+	technique techA
+	{
+		/*Add other technique data here*/
+		lodlevel 1
+		group "low"
+	}
+
+	technique techB
+	{
+		/*Add other technique data here*/
+		lodlevel 2
+		group "low"
+	}
+
+	technique techC
+	{
+		/*Add other technique data here*/
+		lodlevel 1
+		group "High"
+	}
+
+	technique techD
+	{
+		/*Add other technique data here*/
+		lodlevel 2
+		group "High"
+	}
+}
+--------------------------------------------------------
+ 
+disabledshadoweffects <lighting type>
++++++++++++++++++++++++++++++++++++++
+If <<program_type_index,shadowvertexprogram>> was defined to create a shadow caster, then this keyword allows you to disable casting from specific lighting types. Valid +<lighting type>+ values can be one or more of the following separated by a space:
+
+ directional
+ spot
+ point
+
+Other Material Parameters
+~~~~~~~~~~~~~~~~~~~~~~~~~
+[[lod_distance_index]]
+loddistance <value>
++++++++++++++++++++
+This defines the distances which lods will activate. The values may be one or more integers separated by a space. The distances in this array correspond to the elements given in <<lodlevel_index,lodlevel>> for all techniques in this material. For example:
+
+------------------------------------------------------
+material MyMaterial
+{
+	loddistance 0 100
+
+	technique techA
+	{
+		/*Add other technique data here*/
+		lodlevel 1
+	}
+
+	technique techB
+	{
+		/*Add other technique data here*/
+		lodlevel 2
+	}
+}
+------------------------------------------------------
+
+In this example, techA is active from distances of 0 - 99, and techB is active from 100 and any distance there after. For scene nodes, the material will automatically change the technique at render time based on the current distance from the camera.
+
+shadingeffect <"effect_file_path.eff">
++++++++++++++++++++++++++++++++++++++++
+This value is quite powerful. This allows you to set an effect file that defines how objects rendered with this material will be shaded (lit). So for example, some objects can have a plastic look, some objects can be shaded to look like wood, some can look like metal, etc… The contents of this file must be in effect format and the function MashComputeShading must be named the same with the same number of parameters and types as follows. Below is a template from which you should start:
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+include
+{
+	MashLightStructures.eff
+}
+
+source
+{
+	sLightOutput MashComputeShading(float3 viewSpaceLightVec, //Normalised inverse light direction
+																float3 viewSpaceSurfaceNormal, //Surface normal
+																float3 ViewSpaceToEye,  //Normalised direction from the surface to the camera
+																float4 specularIntensity,
+																float3 lightDiffuseValue, 
+																float3 lightSpecularValue)
+	{
+		sLightOutput output
+		/*do lighting and fill output*/
+		return output;
+	}
+
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+Contained within MashLightStructures.eff is sLightOutput. The user must not define sLightOutput themselves. This structure contains output values for diffuse and specular lighting. They must both be filled out and the structure returned.
+
+----------------------------
+struct sLightOutput
+{
+	float3 diffuse;
+	float3 specular;
+};
+----------------------------
+
+Samplers, Rasteriser States, and Blend States
++++++++++++++++++++++++++++++++++++++++++++++
+These were shown earlier defined within techniques, but they may also be defined within a materials scope. Any technique without there own states defined will inherit the global versions.
+
+[[mtr_ref_index]]
+Material References
+~~~~~~~~~~~~~~~~~~~
+Material references are the same as creating an instance of a material within the engine. They are used in cases where a single material is applied to many different node instances, and in each instance only the texture needs to change. Material instances should be used wherever possible to reduce memory consumption and possibly increase rendering performance as less state changes are needed.
+
+Material references will inherit all values from the base material, and allow you to override the samplers with new texture data. The sampler that is being changed must share the same sampler name across both material. 
+
+Material references have the following syntax:
+
+ material <material_name> : <base_material_name>
+
+Example
+^^^^^^^
+
+-------------------------------------------------------------------------
+material BaseMaterial
+{	
+	vertex
+	{
+		position rgb32float
+		texcoord rg32float
+	}
+
+	sampler2D DiffuseSampler
+	{
+		index 0
+		texture "DiffuseTexture.DDS"
+	}
+
+	technique Normal
+	{
+        	vertexprogram "auto" "Vertex.eff" "vsmain"
+		pixelprogram "auto" "Pixel.eff" "psmain"
+	}
+}
+
+material InstanceMaterial : BaseMaterial
+{
+	sampler2D DiffuseSampler
+	{
+		index 0
+		texture "InstanceTexture.DDS"
+	}	
+}
+-------------------------------------------------------------------------
+
+If the sampler was within a technique then you must specify the technique in the reference as well. The example above would then change to:
+
+-------------------------------------------------------------------------
+material InstanceMaterial : BaseMaterial
+{
+	technique Normal
+	{
+		sampler2D DiffuseSampler
+		{
+			index 0
+			texture "InstanceTexture.DDS"
+		}
+	}	
+}
+-------------------------------------------------------------------------
+
+Material Examples
+~~~~~~~~~~~~~~~~~
+A material with the minimum amount of settings defined:
+
+-------------------------------------------------------------------------
+material MyMaterial
+{	
+	vertex
+	{
+		position rgb32float
+		texcoord rg32float
+	}
+
+	technique Normal
+	{
+		vertexprogram "auto" "RuntimeVertex.eff" "vsmain"
+		pixelprogram "auto" "RuntimePixel.eff" "psmain"
+	}
+}
+-------------------------------------------------------------------------
+
+An API specific material:
+
+-------------------------------------------------------------------------
+material MyMaterial
+{	
+	vertex
+	{
+		position rgb32float
+		texcoord rg32float
+	}
+
+	technique Normal
+	{
+		vertexprogram "glslv" "RuntimeVertex.glsl" "vsmain"
+		pixelprogram "glslp" "RuntimePixel.glsl" "psmain"
+	}
+}
+-------------------------------------------------------------------------
+
+A material that's compatible with runtime lighting and shadow casting:
+
+-------------------------------------------------------------------------
+material MyMaterial
+{	
+	vertex
+	{
+		position rgb32float
+		texcoord rg32float
+	}
+	
+	technique Normal
+	{
+		lighting pixel
+		vertexprogram "auto" "RuntimeVertex.eff"  "vsmain"
+		pixelprogram "auto" "RuntimePixel.eff"  "psmain"
+		shadowvertexprogram "auto" "RuntimeVertex.eff"  "vsmain"
+	}
+}
+-------------------------------------------------------------------------
+
+A material that's compatible with runtime lighting, shadow casting, custom light shading, and render states defined:
+
+-------------------------------------------------------------------------
+material MyMaterial
+{	
+	vertex
+	{
+		position rgb32float
+		texcoord rg32float
+	}
+	
+	technique Normal
+	{
+		lighting pixel
+		vertexprogram "auto" "RuntimeVertex.eff"  "vsmain"
+		pixelprogram "auto" "RuntimePixel.eff"  "psmain"
+		shadowvertexprogram "auto" "RuntimeVertex.eff"  "vsmain"
+		shading effect "lightShading.eff"
+
+		blendstate
+		{
+			blendingenabled true
+			srcblend srcalpha
+			destblend invsrcalpha
+			blendop add
+			srcblendalpha zero
+			destblendalpha zero
+			blendopalpha add
+			writemask all
+		}
+
+		rasteriser
+		{
+			depthtestenabled true
+			depthwriteenabled true
+			depthcmp lessequal
+		}
+	}
+}
+-------------------------------------------------------------------------
+
+[[effect_index]]
+Effects
+-------
+
+Effect files (.eff) hold shader code that will be compiled into an API's native format. This code may also be used to generate effects that will interact with a scenes lighting state automatically. Unlike material files, effect files cannot have multiple effects in the same file. Effect files contain different blocks that state what the inclosed data will be used for, the most important being <<eff_source_index,source>>. Within the source block is raw HLSL shader code that will be used to generate the final shader. Some blocks are valid only in vertex or pixel programs. The blocks defined below will state if they are specific to a program. 
+
+Sometimes it can be handy for debugging purposes to see the final API shader that is being generated from effect files. You can set file paths in +sMashDeviceSettings+ so that intermediate data is saved to file.
+
+[[eff_include_index]]
+Include
+~~~~~~~
+Any files declared within the include block will be added above the current file. Any <<eff_autos_index,autos>> that clash names with the current file will be merged to remove any multiple declaration errors.  *Each include must start on a new line*. File paths can be relative, the file manager will search the root paths when loading files.
+
+Include blocks have the following syntax:
+
+------------------------------------------
+include
+{
+	filename.ext
+}
+------------------------------------------
+
+[[eff_autos_index]]
+Auto Parameters
+~~~~~~~~~~~~~~~
+Auto blocks contain all the parameters who's data needs to be passed in from the CPU. *Each auto must start on a new line*. The main purpose of this block is to check for any previously declared autos in included files, therefore removing any possible multiple declaration errors. These autos will be checked against registered autos at load time to find a handler that will pass on information from the CPU to GPU to that auto. Auto handlers can be registered using +MashMaterialManager::RegisterAutoParameterHandler()+. It's important to note that structs *must* be declared before the auto, there is two options to satisfy this rule:
+
+1. Their declaration can be placed within an <<eff_include_index,included>> file.
+
+2. Declare both the struct and the auto within the <<eff_source_index,source>> block. Doing this however, you run the risk of multiple declarations for autos. Only do this if your sure the same auto is not used in an included file, or included when lighting data is added.
+
+Auto blocks have the following syntax:
+
+------------------------------------------
+autos
+{
+	<auto_format> <auto_name>
+	/*Add a new line for each auto in your effect*/
+}
+------------------------------------------
+
+<auto_format>
++++++++++++
+This is the format of the auto and can either be of built in type, or a user defined struct. Structs are handled as constant buffers and usually serve as the most efficient way of passing a lot of parameters to a shader. Be aware of an APIs packing rules when it comes to constant buffers. Mash requests the API not to optimise or pack the data to make passing data easier. It's usually best to simply make all variables within a struct +float4+ or +float4x4+ to remove any memory alignment issues. Valid auto formats match those found in HLSL sm3 and include:
+
+ float
+ float2
+ float3
+ float4
+ float4x4
+ int
+ int2
+ int3
+ int4
+ bool
+ bool2
+ bool3
+ bool4
+ sampler2D
+ samplerCUBE
+
+The name of a struct format is the same name you declared the struct with. For example:
+
+-------------------------------
+/*Normal HLSL struct*/
+struct EffectData
+{
+	float4 dataA;
+	float4 dataB;
+	float4 dataC;
+};
+
+.
+.
+.
+
+/*The auto then looks like:*/
+EffectData effectDataAuto
+-------------------------------
+
+<auto_name>
++++++++++
+This can be the name of an built-in auto, or an auto that you have registered previous to loading the effect. The name may also be not registered if you wish, though this is rarely wanted. The auto can be found within a loaded effect using +MashEffect::GetParameterByName()+. Built in auto names and their data type include:
+
+[width="90%",cols="3,3,10",options="header"]
+|=========================================================
+|Auto Name |Format |Description
+
+|autoWorldViewProjection |float4x4 |Active camera and nodes combined world view projection matrix.
+
+|autoViewProjection |float4x4 |Active cameras view projection matrix.
+
+|autoView |float4x4 |Active cameras view matrix.
+
+|autoProjection |float4x4 |Active camera projection matrix.
+
+|autoWorld |float4x4 |The world transform of the current node being rendered. This is only valid during node rendering when a custom render path for that nodes material is not being used.
+
+|autoWorldView |float4x4 |Active camera and nodes combined world view matrix.
+
+|autoWorldPosition |float3 |Active nodes world position.
+
+|autoWorldInvTranspose |float4x4 |The inverse transpose of the active nodes world transform. 
+
+|autoViewInvTranspose |float4x4 |The inverse transpose of the active cameras view matrix. 
+
+|autoInvViewProjection |float4x4 |The inverse transpose of the active cameras view matrix. 
+
+|autoInvView |float4x4 |The inverse of the active cameras view matrix. 
+
+|autoInvProjection |float4x4 |The inverse of the active cameras projection matrix. 
+
+|autoWorldViewInvTranspose |float4x4 |The inverse transpose of the active camera and nodes world view matrix. 
+
+|autoSampler |sampler2D, samplerCUBE |Texture sampler. This auto must have a postfix number that matches a sampler within the material file. This index is also used to retrieve the texture from a materials technique using +MashTechniqueInstance::GetTexture(textureIndex)+. A sampler at index zero would look like: +autoSampler0+.
+
+|autoCameraNearFar |float2 |Holds the active cameras near and far values. Near is held in .x, Far is held in .y.
+
+|autoLight |struct sLight (Defined in MashLightStructures.eff) |Contains all the data associated with the active light.
+
+|autoLightWorldPosition |float3 |Active lights world position.
+
+|autoShadowsEnabled |bool |This is set to true if the active light has shadows enabled.
+
+|autoSceneShadowMap |sampler2D |This is the current scenes shadow map for the current light pass. This is only valid when lighting and shadows are enabled.
+
+|autoGBufferDiffuseSampler |sampler2D |This is only valid after a scene has been deferred rendered. This is the scene with only diffuse colour. 
+
+|autoGBufferSpecularSampler |sampler2D |This is only valid after a scene has been deferred rendered. This is the scene with only the specular value from a scenes specular maps. 
+
+|autoGBufferDepthSampler |sampler2D |This is only valid after a scene has been deferred rendered. Contains the depth buffer.
+
+|autoGBufferNormalSampler |sampler2D |This is only valid after a scene has been deferred rendered. Contains the normal values from a scene.
+
+|autoGBufferLightSampler |sampler2D |This is only valid after a scene has been deferred rendered. Contains the lighting values calculated from the specular, depth, and normal buffers. This is a one channel texture used to multiply with the diffuse sampler to produce the final lit colour.
+
+|autoGBufferLightSpecularSampler |sampler2D |This is only valid after a scene has been deferred rendered. Contains the lighting specular values calculated from the specular, depth, and normal buffers. This is added to the final lit term to add specular lighting.
+
+|autoBonePalette |float4x4 array |This can be used during skinning to get an Entity's world bone offsets. These matrices are then multiplied by a meshes local vertices to produce the final transformed world space position. Each index in this array corresponds to a bone index in the vertices <<vertex_usage_index,boneIndex>> element. The size of this array should be set to the bone count of your model. For example, a model with 26 bones would have an auto parameter like: +autoBonePalette[26]+.
+
+|=========================================================
+
+[[eff_vert_inputs_index]]
+Vertex Program Inputs
+~~~~~~~~~~~~~~~~~~~~~
+Used in vertex programs only. Here you define the vertex layout of the CPU vertex data. This layout then becomes the input into the vertex shader. This must match the <<mtr_vertex_index,vertex declaration>> given in the material.
+
+This should only be used for effects that want runtime lighting information. Other effects should just define a vertex shader input struct in the <<eff_source_index,source>> block in regular HLSL sm3 style.
+
+Vertex input blocks have the following syntax:
+
+------------------------------------------
+vertexInput
+{
+	<data_type> <element_name> : <vertex_usage>
+	/*Add a new line for each element in your declaration*/
+}
+------------------------------------------
+
+<data_type>
++++++++++++
+Data types can be found in the <<eff_autos_index,auto>> section. The data type needs to be compatible with the format set in the <<vertex_usage_index,materials>> element.
+
+<element_name>
+++++++++++++++
+A user defined name that will be used to access this element with the shader code.
+
+<vertex_usage>
+++++++++++++++
+This usage must match the same element within the <<vertex_usage_index,materials>> vertex declaration.
+
+Example
++++++++
+A vertex input block with position, texture coordinates, and colour:
+
+------------------------------------------
+vertexInput
+{
+	float3 vertPos : position
+	float2 vertTexcoords : texcoord
+	float4 colour : colour
+}
+------------------------------------------
+
+This would match a materials vertex declaration of:
+
+------------------------------
+vertex
+
+{
+	rgb32float position
+	rg32float texcoord
+	rgba8uint colour
+}
+------------------------------
+
+[[eff_vertex_outputs_index]]
+Vertex Program Outputs
+~~~~~~~~~~~~~~~~~~~~~~
+Used in vertex programs only. Here you define the data you are handing onto the engine for processing and/or passing onto the pixel shader so you can process it further.
+
+This should only be used for effects that want runtime lighting information. Other effects should just define a vertex shader output struct in the <<eff_source_index,source>> block in regular HLSL sm3 style.
+
+Vertex outputs have a similar syntax as <<eff_vert_inputs_index,vertex inputs>>:
+
+------------------------------------------
+vertexOutput
+{
+	<data_type> <element_name> : <output_usage> <opt_param_pass>
+	/*Add a new line for each output element*/
+}
+------------------------------------------
+
+The difference here is +output_usage+ and +opt_param_pass+.  
+
+<output_usage>
+++++++++++++++
+The output usage tells the engine how the data should be used. For example, an element with the +viewnormal+ semantic tells the engine that normal data in view space is contained within that element. That element can then be used as the surface normal for vertex or pixel lighting.
+
+Valid values for +<output_usage>+ are:
+
+[width="90%",cols="3,3,10",options="header"]
+|=========================================================
+|Keyword |Format |Description
+
+|viewposition |float4 |*All vertex outputs must define at least this element*. This is the world position multiplied by the active cameras view matrix.
+
+|viewnormal |float3 |A vertex normal multiplied by the active cameras view matrix.
+
+|specular |float4 |This will be used to calculate the specular value for vertex lighting. Elements x,y,z hold the specular colour while element w hold the specular intensity.
+
+|colour |float4 |For passing colour values to the pixel shader.
+
+|texcoord |float2 |For passing texture coordinates to the pixel shader.
+
+|custom |float, float2, float3, float4 |For passing a user defined value to the pixel shader.
+
+|hposition |float4 |Holds the final position of the vertex in screen space. This would be the world transform multiplied by the active cameras view projection matrix. Normally this is done for you automatically, but this gives you the option of calculating it yourself for special effects.
+
+|=========================================================
+
+[[eff_pass_param_index]]
+<opt_param_pass>
+++++++++++++++
+Defining usages for the outputs lets the engine know what you have calculated and how it should be used whether it be for lighting or positioning. If you actually want to pass that same data onto the pixel shader for your own purposes then you also need to add the +pass+ keyword after the usage. If the keyword is not added then the data will not be passed onto the user pixel function.
+
+Example
++++++++
+Here is an output block with view position, view normal, and texture coordinates. The texture coordinates are passing onto the pixel shader:
+
+-----------------------------------------------
+vertexOutput
+{
+	float4 myViewPosition : viewposition
+	float3 myViewNormal : viewnormal
+	float2 myTexcoords : texcoord pass
+}
+-----------------------------------------------
+
+[[eff_pixel_outputs_index]]
+Pixel Programs Outputs
+~~~~~~~~~~~~~~~~~~~~~~
+Used for pixel programs only. This is similar to the <<eff_vertex_outputs_index,vertex program outputs>> block but for pixel programs. The parameters you define in this block will be used by the engine to process per pixel lighting or render a colour to the back buffer. Note that this block is optional.
+
+This should only be used for effects that want runtime lighting information. Other effects should just define a pixel shader output struct in the <<eff_source_index,source>> block in regular HLSL sm3 style.
+
+Pixel output blocks have the following syntax:
+
+------------------------------------------
+pixelOutput
+{
+	<data_type> <element_name> : <output_usage>
+	/*Add a new line for each output element*/
+}
+------------------------------------------
+
+<data_type>
++++++++++++
+Data types can be found in the <<eff_autos_index,auto>> section, you would normally use +float4+ in this block.
+
+<element_name>
+++++++++++++++
+A user defined name that will be used to access this element with the shader code.
+
+<output_usage>
+++++++++++++++
+The output usage tells the engine how the data should be used. For example, an element with the +specular+ semantic tells the engine that specular lighting information is contained within that element. That element would then be used to calculate specular lighting for that pixel.
+
+Valid values for +<output_usage>+ are:
+
+[width="90%",cols="3,3,10",options="header"]
+|=========================================================
+|Keyword |Format |Description
+
+|diffuse |float4 | The colour of this pixel. This could be sampled from a texture, passed in from the vertex shader, or simply hardcoded. If lighting is enabled, this value will be multiplied with the final lighting value.
+
+|specular |float4 |The specular value of this pixel for per pixel lighting. This could be sampled from a specular texture, passed in from the vertex shader, or simply hardcoded. Elements 'rgb' contain the specular colour, and element 'a' contains the specular intensity. 
+
+|viewnormal |float3 |This can be used to set the surface normal in view space for use in lighting calculations. You would use this for normal mapping. If your not performing normal mapping, then it's best to simply calculate this in the <<eff_vertex_outputs_index,vertex shader>>.
+
+|=========================================================
+
+Example
++++++++
+A pixel output block with diffuse and specular values defined:
+
+--------------------------------------
+pixelOutput
+{
+	float4 pixelColour : diffuse
+	float4 pixelSpec : specular
+}
+--------------------------------------
+
+[[eff_source_index]]
+Program Source
+~~~~~~~~~~~~~~
+This block contains the main HLSL shader model 3 code. All code in this block is copied verbatim to the final shader (#defines, uniforms, comments, functions, structs, etc…). Within this code, among other things, you would access uniform parameters declared within the <<eff_autos_index,auto block>>.
+
+The syntax of this block looks like:
+
+-----------------------------------
+source
+{
+	/*Add HLSL code here*/
+}
+-----------------------------------
+
+Effects Without Runtime Lighting Generation Support
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+These are normally any effect that isn't being applied to a lit scene node. Example usages would be GUI, post processing or non/custom lighting scene node. Here you define your entire HLSL sm3 source code including vertex shader inputs and outputs. The vertex input structure must match the materials <<mtr_vertex_index,vertex declaration>> in terms of the data type, size and semantic. 
+
+Semantic mapping table for vertex inputs:
+
+[width="60%",cols="3,3",options="header"]
+|=========================================================
+|Material Semantic |Map To HLSL Semantic
+
+|position |POSITION
+
+|tangent |TANGENT
+
+|colour |COLOR
+
+|texcoord |TEXCOORD
+
+|custom |TEXCOORD
+
+|normal |NORMAL
+
+|blendindex |BLENDINDICES
+
+|blendweight |BLENDWEIGHT
+
+|=========================================================
+
+These effects still support <<eff_include_index,include blocks>> and <<eff_autos_index,auto blocks>>, they will be added with the code found in the source block to produce the final effect. <<eff_vert_inputs_index,Vertex input>> blocks and <<eff_vertex_outputs_index,vertex output>> blocks will be ignored.
+
+The only difference to shader model 3 code and effect code is the SV_POSITION semantic. This must be used to define the element that holds the vertex screen position. See <<example_two_index,this>> effect for an example. 
+
+Effects With Runtime Lighting Generation Support
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Most scene nodes should have these effects. If creating effects to support runtime lighting, then your main entry point function *must* have specific input and output data types. You do not declare these structures, they are creating by the shader generator and are different for vertex and pixel programs. If you create structures with the same name then compile errors will occur. The entry point function name is user defined and the engine has no restrictions on it. 
+
+The engine uses the data defined in this file as a guide on how to create the final shader. It will basically build a wrapper shader around whats provided in an effect file and pass on the data you requested to your vertex and pixel functions. The data you output from these functions is used for lighting calculations, vertex positioning, and the final pixel colour. 
+
+Vertex Programs
++++++++++++++++
+The input and output data types for vertex programs are +VOUT+ and +VIN+. 
+
++VOUT+ will contain the variables you declared within the <<eff_vertex_outputs_index,vertex output>> block. All variables declared should be *filled in completely* before leaving the main function. +VIN+ contains the variables you declared within the <<eff_vert_inputs_index,vertex input>> block.
+
+Example
++++++++
+
+-------------------------------------------
+VOUT vertexmain(VIN input)
+{
+	VOUT output;
+
+	/*Fill in the output structure then return the data*/
+
+	return output.
+}
+-------------------------------------------
+
+Pixel Programs
+++++++++++++++
+The input and output data types for pixel programs are +POUT+ and +PIN+. 
+
++POUT+ will contain the variables you declared within the <<eff_pixel_outputs_index,pixel output>> block. All variables declared should be *filled in completely* before leaving the main function. +PIN+ contains the variables you passed in via the <<eff_vertex_outputs_index,vertex output>> block. Note that pixel programs do not have a <<eff_vert_inputs_index,vertex input>> block equivalent. The inputs are generated automatically based on the elements you added a <<eff_pass_param_index,pass>> semantic to in the <<eff_vertex_outputs_index,vertex output>> block. These elements can be accessed within the pixel program from the +PIN+ structure.
+
+Example
++++++++
+
+-------------------------------------------
+POUT pixelmain(PIN input)
+{
+	VPUT output;
+
+	/*Fill in the output structure then return the data*/
+
+	return output.
+}
+-------------------------------------------
+
+Source Limitations
+^^^^^^^^^^^^^^^^^^
+Most HLSL shader model 3 (directx 9) operations work as expected. Internally, the shader generator is utilising  program called HLSL2GLSL to convert shaders into GLSL. Therefore the code within the +source+ block has some limitations associated with it.
+
+- Typedef are not supported.
+- Default values for functions parameters are not supported.
+- Arrays are not supported as arguments to the entry functions.
+- Non square matrices are not supported.
+- Const arrays with initialisation statements are not supported.
+- Multi-dimensional arrays are not supported.
+- float4(x,y)=float4 syntax is not supported.
+- Evaluation of function calls in constant expressions not supported (e.g. const float rt3 = 1.0 / sqrt(3)).
+- static keyword is not supported.
+- Unsized array initialisation is not supported. 
+- Assigning to a matrix via swizzling doesn't work too well and should be avoided if possible.
+
+Effect Examples
+~~~~~~~~~~~~~~~
+
+Example 1
++++++++++
+
+An effect that supports runtime light generation and samples its colour from a texture in the pixel shader. Note, because this is an effect file, the HLSL code will be converted to GLSL if needed.
+
+The vertex program.
+
+---------------------------------------------------------------------------------------------------------------
+include
+{
+	MashTexCoords.eff
+}
+
+autos
+{
+	float4x4 autoWorldView
+}
+
+vertexInput
+{
+	float3 localposition : position
+	float2 texcood : texcoord
+}
+
+vertexOutput
+{
+	float4 viewposition : viewposition
+	float2 objtexcoords : texcoord pass
+}
+
+source
+{
+	VOUT vertexmain(VIN input)
+	{
+		VOUT output;
+
+		output.viewposition = mul(autoWorldView, float4(input.localposition, 1.0));
+
+		/*mashGetTexcoords transforms the texcoords based on whether we're using OpenGL or DirectX*/
+		output.objtexcoords = mashGetTexcoords(input.texcoord);
+
+		return output;
+	}
+}
+---------------------------------------------------------------------------------------------------------------
+
+And the matching pixel program.
+
+---------------------------------------------------------------------------------------
+autos
+{
+	sampler2D autoSampler0
+}
+
+pixelOutput
+{
+	float4 surfacecolour : diffuse
+}
+
+source
+{
+	POUT pixelmain(PIN input)
+	{
+		POUT output;
+		output.surfacecolour = tex2D(autoSampler0, input.objtexcoords);
+		return output;
+	}
+}
+---------------------------------------------------------------------------------------
+
+[[example_two_index]]
+Example 2
++++++++++
+
+The same effect as in example 1 but this would be used for GUI or post processing. It would not use runtime lighting.
+
+The vertex program.
+---------------------------------------------------------------------------------------------------------------
+include
+{
+	MashTexCoords.eff
+}
+
+autos
+{
+	float4x4 autoWorldView
+}
+
+source
+{
+	struct VS_INPUT
+	{
+		float3 position : POSITION0;
+		float2 texcoord : TEXCOORD0;
+	};
+
+	struct VS_OUTPUT
+	{
+		float2 texcoord : TEXCOORD0;
+		float4 positionH : SV_POSITION;
+	};
+
+	VS_OUTPUT vsmain( VS_INPUT input)
+	{
+		VS_OUTPUT output;
+		output.positionH = mul(autoWorldView, float4(input.position, 1.0));	
+
+		/*mashGetTexcoords transforms the texcoords based on whether we're using OpenGL or DirectX*/	
+		output.texcoord = mashGetTexcoords(input.texcoord);
+		
+	   	return output;
+	}
+}
+---------------------------------------------------------------------------------------------------------------
+
+And the matching pixel program.
+
+------------------------------------------------------------------------
+autos
+{
+	sampler2D autoSampler0
+}
+
+source
+{
+	struct VS_OUTPUT
+	{
+		float2 texcoord : TEXCOORD0;
+	};
+
+	float4 psmain(VS_OUTPUT input) : SV_TARGET0
+	{
+		return tex2D(autoSampler0, input.texcoord);
+	}
+}
+------------------------------------------------------------------------
+
+Information For Artists
+-----------------------
+
+Exporting
+~~~~~~~~~
+Currently only the COLLADA file format is supported. The engine has been specifically made using openCOLLADA however other COLLADA exporters may work too.
+
+- In the COLLADA export options, you should tick at the very least +Normals+ and +Triangulate+ (or similar). 
+- +Tangents/Binormals+ should be checked if normal mapping will be used. 
+- +Enable export+ should be selected under +Animation+ to export animation key frames if animation data is wanted. 
+- +Bake Matrices+ shouldn't be selected in most cases as it leads to larger file sizes. However, this option does remove some positional problems if they arise. So only select this option if you are experiencing any transform issues.  
+
+Supported Node Types
+~~~~~~~~~~~~~~~~~~~~
+The following node types can be imported from a COLLADA file into Mash:
+
+ Camera
+ Bone
+ Mesh
+ Light
+ Dummy
+
+Camera and Light nodes will need to have their settings reset once loaded into the engine.
+
+Animations
+~~~~~~~~~~
+- Single animation timelines can be split into different cycles using the scene viewer or in code using +MashControllerManager+.
+- All supported node types can have their transforms animated.
+- Skinning is supported with up to 4 bone influences per vertex.
+- Morph targets are not supported.
+- Node names do not need to be unique.
+
+When moving skinned Entities around a scene, be aware it's usually preferred to move both the Entity and their bones together. The best way to achieve this is to parent both the Entity and it's bone structure to the same node (a Dummy node). Additional instances of this animated character would clone this hierarchy and would be independent from each other. This ensures you don't end up with translation errors as skinned Entities move in the world. More advanced users could share a single bone structure with many Entities for techniques such as crowd rendering.
+
+Materials
+~~~~~~~~~
+Material data cannot be imported from modelling packages. So they will need to be created outside your modelling package and applied to objects using either the scene viewer, applied programatically, or by some other custom tool for material creation.
+
+Multi subs are supported. A mesh will be broken down into sub meshes per material. These meshes can later be accessed via +MashModel::GetMesh()+.
+
+Model Levels Of Detail
+~~~~~~~~~~~~~~~~~~~~~~
+Artists can create meshes from their modelling package that will be grouped together to form a single model with each mesh representing a different lod. Mesh lod can significantly improve an applications performance by swapping out high poly meshes for lower poly versions as its distance from the camera changes.
+
+To create a LODing model in your modelling package, all the meshes associated with it must share the same name postfixed with +\__lod[n]+, where [n] is the lod that mesh should be assigned to. For example to create a model called +character+ with two lods, you would create a high poly mesh called +character\__lod0+ and a low poly mesh called +character\__lod1+. The postfix +__lod[n]+ will be stripped from the name when loaded into the engine. Each lod can then be accessed via +MashModel::GetMesh()+.
+
+The distance at which lods are swapped can be set per instance using +MashEntity::SetLodDistance()+
+
+If a model is skinned for animation, then all lods *must* share the same bone structure.
+

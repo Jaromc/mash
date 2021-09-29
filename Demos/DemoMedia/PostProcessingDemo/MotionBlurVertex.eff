@@ -1,0 +1,34 @@
+include
+{
+	MashTexCoords.eff
+}
+
+autos
+{
+	float4x4 autoInvProjection
+}
+
+source
+{
+	struct VS_INPUT
+	{
+		float3 Position : POSITION0;
+		float2 texcoord : TEXCOORD0;
+	};
+
+	struct VS_OUTPUT
+	{
+		float2 texcoord : TEXCOORD0;
+		float4 vsPosition : TEXCOORD1;
+		float4 positionH : SV_POSITION;
+	};
+
+	VS_OUTPUT vsmain( VS_INPUT Input)
+	{
+		VS_OUTPUT Output;
+		Output.positionH = float4(Input.Position, 1.0f);		
+		Output.texcoord = mashGetTexcoords(Input.texcoord);
+		Output.vsPosition = mul(autoInvProjection, Output.positionH);
+		return Output;
+	}
+}

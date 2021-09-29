@@ -1,0 +1,58 @@
+material MashGPUSoftParticleMaterial
+{	
+	vertex
+	{
+		position rgba32float
+		custom rgb32float
+		custom rg32float
+		custom rg32float
+		custom r32float
+		colour rgba8unorm
+		colour rgba8unorm
+	}
+
+	technique Standard
+	{
+		lighting none
+		
+		vertexprogram "auto" "MashGPUSoftParticleVertex.eff" "vertexmain"
+		pixelprogram "auto" "MashGPUSoftParticlePixel.eff" "pixelmain"
+	}
+	
+	sampler2D DiffuseSampler
+	{
+		index 0
+		minmagfilter linear
+		mipfilter linear
+		addressu clamp
+		addressv clamp
+	}
+	
+	sampler2D DepthSampler
+	{
+		index 1
+		minmagfilter point
+		mipfilter none
+		addressu clamp
+		addressv clamp
+	}
+	
+	rasteriser
+	{
+		depthcmp lessequal
+		depthtestenabled true
+		depthwriteenabled false
+	}
+	
+	blendstate
+	{
+		blendingenabled true
+		srcblend srcalpha
+		destblend invsrcalpha
+		blendop add
+		srcblendalpha zero
+		destblendalpha zero
+		blendopalpha add
+		writemask all
+	}
+}

@@ -1,0 +1,18 @@
+
+autos
+{
+	sampler2D autoGBufferDiffuseSampler0;
+	sampler2D autoGBufferLightSampler1;
+	sampler2D autoGBufferLightSpecularSampler2;
+}
+
+source
+{
+	float4 psmain(float2 texCoord : TEXCOORD0) : SV_TARGET0
+	{
+		float4 diffuseColour = tex2D(autoGBufferDiffuseSampler0, texCoord);
+		float3 specularLight = tex2D(autoGBufferLightSpecularSampler2, texCoord).rgb;
+		float3 lightColour = tex2D(autoGBufferLightSampler1, texCoord).rgb;
+		return float4((diffuseColour.rgb * lightColour + specularLight), 1.0f);
+	}
+}

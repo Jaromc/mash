@@ -1,0 +1,2943 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.6.8" />
+<title>Mash 3D Guide</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install(2);
+/*]]>*/
+</script>
+</head>
+<body class="article">
+<div id="header">
+<h1>Mash 3D Guide</h1>
+<div id="toc">
+  <div id="toctitle">Table of Contents</div>
+  <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_getting_started">1. Getting Started</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_sdk">1.1. SDK</h3>
+<div class="paragraph"><p>Check out the compiled examples and source code in the SDK.
+To start your own project, in the SDK there are 4 main folders you will want to copy into your project directory:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>Include
+Lib
+Media
+SupportLib</code></pre>
+</div></div>
+<div class="sect3">
+<h4 id="_include">1.1.1. Include</h4>
+<div class="paragraph"><p>Holds all the header files. There are also some subfolders within that hold headers for optional libraries.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_lib">1.1.2. Lib</h4>
+<div class="paragraph"><p>Contains all the library (.lib) files. These are separated into Debug and Release folders. Release libraries have some debugging helpers and loggers compiled out so they should only be used once your application has been built and tested with the Debug libraries.
+Only 3 libs are needed for a basic application:</p></div>
+<div class="paragraph"><p><code>MashMain</code> - Contains the core library.</p></div>
+<div class="paragraph"><p><code>MashMaterialCompiler</code> - Compiles material files and generates runtime effects.</p></div>
+<div class="paragraph"><p><code>MashD3DRenderer</code> or <code>MashOGLRenderer</code> - API specific rendering. You can include one or both into the sample application.</p></div>
+<div class="paragraph"><p>Optional libs are:</p></div>
+<div class="paragraph"><p><code>MashGUI</code> - Basic GUI library.</p></div>
+<div class="paragraph"><p><code>MashPhysics</code> - Adds physics to scene nodes and meshes. Uses the bullet physics library.</p></div>
+<div class="paragraph"><p><code>MashScript</code> - Adds the ability to attach LUA scripts to scene nodes.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_media">1.1.3. Media</h4>
+<div class="paragraph"><p>Contains all the default material and effect files the engine may need to load. These are runtime resources so the folder location should be given to the engine when the application loads. The example source files demonstrate this. Alternatively, Mash has a virtual file system built-in so these files (or any file/resource you wish) could be compiled into an application.
+There is also a folder for default GUI items. This only needs to be added if you have compiled an application with the GUI library.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_supportlib">1.1.4. SupportLib</h4>
+<div class="paragraph"><p>Contains some header and source files that can be used to quickly get started.</p></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_creating_a_basic_mash_application_in_xcode">1.2. Creating a Basic Mash Application in XCode</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Create a new workspace.
+</p>
+</li>
+<li>
+<p>
+Create an empty project within that workspace.
+</p>
+</li>
+<li>
+<p>
+Add a .cpp source file to your project. This is where you will add main() and start your application.
+</p>
+</li>
+<li>
+<p>
+Add a target to the project and select Cocoa Application.
+</p>
+</li>
+<li>
+<p>
+Add the Mash include paths under "Build Settings&#8594;Header Search Paths".
+</p>
+</li>
+<li>
+<p>
+Add the Mash library files under "Build Phases&#8594;Link Binary With Libraries". You will also need to link with the OpenGL framework found on your computer.
+</p>
+</li>
+<li>
+<p>
+Under "Build Phases&#8594;Compile Sources" add the source file you created with main(), also add SupportLib/MemoryAllocator/MashDefaultMemoryAllocator.cpp (from the SDK)
+</p>
+</li>
+<li>
+<p>
+Start coding from main()
+</p>
+</li>
+<li>
+<p>
+Libraries were compiled using GCC 4.2.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>When Xcode creates a new target it will create a few default files (AppDelegate.m and AppDelegate.h). You do not need these files. Remove any references to them from Targets&#8594;Build Phases&#8594;Compile Sources. If these files are compiled into your application it will fail to start.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_creating_a_basic_mash_application_in_visual_studio">1.3. Creating a Basic Mash Application in Visual Studio</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Create a new Win32 Console Application.
+</p>
+</li>
+<li>
+<p>
+Add the location of the Mash header files under "Project&#8594;Properites&#8594;C/C++&#8594;General&#8594;Additional Include Directories".
+</p>
+</li>
+<li>
+<p>
+Add Mash library files under "Project&#8594;Properties&#8594;Linker&#8594;Input&#8594;Addition Dependencies".
+</p>
+</li>
+<li>
+<p>
+Right click on your project then go to "Add&#8594;Existing Item" then add SupportLib/MemoryAllocator/MashDefaultMemoryAllocator.cpp (from the SDK) to your project.
+</p>
+</li>
+<li>
+<p>
+If a default .cpp source file was not created automatically then add one to the project and start coding from main().
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_creating_a_basic_mash_application_in_qtcreator">1.4. Creating a Basic Mash Application in QtCreator</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+File&#8594;New File or Project
+</p>
+</li>
+<li>
+<p>
+In the Projects section select "Non-Qt Project", then select "Plain C++ Project".
+</p>
+</li>
+<li>
+<p>
+Then follow the rest of the prompts to create the project, main.cpp should be created for you.
+</p>
+</li>
+<li>
+<p>
+Right click on your newly created project folder and select "Add Existing Files". Then add SupportLib/MemoryAllocator/MashDefaultMemoryAllocator.cpp (from the SDK).
+</p>
+</li>
+<li>
+<p>
+In your .pro file you will need to link to Mash library and include files, look at the Qt SDK examples on how to do this.
+</p>
+</li>
+<li>
+<p>
+You will also need to link to some system libraries depending on your OS, again this is shown in the Qt SDK examples.
+</p>
+</li>
+<li>
+<p>
+Libraries were compiled using GCC.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>The demo projects in the Qt SDK have been setup so you only need to supply an argument to qmake to build the correct target.
+For example, to build the 32bit development build you would add to the "Additional arguments" section "CONFIG+=Development32".
+Other targets can be seen in the projects .pro and .pri files.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_additional_notes_for_ubuntu">1.5. Additional notes for Ubuntu</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Mash has been tested with Ubuntu 13.04 and Opengl version 3.1.
+</p>
+</li>
+<li>
+<p>
+You will need to give the pre-built demo projects executable permissions before they will run.
+</p>
+</li>
+<li>
+<p>
+Installing qtCreator should install most of the packages required for the SDK.
+</p>
+</li>
+<li>
+<p>
+Consult the .pro files in the qt demos for additional dependencies needed.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_having_problems">1.6. Having Problems?</h3>
+<div class="paragraph"><p>If the prebuilt demos arn&#8217;t launching, a debug.txt file should be created in the same directory of the application that may help in finding the problem. Consult this log for more information.
+This log will also be produced in development versions of your application, you can set the debug file path when creating a new device.
+Any memory allocated using Mash&#8217;s memory management and not being freed before the devices destruction will also be logged at the end of this file.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_example_main_file">1.7. Example Main File</h3>
+<div class="paragraph"><p>The following shows the minimum amount of work needed to get an a Mash3D application running. You should use this as a template for your first project. This has been taken from the Hello World exmaple.</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 3.1.7
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">#include</span></span> <span style="color: #FF0000">"MashInclude.h"</span>
+
+<span style="font-weight: bold"><span style="color: #000080">#include</span></span> <span style="color: #FF0000">"MemoryAllocator/MashDefaultMemoryAllocator.h"</span>
+<span style="font-weight: bold"><span style="color: #000080">#include</span></span> <span style="color: #FF0000">"D3D10/MashD3D10Creation.h"</span>
+<span style="font-weight: bold"><span style="color: #000080">#include</span></span> <span style="color: #FF0000">"OpenGL3/MashOpenGL3Creation.h"</span>
+
+<span style="font-weight: bold"><span style="color: #000080">#if</span></span> <span style="font-weight: bold"><span style="color: #000000">defined</span></span> <span style="color: #990000">(</span>MASH_WINDOWS<span style="color: #990000">)</span> <span style="color: #990000">&amp;&amp;</span> <span style="color: #990000">!</span><span style="font-weight: bold"><span style="color: #000000">defined</span></span><span style="color: #990000">(</span>__MINGW32__<span style="color: #990000">)</span>
+<span style="font-weight: bold"><span style="color: #000080">    #define</span></span> USE_DIRECTX
+<span style="font-weight: bold"><span style="color: #000080">#endif</span></span>
+
+using <span style="color: #008080">namespace</span> mash<span style="color: #990000">;</span>
+
+<span style="color: #008080">class</span> MainLoop <span style="color: #990000">:</span> <span style="color: #008080">public</span> mash<span style="color: #990000">::</span>MashGameLoop
+<span style="color: #FF0000">{</span>
+<span style="font-weight: bold"><span style="color: #008080">private:</span></span>
+        <span style="color: #008080">MashDevice</span> <span style="color: #990000">*</span>m_device<span style="color: #990000">;</span>
+        <span style="color: #008080">MashCamera</span> <span style="color: #990000">*</span>m_camera<span style="color: #990000">;</span>
+<span style="font-weight: bold"><span style="color: #008080">public:</span></span>
+        <span style="font-weight: bold"><span style="color: #000000">MainLoop</span></span><span style="color: #990000">(</span>mash<span style="color: #990000">::</span><span style="color: #008080">MashDevice</span> <span style="color: #990000">*</span>device<span style="color: #990000">):</span><span style="font-weight: bold"><span style="color: #000000">m_device</span></span><span style="color: #990000">(</span>device<span style="color: #990000">)</span><span style="color: #FF0000">{}</span>
+        virtual <span style="color: #990000">~</span><span style="font-weight: bold"><span style="color: #000000">MainLoop</span></span><span style="color: #990000">()</span><span style="color: #FF0000">{}</span>
+
+        <span style="font-style: italic"><span style="color: #9A1900">/*</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                All scene setup should be done in this function. This includes:</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                - material loading</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                - applying materials to a mesh</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                - mesh construction</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                - loading scene nodes from a file</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                - adding lights and light/shadow settings</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">                After this function exits the engine compiles all materials and shaders loaded, and also</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                compiles some internal API specific objects.</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">                Lighting values can be changed after this function but some lighting values will force</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                some materials to be recompiled to reflect those changes. This will affect runtime</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">                performance. These values include:</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                - enable/disable shadows</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                - adding/removing lights</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                - changing light types</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                - changing what light is considered as the main forward rendering light</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">                Simply changing light colours, direction, attenuation, position at runtime is fine,</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                and won't affect performance.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        */</span></span>
+        <span style="color: #009900">bool</span> <span style="font-weight: bold"><span style="color: #000000">Initialise</span></span><span style="color: #990000">()</span>
+        <span style="color: #FF0000">{</span>
+                <span style="font-style: italic"><span style="color: #9A1900">/*</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        There always needs to be one active camera in the current scene.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        The first camera created is set as the active camera by default. The active</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        camera can be changed by calling SceneManager::SetActiveCamera()</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                */</span></span>
+                m_camera <span style="color: #990000">=</span> m_device<span style="color: #990000">-&gt;</span><span style="font-weight: bold"><span style="color: #000000">GetSceneManager</span></span><span style="color: #990000">()-&gt;</span><span style="font-weight: bold"><span style="color: #000000">AddCamera</span></span><span style="color: #990000">(</span><span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #FF0000">"Camera01"</span><span style="color: #990000">);</span>
+                m_camera<span style="color: #990000">-&gt;</span><span style="font-weight: bold"><span style="color: #000000">SetZFar</span></span><span style="color: #990000">(</span><span style="color: #993399">1000</span><span style="color: #990000">);</span>
+                m_camera<span style="color: #990000">-&gt;</span><span style="font-weight: bold"><span style="color: #000000">SetZNear</span></span><span style="color: #990000">(</span><span style="color: #993399">1</span><span style="color: #990000">.</span>0f<span style="color: #990000">);</span>
+                m_camera<span style="color: #990000">-&gt;</span><span style="font-weight: bold"><span style="color: #000000">SetPosition</span></span><span style="color: #990000">(</span><span style="font-weight: bold"><span style="color: #000000">MashVector3</span></span><span style="color: #990000">(</span><span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">,</span> <span style="color: #993399">0</span><span style="color: #990000">));</span>
+
+                <span style="font-style: italic"><span style="color: #9A1900">//return true to abort the application loading further.</span></span>
+                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> false<span style="color: #990000">;</span>
+        <span style="color: #FF0000">}</span>
+
+        <span style="font-style: italic"><span style="color: #9A1900">/*</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                This function is called in fixed time steps, normally 0.016ms (60fps)</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">                but this step can be changed if needed when the device is created.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                From here you would do all scene updating from this function.</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">                This function may be called mutiple times per frame or not at all depending</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                on the speed of the application in relation to the fixed time step.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        */</span></span>
+        <span style="color: #009900">bool</span> <span style="font-weight: bold"><span style="color: #000000">Update</span></span><span style="color: #990000">(</span><span style="color: #008080">f32</span> dt<span style="color: #990000">)</span>
+        <span style="color: #FF0000">{</span>
+                <span style="font-style: italic"><span style="color: #9A1900">/*</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        Updates the given scenes animations and positions.</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">                        SceneManager::UpdateScene() can be called multiple times to update</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        different scene graphs.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                */</span></span>
+                m_device<span style="color: #990000">-&gt;</span><span style="font-weight: bold"><span style="color: #000000">GetSceneManager</span></span><span style="color: #990000">()-&gt;</span><span style="font-weight: bold"><span style="color: #000000">UpdateScene</span></span><span style="color: #990000">(</span>dt<span style="color: #990000">,</span> m_camera<span style="color: #990000">);</span>
+
+                <span style="font-style: italic"><span style="color: #9A1900">//return true to quit the application.</span></span>
+                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> false<span style="color: #990000">;</span>
+        <span style="color: #FF0000">}</span>
+
+        <span style="font-style: italic"><span style="color: #9A1900">/*</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                Called once every frame (not at fixed time steps).</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        */</span></span>
+        <span style="color: #009900">void</span> <span style="font-weight: bold"><span style="color: #000000">LateUpdate</span></span><span style="color: #990000">(</span><span style="color: #008080">f32</span> dt<span style="color: #990000">)</span>
+        <span style="color: #FF0000">{</span>
+        <span style="color: #FF0000">}</span>
+
+        <span style="font-style: italic"><span style="color: #9A1900">/*</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                This is where all rendering occurs.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                Call MashSceneManager::CullScene() once per scene graph you want rendered, this fills</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                the internal render buckets. Than call MashSceneManager::DrawScene() to render</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                everything to the current render target and empty the buckets.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        */</span></span>
+        <span style="color: #009900">void</span> <span style="font-weight: bold"><span style="color: #000000">Render</span></span><span style="color: #990000">()</span>
+        <span style="color: #FF0000">{</span>
+                <span style="font-style: italic"><span style="color: #9A1900">/*</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        Culls the given scene for rendering. SceneManager::CullScene() can be called</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        multiple times for different scene graphs. This can be handy if you wanted</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        to cull different graphs using different culling techniques. Nodes that pass</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        culling will be added to internal render buckets and drawn to the screen</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        when MashSceneManager::DrawScene() is called.</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">                        Some scene node data is delayed till a node passes culling. This is to save on</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        unncessary processing. After this function has been called for a scene graph,</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        all nodes that passed culling will be completly updated.</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">                        Nodes that pass culling have their render/interpolated position updated forward towards</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        MashSceneNode::GetWorldTransformState().</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        This interpolation reduces any jitter that may be noticable in a nodes movement due to</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        changing frame rates. A nodes render position can be accessed by calling</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        MashSceneNode::GetRenderTransformState().</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                */</span></span>
+                m_device<span style="color: #990000">-&gt;</span><span style="font-weight: bold"><span style="color: #000000">GetSceneManager</span></span><span style="color: #990000">()-&gt;</span><span style="font-weight: bold"><span style="color: #000000">CullScene</span></span><span style="color: #990000">(</span>m_camera<span style="color: #990000">);</span>
+
+                <span style="font-style: italic"><span style="color: #9A1900">/*</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        Draws the culled objects to the screen. This function will choose forward or deferred</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        rendering based on material and lighting settings, and generate shadow maps if needed.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        Finally the scene will be rendered to the render target set.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                */</span></span>
+                m_device<span style="color: #990000">-&gt;</span><span style="font-weight: bold"><span style="color: #000000">GetSceneManager</span></span><span style="color: #990000">()-&gt;</span><span style="font-weight: bold"><span style="color: #000000">DrawScene</span></span><span style="color: #990000">();</span>
+
+                <span style="font-style: italic"><span style="color: #9A1900">/*</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        The default render target is your main backbuffer. If you were to render</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        to another render target at some point then you will need to call this</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        before this function exits to render the final scene to the backbuffer.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        In this case it's not necessary to call it because we haven't changed render</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                        targets, it's just here for your information.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                */</span></span>
+                m_device<span style="color: #990000">-&gt;</span><span style="font-weight: bold"><span style="color: #000000">GetRenderer</span></span><span style="color: #990000">()-&gt;</span><span style="font-weight: bold"><span style="color: #000000">SetRenderTargetDefault</span></span><span style="color: #990000">();</span>
+        <span style="color: #FF0000">}</span>
+<span style="color: #FF0000">}</span><span style="color: #990000">;</span>
+
+<span style="color: #009900">int</span> <span style="font-weight: bold"><span style="color: #000000">main</span></span><span style="color: #990000">()</span>
+<span style="color: #FF0000">{</span>
+        <span style="font-style: italic"><span style="color: #9A1900">/*</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                Loads the engine with these settings. Optionally you could load</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                these in from a file for easy settings changes.</span></span>
+
+<span style="font-style: italic"><span style="color: #9A1900">                The function pointers create the main and optional components to the engine.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                The gui, physics and script managers are all optional and can be null.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                This saves on .exe size and runtime memory if these are things you</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                are not going to use.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        */</span></span>
+        <span style="color: #008080">sMashDeviceSettings</span> deviceSettings<span style="color: #990000">;</span>
+<span style="font-weight: bold"><span style="color: #000080">#ifdef</span></span> USE_DIRECTX
+        deviceSettings<span style="color: #990000">.</span>rendererFunctPtr <span style="color: #990000">=</span> CreateMashD3D10Device<span style="color: #990000">;</span>
+<span style="font-weight: bold"><span style="color: #000080">#else</span></span>
+        deviceSettings<span style="color: #990000">.</span>rendererFunctPtr <span style="color: #990000">=</span> CreateMashOpenGL3Device<span style="color: #990000">;</span>
+<span style="font-weight: bold"><span style="color: #000080">#endif</span></span>
+        <span style="font-style: italic"><span style="color: #9A1900">//deviceSettings.guiManagerFunctPtr = CreateMashGUI;</span></span>
+        <span style="font-style: italic"><span style="color: #9A1900">//deviceSettings.physicsManagerFunctPtr = CreateMashPhysics;</span></span>
+        <span style="font-style: italic"><span style="color: #9A1900">//deviceSettings.scriptManagerFunctPtr = CreateMashScriptManager;</span></span>
+
+        deviceSettings<span style="color: #990000">.</span>fullScreen <span style="color: #990000">=</span> false<span style="color: #990000">;</span>
+        deviceSettings<span style="color: #990000">.</span>screenWidth <span style="color: #990000">=</span> <span style="color: #993399">800</span><span style="color: #990000">;</span>
+        deviceSettings<span style="color: #990000">.</span>screenHeight <span style="color: #990000">=</span> <span style="color: #993399">600</span><span style="color: #990000">;</span>
+        deviceSettings<span style="color: #990000">.</span>enableVSync <span style="color: #990000">=</span> false<span style="color: #990000">;</span>
+        deviceSettings<span style="color: #990000">.</span>preferredLightingMode <span style="color: #990000">=</span> aLIGHT_TYPE_PIXEL<span style="color: #990000">;</span>
+        deviceSettings<span style="color: #990000">.</span>antiAliasType <span style="color: #990000">=</span> aANTIALIAS_TYPE_NONE<span style="color: #990000">;</span>
+
+        <span style="font-style: italic"><span style="color: #9A1900">/*</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                Root paths tell the engine where to look for files. You should include at least</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                the paths stated below to the engine data. Then add paths to any of your</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                application files (texture, models, sounds, etc...).</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                Eg, Your sound path may be "../GameMedia/Sounds". Then throught your code you can</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                load these sounds by simply calling "ShootSound.mp3". The root paths will be searched</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                for your sound.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                This behavior can be handy for easy path changes. But be aware of files that share the</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                same name in different paths as the wrong file could be loaded. Smart name choices will</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                avoid any issues here.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        */</span></span>
+        deviceSettings<span style="color: #990000">.</span>rootPaths<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">PushBack</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"../../Media/Materials"</span><span style="color: #990000">);</span>
+
+        <span style="font-style: italic"><span style="color: #9A1900">//The following is only needed if GUI is used.</span></span>
+        <span style="font-style: italic"><span style="color: #9A1900">//deviceSettings.rootPaths.push_back("../../Media/GUI");</span></span>
+
+        <span style="font-style: italic"><span style="color: #9A1900">//You can set up paths that debug material information will be written to. Eg,</span></span>
+        <span style="font-style: italic"><span style="color: #9A1900">//deviceSettings.compiledShaderOutputDirectory = "../MaterialDebug";</span></span>
+        <span style="font-style: italic"><span style="color: #9A1900">//deviceSettings.intermediateShaderOutputDirectory = "../MaterialDebug";</span></span>
+
+        <span style="font-style: italic"><span style="color: #9A1900">//Creates the device</span></span>
+        <span style="color: #008080">MashDevice</span> <span style="color: #990000">*</span>device <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">CreateDevice</span></span><span style="color: #990000">(</span>deviceSettings<span style="color: #990000">);</span>
+
+        <span style="font-weight: bold"><span style="color: #0000FF">if</span></span> <span style="color: #990000">(!</span>device<span style="color: #990000">)</span>
+                <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="color: #993399">1</span><span style="color: #990000">;</span>
+
+        device<span style="color: #990000">-&gt;</span><span style="font-weight: bold"><span style="color: #000000">SetWindowCaption</span></span><span style="color: #990000">(</span><span style="color: #FF0000">"Hello World Demo"</span><span style="color: #990000">);</span>
+
+        <span style="font-style: italic"><span style="color: #9A1900">/*</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                Sets the game loop.</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                This can be called multiple times throught your application life</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">                for different loops. Maybe a different loop per game level?</span></span>
+<span style="font-style: italic"><span style="color: #9A1900">        */</span></span>
+        <span style="color: #008080">MainLoop</span> <span style="color: #990000">*</span>mainLoop <span style="color: #990000">=</span> <span style="color: #008080">MASH_NEW_COMMON</span> <span style="font-weight: bold"><span style="color: #000000">MainLoop</span></span><span style="color: #990000">(</span>device<span style="color: #990000">);</span>
+        device<span style="color: #990000">-&gt;</span><span style="font-weight: bold"><span style="color: #000000">SetGameLoop</span></span><span style="color: #990000">(</span>mainLoop<span style="color: #990000">);</span>
+        mainLoop<span style="color: #990000">-&gt;</span><span style="font-weight: bold"><span style="color: #000000">Drop</span></span><span style="color: #990000">();</span>
+
+        device<span style="color: #990000">-&gt;</span><span style="font-weight: bold"><span style="color: #000000">Drop</span></span><span style="color: #990000">();</span>
+
+        <span style="font-weight: bold"><span style="color: #0000FF">return</span></span> <span style="color: #993399">0</span><span style="color: #990000">;</span>
+<span style="color: #FF0000">}</span></tt></pre></div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_materials">2. Materials</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Material (<code>.mtl</code>) files are scripts that contains information for how a mesh should be rendered and the structure of its vertices. A material files structure is as follows:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>material &lt;material_name&gt;
+{
+        vertex
+        {
+        }
+
+        technique &lt;technique_name&gt;
+        {
+                sampler2D &lt;sampler_name&gt;
+                {
+                }
+
+                rasteriser
+                {
+                }
+
+                blendstate
+                {
+                }
+        }
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>A material file may contain many material blocks if needed. This can be handy for grouping similar materials together, or for <a href="#mtr_ref_index">deriving materials</a> from a base material. All materials MUST have unique names.</p></div>
+<div class="sect2">
+<h3 id="mtr_vertex_index">2.1. Vertex Declaration</h3>
+<div class="paragraph"><p>This block defines the vertex structure that will be used for this material. It is assumed that any mesh using this material will also be created using this vertex declaration. When assigning a material to sub entities, their mesh will automatically be recreated using this vertex declaration. There are also methods in <code>MashMeshBuilder</code> that can change the format of a mesh.</p></div>
+<div class="paragraph"><p>The structure of the vertex block is as follows:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>vertex
+{
+        &lt;format&gt; &lt;usage&gt; &lt;stream&gt; &lt;steprate&gt;
+        /*Add a new line for each vertex element*/
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>Each line in the vertex block describes 1 element. So to state position, normal, and texture coordinates you would have 3 separate lines in the block, 1 for each element.</p></div>
+<div class="sect3">
+<h4 id="format_index">2.1.1. &lt;format&gt;</h4>
+<div class="paragraph"><p>Describes the layout and format of an element. Valid layouts are:</p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="23%" />
+<col width="76%" />
+<thead>
+<tr>
+<th align="left" valign="top">Keyword </th>
+<th align="left" valign="top">Layout</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">r32float</p></td>
+<td align="left" valign="top"><p class="table">1x 32bit floats.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">rg32float</p></td>
+<td align="left" valign="top"><p class="table">2x 32bit floats.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">rgb32float</p></td>
+<td align="left" valign="top"><p class="table">3x 32bit floats.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">rgba32float</p></td>
+<td align="left" valign="top"><p class="table">4x 32bit floats.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">rgba8unorm</p></td>
+<td align="left" valign="top"><p class="table">4x 8bit chars. This is used for 8 bit colour values that will expand to a <code>float4</code> on the GPU in the range of 0.0 - 1.0.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">rgba8uint</p></td>
+<td align="left" valign="top"><p class="table">4x 8bit unsigned chars.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">rg16sint</p></td>
+<td align="left" valign="top"><p class="table">2x 16bit signed ints.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">rgba16sint</p></td>
+<td align="left" valign="top"><p class="table">4x 16bit signed ints.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="vertex_usage_index">2.1.2. &lt;usage&gt;</h4>
+<div class="paragraph"><p>Tells the application what the element is being used for. Usually any format can be used for any usage, but some examples are given below. Valid elements are:</p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="23%" />
+<col width="76%" />
+<thead>
+<tr>
+<th align="left" valign="top">Keyword </th>
+<th align="left" valign="top">Layout</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">position</p></td>
+<td align="left" valign="top"><p class="table">All vertex declarations must start with this usage. This is the vertex position. Normally this uses the <a href="#format_index">rgb32float</a> format.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">normal</p></td>
+<td align="left" valign="top"><p class="table">Vertex normal. Normally this uses the <a href="#format_index">rgb32float</a> format.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">texcoord</p></td>
+<td align="left" valign="top"><p class="table">Texture coordinates. Normally this uses the <a href="#format_index">rg32float</a> format.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">binormal</p></td>
+<td align="left" valign="top"><p class="table">Used for normal mapping.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">custom</p></td>
+<td align="left" valign="top"><p class="table">This is custom data you want to access on the GPU. This can be anything from colour information to an instances world position.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">boneIndex</p></td>
+<td align="left" valign="top"><p class="table">This is a rgba32float format used for skinning that holds up to 4 bone indices that affect this vertex.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">boneWeight</p></td>
+<td align="left" valign="top"><p class="table">This is a rgba32float format used for skinning that holds up to 4 bone weights that affect this vertex.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="vertex_stream_index">2.1.3. &lt;stream&gt;</h4>
+<div class="paragraph"><p>This may be omitted and is 0 by default. This is the stream to which this element belongs. Stream 0 is known as the geometry stream, it&#8217;s used as the main buffer for a mesh and is normally a static buffer because the data shouldn&#8217;t change. Streams greater than 0 are mainly used for instancing data and are created as dynamic buffers, these can be updated regularly. If you access the vertex buffers from <code>MashMeshBuffer</code>, there will be one vertex buffer per stream.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_lt_steprate_gt">2.1.4. &lt;stepRate&gt;</h4>
+<div class="paragraph"><p>This may be omitted only if <a href="#vertex_stream_index">stream</a> has been omitted. This value is 0 by default. This is used for instancing data and streams greater than 0. Normally for instanced data this would be set to 1, meaning the instancing stream index will advance forward by 1 per instance.</p></div>
+<div class="sect4">
+<h5 id="_vertex_declaration_examples">Vertex Declaration Examples:</h5>
+<div class="paragraph"><p>A vertex declaration with one stream and position, normal, and texture coordinate information.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>vertex
+{
+        rgb32float position
+        rgb32float normal
+        rg32float texcoord
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>A vertex declaration with two streams. The first stream (geometry stream) contains position, normal, and texture coordinate information. The second stream is used to hold instancing information, in this case, one 4x4 transform matrix per instance.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>vertex
+{
+        rgb32float position 0 0
+        rgb32float normal 0 0
+        rg32float texcoord 0 0
+
+        rgba32float custom 1 1
+        rgba32float custom 1 1
+        rgba32float custom 1 1
+        rgba32float custom 1 1
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>Mesh buffers that use the above vertex declaration will have two vertex buffers, one for each stream. The first contains a static buffer filled with the geometry of the mesh. The second buffer would be a dynamic buffer that&#8217;s regularly updated with new instance data.</p></div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_technique_blocks">2.2. Technique Blocks</h3>
+<div class="paragraph"><p>Techniques hold all the data that defines the "look" of a mesh. Multiple techniques can be added to a material to support different APIs, low, med, and high graphic options and LODing.</p></div>
+<div class="sect3">
+<h4 id="_defining_technique_programs">2.2.1. Defining Technique Programs</h4>
+<div class="paragraph"><p>Within techniques you can define the vertex and pixel programs (among others) that will be used during rendering. Programs are declared in the following format:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>technique &lt;technique_name&gt;
+{
+        &lt;programType&gt; &lt;"profile string"&gt; &lt;"effect path string"&gt; &lt;"entry string"&gt;
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>A technique at the very least must define a vertex and pixel program. Example:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>technique Normal
+{
+        vertexprogram "glslv" "RuntimeVertex.glsl" "vsmain"
+        pixelprogram "glslp" "RuntimePixel.glsl" "psmain"
+}</code></pre>
+</div></div>
+<div class="sect4">
+<h5 id="program_type_index">&lt;programType&gt;</h5>
+<div class="paragraph"><p>Defines the effect that will be used for different stages of the rendering process. Valid program types are:</p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="23%" />
+<col width="76%" />
+<thead>
+<tr>
+<th align="left" valign="top">Keyword </th>
+<th align="left" valign="top">Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">vertexprogram</p></td>
+<td align="left" valign="top"><p class="table">Vertex program.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">pixelprogram</p></td>
+<td align="left" valign="top"><p class="table">Pixel/fragment program.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">geometryprogram</p></td>
+<td align="left" valign="top"><p class="table">Geometry program (optional). Note, the engine does not do any conversions into hlsl or glsl for geometry shaders. This must be supplied as a <code>.glsl</code> or <code>.hlsl</code> file. <code>.eff</code> files should not be used for geometry programs. See <a href="#tech_file_path_index">here</a> for more information about file extensions.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">shadowvertexprogram</p></td>
+<td align="left" valign="top"><p class="table">Vertex program for shadow casting (optional). This maybe the same as <code>vertexprogram</code> or you could optimise it for shadow generation only. If you don&#8217;t want this technique casting shadows then don&#8217;t define <code>shadowvertexprogram</code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_lt_profile_string_gt">&lt;"profile string"&gt;</h5>
+<div class="paragraph"><p>Defines the API profile the effect should be compiled to.</p></div>
+<div class="paragraph"><p>Valid DirectX vertex strings are:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>vs_3_0
+vs_4_0
+vs_5_0</code></pre>
+</div></div>
+<div class="paragraph"><p>Valid DirectX pixel strings are:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>ps_3_0
+ps_4_0
+ps_5_0</code></pre>
+</div></div>
+<div class="paragraph"><p>Valid DirectX geometry strings are:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>gs_4_0
+gs_5_0</code></pre>
+</div></div>
+<div class="paragraph"><p>Valid OpenGL strings are:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>glslv
+glslp
+glslg</code></pre>
+</div></div>
+<div class="paragraph"><p>To determine the appropriate profile string at runtime (it&#8217;s recommended you use this for <code>.eff</code> files) use:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>auto</code></pre>
+</div></div>
+</div>
+<div class="sect4">
+<h5 id="tech_file_path_index">&lt;"effect path string"&gt;</h5>
+<div class="paragraph"><p>The effect path string is the path to the shader that will be used. This can be a local path, the file system will search the root paths to find the file. The file extension is important as it informs the engine on how to compile it. There are three extension options:</p></div>
+<div class="tableblock">
+<table rules="all"
+width="80%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="23%" />
+<col width="76%" />
+<thead>
+<tr>
+<th align="left" valign="top">Extension </th>
+<th align="left" valign="top">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">eff</p></td>
+<td align="left" valign="top"><p class="table">Tells the engine the file is in <a href="#effect_index">effect</a> format. This format will be compiled into hlsl or glsl depending on the current system. This format must also be used if you want runtime lighting information added to the shader code (usually for scene nodes). If the vertex program is in <code>eff</code> format then the pixel program must also be in <code>eff</code> format, and vice versa.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">glsl</p></td>
+<td align="left" valign="top"><p class="table">Tells the engine the file is in native OpenGL glsl format. No format conversions will occur. The files contents will be sent directly to the API for compiling.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">hlsl</p></td>
+<td align="left" valign="top"><p class="table">Tells the engine the file is in native DirectX hlsl format. No format conversion will occur. The files contents will be sent directly to the API for compiling.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_lt_entry_string_gt">&lt;"entry string"&gt;</h5>
+<div class="paragraph"><p>This is the entry point (function) to this shader.</p></div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_blend_states">2.2.2. Blend States</h4>
+<div class="paragraph"><p>Contains the values that will blend the final image with the back buffer. You would use this for alpha blending and other special effects. Blend states can contain one or more of the following states. Example block:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>blendstate
+{
+        blendingenabled &lt;value&gt;
+        srcblend &lt;value&gt;
+        destblend &lt;value&gt;
+        blendop &lt;value&gt;
+        srcblendalpha &lt;value&gt;
+        destblendalpha &lt;value&gt;
+        blendopalpha &lt;value&gt;
+        writemask &lt;value&gt;
+}</code></pre>
+</div></div>
+<div class="sect4">
+<h5 id="_blendingenabled_lt_value_gt">blendingenabled &lt;value&gt;</h5>
+<div class="paragraph"><p>Set this to true to enable alpha blending. Valid parameters to &lt;value&gt; are:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>true
+false</code></pre>
+</div></div>
+</div>
+<div class="sect4">
+<h5 id="_srcblend_destblend_srcblendalpha_destblendalpha_blendopalpha_lt_value_gt">srcblend, destblend, srcblendalpha, destblendalpha, blendopalpha &lt;value&gt;</h5>
+<div class="paragraph"><p>Blending options. Valid parameters to &lt;value&gt; are:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>srcalpha
+invsrcalpha
+destalpha
+destcolor
+invdestalpha
+invsrccolor
+one
+srcalphasat
+srccolor
+zero
+invdestcolor</code></pre>
+</div></div>
+</div>
+<div class="sect4">
+<h5 id="_blendop_blendopalpha_lt_value_gt">blendop, blendopalpha &lt;value&gt;</h5>
+<div class="paragraph"><p>Blending operators. Valid parameters to &lt;value&gt; are:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>add
+max
+min
+subtract
+revsubtract</code></pre>
+</div></div>
+</div>
+<div class="sect4">
+<h5 id="_writemask_lt_value_gt">writemask &lt;value&gt;</h5>
+<div class="paragraph"><p>Defines which colour channels to write to. If your only writing to specific channels then setting this can improve performance.
+Valid parameters to &lt;value&gt; are one or more of the following separated by a space:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>red
+green
+blue
+alpha
+all</code></pre>
+</div></div>
+</div>
+<div class="sect4">
+<h5 id="_example_blend_states">Example Blend States</h5>
+<div class="paragraph"><p>A blend state for regular non transparent objects:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>blendstate
+{
+        blendingenabled false
+        srcblend one
+        destblend zero
+        blendop add
+        srcblendalpha zero
+        destblendalpha zero
+        blendopalpha add
+        writemask all
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>A blend state for a transparent object:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>blendstate
+{
+        blendingenabled true
+        srcblend srcalpha
+        destblend invsrcalpha
+        blendop add
+        srcblendalpha zero
+        destblendalpha zero
+        blendopalpha add
+        writemask all
+}</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_rasteriser">2.2.3. Rasteriser</h4>
+<div class="paragraph"><p>Sets rasteriser settings. Rasteriser blocks can contain one or more of the following states. Example block:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>rasteriser
+{
+        depthtestenabled &lt;value&gt;
+        depthwriteenabled &lt;value&gt;
+        depthcmp &lt;value&gt;
+        depthbias &lt;value&gt;
+        depthbiasclamp &lt;value&gt;
+        slopescaledbias &lt;value&gt;
+        fill &lt;value&gt;
+        cull &lt;value&gt;
+}</code></pre>
+</div></div>
+<div class="sect4">
+<h5 id="_depthtestenabled_lt_value_gt">depthtestenabled &lt;value&gt;</h5>
+<div class="paragraph"><p>Enables depth testing against the depth buffer. Valid parameters to &lt;value&gt; are:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>true
+false</code></pre>
+</div></div>
+<div class="paragraph"><p>Full screen quads or post processing effects would normally disable depth testing.</p></div>
+</div>
+<div class="sect4">
+<h5 id="_depthwriteenabled_lt_value_gt">depthwriteenabled &lt;value&gt;</h5>
+<div class="paragraph"><p>Enables depth writing to the depth buffer. Valid parameters to &lt;value&gt; are:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>true
+false</code></pre>
+</div></div>
+<div class="paragraph"><p>Full screen quads or post processing effects would normally disable depth writing.</p></div>
+</div>
+<div class="sect4">
+<h5 id="_depthcmp_lt_value_gt">depthcmp &lt;value&gt;</h5>
+<div class="paragraph"><p>Depth comparison mode. A pixel must pass this test to be written to the buffer. Valid parameters to &lt;value&gt; are:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>never
+less
+equal
+lessequal
+greater
+notequal
+greaterequal
+always</code></pre>
+</div></div>
+</div>
+<div class="sect4">
+<h5 id="_depthbias_lt_value_gt">depthbias &lt;value&gt;</h5>
+<div class="paragraph"><p>Adds a bias to the depth value. &lt;value&gt; is of float type.</p></div>
+</div>
+<div class="sect4">
+<h5 id="_slopescaledbias_lt_value_gt">slopescaledbias &lt;value&gt;</h5>
+<div class="paragraph"><p>Adds a bias to the depth value. &lt;value&gt; is of float type.</p></div>
+</div>
+<div class="sect4">
+<h5 id="_depthbiasclamp_lt_value_gt">depthbiasclamp &lt;value&gt;</h5>
+<div class="paragraph"><p>Sets the max depth bias. &lt;value&gt; is of float type.</p></div>
+</div>
+<div class="sect4">
+<h5 id="_fill_lt_value_gt">fill &lt;value&gt;</h5>
+<div class="paragraph"><p>Sets the fill mode. Valid parameters to &lt;value&gt; are:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>wireframe
+solid</code></pre>
+</div></div>
+</div>
+<div class="sect4">
+<h5 id="_cull_lt_value_gt">cull &lt;value&gt;</h5>
+<div class="paragraph"><p>Sets the triangle direction that will be culled. Mash defines clockwise triangles as front facing, so by default the cull value is <code>counterclockwise</code>. Valid parameters to &lt;value&gt; are:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>clockwise
+counterclockwise</code></pre>
+</div></div>
+</div>
+<div class="sect4">
+<h5 id="_example_rasteriser_states">Example Rasteriser States</h5>
+<div class="paragraph"><p>A rasteriser block for a material that does no depth testing or writing:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>rasteriser
+{
+        depthtestenabled false
+        depthwriteenabled false
+        depthcmp never
+}</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_samplers">2.2.4. Samplers</h4>
+<div class="paragraph"><p>Samplers define a texture and its options for sampling in a vertex and/or pixel program. Sampler blocks can contain one or more of the following settings. Sampler format:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>&lt;sampler_type&gt; &lt;sampler_name&gt;
+{
+        index &lt;sampler index&gt;
+        texture &lt;"texture path string"&gt;
+        minmagfilter &lt;value&gt;
+        mipfilter &lt;value&gt;
+        addressu &lt;value&gt;
+        addressv &lt;value&gt;
+}</code></pre>
+</div></div>
+<div class="sect4">
+<h5 id="_lt_sampler_type_gt">&lt;sampler_type&gt;</h5>
+<div class="paragraph"><p>Defines the sampler type to use. Valid values are:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>sampler2D
+samplerCUBE</code></pre>
+</div></div>
+</div>
+<div class="sect4">
+<h5 id="_lt_sampler_name_gt">&lt;sampler_name&gt;</h5>
+<div class="paragraph"><p>A name given to this sampler by the user for identification only.</p></div>
+</div>
+<div class="sect4">
+<h5 id="_index_lt_sampler_index_gt">index &lt;sampler index&gt;</h5>
+<div class="paragraph"><p><code>&lt;sampler index&gt;</code> is the index given to the sampler within the shader program. For example, the following uniform parameter is given an index of 0:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>sampler2D autoSampler0</code></pre>
+</div></div>
+<div class="paragraph"><p>This parameter would then use the sampler within the technique of the same index. Also note, This will be the index used for calls such as <code>MashTechniqueInstance::GetTexture(0)</code> and MashTechniqueInstance::SetTexture(0);</p></div>
+</div>
+<div class="sect4">
+<h5 id="_texture_lt_texture_path_string_gt">texture &lt;"texture path string"&gt;</h5>
+<div class="paragraph"><p><code>&lt;"texture path string"&gt;</code> is the texture path that&#8217;s assigned to this sampler. This can be a local path and the file system will search the root directories for the texture. Optionally the texture can be set using <code>MashTechniqueInstance::SetTexture(textureIndex, myTexture)</code> or <code>MashMaterial::SetTexture(textureIndex, myTexture)</code>.</p></div>
+</div>
+<div class="sect4">
+<h5 id="_minmagfilter_lt_value_gt">minmagfilter &lt;value&gt;</h5>
+<div class="paragraph"><p>Specifies the texture min and mag texture filter. Valid parameters to &lt;value&gt; are:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>linear
+point</code></pre>
+</div></div>
+</div>
+<div class="sect4">
+<h5 id="_mipfilter_lt_value_gt">mipfilter &lt;value&gt;</h5>
+<div class="paragraph"><p>Specifies the mipmapping filter. Selecting none will disable mipmapping. Valid parameters to &lt;value&gt; are:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>linear
+point
+none</code></pre>
+</div></div>
+</div>
+<div class="sect4">
+<h5 id="_addressu_lt_value_gt">addressu &lt;value&gt;</h5>
+<div class="paragraph"><p>Texture address method for the u value. Valid parameters to &lt;value&gt; are:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>clamp
+wrap</code></pre>
+</div></div>
+</div>
+<div class="sect4">
+<h5 id="_addressv_lt_value_gt">addressv &lt;value&gt;</h5>
+<div class="paragraph"><p>Texture address method for the v value. Valid parameters to &lt;value&gt; are:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>clamp
+wrap</code></pre>
+</div></div>
+</div>
+<div class="sect4">
+<h5 id="_example_sampler_usage">Example Sampler Usage</h5>
+<div class="listingblock">
+<div class="content">
+<pre><code>sampler2D DiffuseSampler
+{
+        index 0
+        texture "DiffuseTexture.DDS"
+        minmagfilter linear
+        mipfilter linear
+        addressu clamp
+        addressv clamp
+}</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="other_tech_params_index">2.2.5. Other Technique Parameters</h4>
+<div class="sect4">
+<h5 id="_lighting_lt_lighting_type_gt">lighting &lt;lighting type&gt;</h5>
+<div class="paragraph"><p>Defines the lighting type that will be used in this technique. This is used for <code>.eff</code> files only. Lighting shader code will be generated and added to the effects at runtime based on this setting. Valid &lt;lighting type&gt; values are:</p></div>
+<div class="tableblock">
+<table rules="all"
+width="90%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="23%" />
+<col width="76%" />
+<thead>
+<tr>
+<th align="left" valign="top">Keyword </th>
+<th align="left" valign="top">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">auto</p></td>
+<td align="left" valign="top"><p class="table">Gives you the ability to compile this technique to what ever the preferred lighting mode is within the engine. This allows you to change the lighting types of many techniques with one value.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">vertex</p></td>
+<td align="left" valign="top"><p class="table">This technique will use only vertex shading. This is good for techniques made for lower graphics settings.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">pixel</p></td>
+<td align="left" valign="top"><p class="table">This technique will use only pixel shading. Normal or high graphics mode techniques should use this.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">deferred</p></td>
+<td align="left" valign="top"><p class="table">This technique will use only deferred lighting. The graphics quality is the same as pixel in most cases, however, deferred mode is more performance heavy than pixel lighting. If you have only one or two lights in your scene then pixel lighting maybe a better option than deferred. Deferred lighting would be used in scenes with many lights, or if you wanted to utilise the gbuffer data for post processing.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="lodlevel_index">lodlevel &lt;lod level&gt;</h5>
+<div class="paragraph"><p>Defines the lod levels this technique can be used for. This keyword is followed by one, or many numbers separated by a space. The lod index must start at 1. For example, a technique that supports lod levels 1 and 2 would write:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>lodlevel 1 2</code></pre>
+</div></div>
+<div class="paragraph"><p>The distances which correspond to these values are set using <a href="#lod_distance_index">loddistance</a>. The material will then update its lod at draw time to that which matches the current distance from the camera. Using this, you could have one technique for lod levels 1 and 2. Then another technique for lod levels 3 and 4. If you define this, then be sure to set the lod distances as well. There should be one lod for each element in <a href="#lod_distance_index">loddistance</a>.</p></div>
+</div>
+<div class="sect4">
+<h5 id="_group_lt_user_defined_string_gt">group &lt;"user defined string"&gt;</h5>
+<div class="paragraph"><p>This keyword is followed by a string that can be used to activate a technique group from within the engine using <code>MashMaterial::SetActiveGroup()</code>. An example declaration from within a technique would be:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>group "LowGraphics"</code></pre>
+</div></div>
+<div class="paragraph"><p>Groups allow you to have specific options and lods set up for different graphics options. An example would be to give the user the option between low and high end graphics, then have LODing within each group. In this example, techA and techB are used only for the "low" group. techC and techD are used only for the "high" group:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>material MyMaterial
+{
+        loddistance 0 100
+
+        technique techA
+        {
+                /*Add other technique data here*/
+                lodlevel 1
+                group "low"
+        }
+
+        technique techB
+        {
+                /*Add other technique data here*/
+                lodlevel 2
+                group "low"
+        }
+
+        technique techC
+        {
+                /*Add other technique data here*/
+                lodlevel 1
+                group "High"
+        }
+
+        technique techD
+        {
+                /*Add other technique data here*/
+                lodlevel 2
+                group "High"
+        }
+}</code></pre>
+</div></div>
+</div>
+<div class="sect4">
+<h5 id="_disabledshadoweffects_lt_lighting_type_gt">disabledshadoweffects &lt;lighting type&gt;</h5>
+<div class="paragraph"><p>If <a href="#program_type_index">shadowvertexprogram</a> was defined to create a shadow caster, then this keyword allows you to disable casting from specific lighting types. Valid <code>&lt;lighting type&gt;</code> values can be one or more of the following separated by a space:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>directional
+spot
+point</code></pre>
+</div></div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_other_material_parameters">2.3. Other Material Parameters</h3>
+<div class="sect4">
+<h5 id="lod_distance_index">loddistance &lt;value&gt;</h5>
+<div class="paragraph"><p>This defines the distances which lods will activate. The values may be one or more integers separated by a space. The distances in this array correspond to the elements given in <a href="#lodlevel_index">lodlevel</a> for all techniques in this material. For example:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>material MyMaterial
+{
+        loddistance 0 100
+
+        technique techA
+        {
+                /*Add other technique data here*/
+                lodlevel 1
+        }
+
+        technique techB
+        {
+                /*Add other technique data here*/
+                lodlevel 2
+        }
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>In this example, techA is active from distances of 0 - 99, and techB is active from 100 and any distance there after. For scene nodes, the material will automatically change the technique at render time based on the current distance from the camera.</p></div>
+</div>
+<div class="sect4">
+<h5 id="_shadingeffect_lt_effect_file_path_eff_gt">shadingeffect &lt;"effect_file_path.eff"&gt;</h5>
+<div class="paragraph"><p>This value is quite powerful. This allows you to set an effect file that defines how objects rendered with this material will be shaded (lit). So for example, some objects can have a plastic look, some objects can be shaded to look like wood, some can look like metal, etc… The contents of this file must be in effect format and the function MashComputeShading must be named the same with the same number of parameters and types as follows. Below is a template from which you should start:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>include
+{
+        MashLightStructures.eff
+}
+
+source
+{
+        sLightOutput MashComputeShading(float3 viewSpaceLightVec, //Normalised inverse light direction
+                                                                                                                                float3 viewSpaceSurfaceNormal, //Surface normal
+                                                                                                                                float3 ViewSpaceToEye,  //Normalised direction from the surface to the camera
+                                                                                                                                float4 specularIntensity,
+                                                                                                                                float3 lightDiffuseValue,
+                                                                                                                                float3 lightSpecularValue)
+        {
+                sLightOutput output
+                /*do lighting and fill output*/
+                return output;
+        }
+
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>Contained within MashLightStructures.eff is sLightOutput. The user must not define sLightOutput themselves. This structure contains output values for diffuse and specular lighting. They must both be filled out and the structure returned.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>struct sLightOutput
+{
+        float3 diffuse;
+        float3 specular;
+};</code></pre>
+</div></div>
+</div>
+<div class="sect4">
+<h5 id="_samplers_rasteriser_states_and_blend_states">Samplers, Rasteriser States, and Blend States</h5>
+<div class="paragraph"><p>These were shown earlier defined within techniques, but they may also be defined within a materials scope. Any technique without there own states defined will inherit the global versions.</p></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="mtr_ref_index">2.4. Material References</h3>
+<div class="paragraph"><p>Material references are the same as creating an instance of a material within the engine. They are used in cases where a single material is applied to many different node instances, and in each instance only the texture needs to change. Material instances should be used wherever possible to reduce memory consumption and possibly increase rendering performance as less state changes are needed.</p></div>
+<div class="paragraph"><p>Material references will inherit all values from the base material, and allow you to override the samplers with new texture data. The sampler that is being changed must share the same sampler name across both material.</p></div>
+<div class="paragraph"><p>Material references have the following syntax:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>material &lt;material_name&gt; : &lt;base_material_name&gt;</code></pre>
+</div></div>
+<div class="sect3">
+<h4 id="_example">2.4.1. Example</h4>
+<div class="listingblock">
+<div class="content">
+<pre><code>material BaseMaterial
+{
+        vertex
+        {
+                position rgb32float
+                texcoord rg32float
+        }
+
+        sampler2D DiffuseSampler
+        {
+                index 0
+                texture "DiffuseTexture.DDS"
+        }
+
+        technique Normal
+        {
+                vertexprogram "auto" "Vertex.eff" "vsmain"
+                pixelprogram "auto" "Pixel.eff" "psmain"
+        }
+}
+
+material InstanceMaterial : BaseMaterial
+{
+        sampler2D DiffuseSampler
+        {
+                index 0
+                texture "InstanceTexture.DDS"
+        }
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>If the sampler was within a technique then you must specify the technique in the reference as well. The example above would then change to:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>material InstanceMaterial : BaseMaterial
+{
+        technique Normal
+        {
+                sampler2D DiffuseSampler
+                {
+                        index 0
+                        texture "InstanceTexture.DDS"
+                }
+        }
+}</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_material_examples">2.5. Material Examples</h3>
+<div class="paragraph"><p>A material with the minimum amount of settings defined:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>material MyMaterial
+{
+        vertex
+        {
+                position rgb32float
+                texcoord rg32float
+        }
+
+        technique Normal
+        {
+                vertexprogram "auto" "RuntimeVertex.eff" "vsmain"
+                pixelprogram "auto" "RuntimePixel.eff" "psmain"
+        }
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>An API specific material:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>material MyMaterial
+{
+        vertex
+        {
+                position rgb32float
+                texcoord rg32float
+        }
+
+        technique Normal
+        {
+                vertexprogram "glslv" "RuntimeVertex.glsl" "vsmain"
+                pixelprogram "glslp" "RuntimePixel.glsl" "psmain"
+        }
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>A material that&#8217;s compatible with runtime lighting and shadow casting:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>material MyMaterial
+{
+        vertex
+        {
+                position rgb32float
+                texcoord rg32float
+        }
+
+        technique Normal
+        {
+                lighting pixel
+                vertexprogram "auto" "RuntimeVertex.eff"  "vsmain"
+                pixelprogram "auto" "RuntimePixel.eff"  "psmain"
+                shadowvertexprogram "auto" "RuntimeVertex.eff"  "vsmain"
+        }
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>A material that&#8217;s compatible with runtime lighting, shadow casting, custom light shading, and render states defined:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>material MyMaterial
+{
+        vertex
+        {
+                position rgb32float
+                texcoord rg32float
+        }
+
+        technique Normal
+        {
+                lighting pixel
+                vertexprogram "auto" "RuntimeVertex.eff"  "vsmain"
+                pixelprogram "auto" "RuntimePixel.eff"  "psmain"
+                shadowvertexprogram "auto" "RuntimeVertex.eff"  "vsmain"
+                shading effect "lightShading.eff"
+
+                blendstate
+                {
+                        blendingenabled true
+                        srcblend srcalpha
+                        destblend invsrcalpha
+                        blendop add
+                        srcblendalpha zero
+                        destblendalpha zero
+                        blendopalpha add
+                        writemask all
+                }
+
+                rasteriser
+                {
+                        depthtestenabled true
+                        depthwriteenabled true
+                        depthcmp lessequal
+                }
+        }
+}</code></pre>
+</div></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="effect_index">3. Effects</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>Effect files (.eff) hold shader code that will be compiled into an API&#8217;s native format. This code may also be used to generate effects that will interact with a scenes lighting state automatically. Unlike material files, effect files cannot have multiple effects in the same file. Effect files contain different blocks that state what the inclosed data will be used for, the most important being <a href="#eff_source_index">source</a>. Within the source block is raw HLSL shader code that will be used to generate the final shader. Some blocks are valid only in vertex or pixel programs. The blocks defined below will state if they are specific to a program.</p></div>
+<div class="paragraph"><p>Sometimes it can be handy for debugging purposes to see the final API shader that is being generated from effect files. You can set file paths in <code>sMashDeviceSettings</code> so that intermediate data is saved to file.</p></div>
+<div class="sect2">
+<h3 id="eff_include_index">3.1. Include</h3>
+<div class="paragraph"><p>Any files declared within the include block will be added above the current file. Any <a href="#eff_autos_index">autos</a> that clash names with the current file will be merged to remove any multiple declaration errors.  <strong>Each include must start on a new line</strong>. File paths can be relative, the file manager will search the root paths when loading files.</p></div>
+<div class="paragraph"><p>Include blocks have the following syntax:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>include
+{
+        filename.ext
+}</code></pre>
+</div></div>
+</div>
+<div class="sect2">
+<h3 id="eff_autos_index">3.2. Auto Parameters</h3>
+<div class="paragraph"><p>Auto blocks contain all the parameters who&#8217;s data needs to be passed in from the CPU. <strong>Each auto must start on a new line</strong>. The main purpose of this block is to check for any previously declared autos in included files, therefore removing any possible multiple declaration errors. These autos will be checked against registered autos at load time to find a handler that will pass on information from the CPU to GPU to that auto. Auto handlers can be registered using <code>MashMaterialManager::RegisterAutoParameterHandler()</code>. It&#8217;s important to note that structs <strong>must</strong> be declared before the auto, there is two options to satisfy this rule:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Their declaration can be placed within an <a href="#eff_include_index">included</a> file.
+</p>
+</li>
+<li>
+<p>
+Declare both the struct and the auto within the <a href="#eff_source_index">source</a> block. Doing this however, you run the risk of multiple declarations for autos. Only do this if your sure the same auto is not used in an included file, or included when lighting data is added.
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>Auto blocks have the following syntax:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>autos
+{
+        &lt;auto_format&gt; &lt;auto_name&gt;
+        /*Add a new line for each auto in your effect*/
+}</code></pre>
+</div></div>
+<div class="sect4">
+<h5 id="_lt_auto_format_gt">&lt;auto_format&gt;</h5>
+<div class="paragraph"><p>This is the format of the auto and can either be of built in type, or a user defined struct. Structs are handled as constant buffers and usually serve as the most efficient way of passing a lot of parameters to a shader. Be aware of an APIs packing rules when it comes to constant buffers. Mash requests the API not to optimise or pack the data to make passing data easier. It&#8217;s usually best to simply make all variables within a struct <code>float4</code> or <code>float4x4</code> to remove any memory alignment issues. Valid auto formats match those found in HLSL sm3 and include:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>float
+float2
+float3
+float4
+float4x4
+int
+int2
+int3
+int4
+bool
+bool2
+bool3
+bool4
+sampler2D
+samplerCUBE</code></pre>
+</div></div>
+<div class="paragraph"><p>The name of a struct format is the same name you declared the struct with. For example:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>/*Normal HLSL struct*/
+struct EffectData
+{
+        float4 dataA;
+        float4 dataB;
+        float4 dataC;
+};
+
+.
+.
+.
+
+/*The auto then looks like:*/
+EffectData effectDataAuto</code></pre>
+</div></div>
+</div>
+<div class="sect4">
+<h5 id="_lt_auto_name_gt">&lt;auto_name&gt;</h5>
+<div class="paragraph"><p>This can be the name of an built-in auto, or an auto that you have registered previous to loading the effect. The name may also be not registered if you wish, though this is rarely wanted. The auto can be found within a loaded effect using <code>MashEffect::GetParameterByName()</code>. Built in auto names and their data type include:</p></div>
+<div class="tableblock">
+<table rules="all"
+width="90%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="18%" />
+<col width="18%" />
+<col width="62%" />
+<thead>
+<tr>
+<th align="left" valign="top">Auto Name </th>
+<th align="left" valign="top">Format </th>
+<th align="left" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">autoWorldViewProjection</p></td>
+<td align="left" valign="top"><p class="table">float4x4</p></td>
+<td align="left" valign="top"><p class="table">Active camera and nodes combined world view projection matrix.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoViewProjection</p></td>
+<td align="left" valign="top"><p class="table">float4x4</p></td>
+<td align="left" valign="top"><p class="table">Active cameras view projection matrix.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoView</p></td>
+<td align="left" valign="top"><p class="table">float4x4</p></td>
+<td align="left" valign="top"><p class="table">Active cameras view matrix.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoProjection</p></td>
+<td align="left" valign="top"><p class="table">float4x4</p></td>
+<td align="left" valign="top"><p class="table">Active camera projection matrix.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoWorld</p></td>
+<td align="left" valign="top"><p class="table">float4x4</p></td>
+<td align="left" valign="top"><p class="table">The world transform of the current node being rendered. This is only valid during node rendering when a custom render path for that nodes material is not being used.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoWorldView</p></td>
+<td align="left" valign="top"><p class="table">float4x4</p></td>
+<td align="left" valign="top"><p class="table">Active camera and nodes combined world view matrix.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoWorldPosition</p></td>
+<td align="left" valign="top"><p class="table">float3</p></td>
+<td align="left" valign="top"><p class="table">Active nodes world position.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoWorldInvTranspose</p></td>
+<td align="left" valign="top"><p class="table">float4x4</p></td>
+<td align="left" valign="top"><p class="table">The inverse transpose of the active nodes world transform.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoViewInvTranspose</p></td>
+<td align="left" valign="top"><p class="table">float4x4</p></td>
+<td align="left" valign="top"><p class="table">The inverse transpose of the active cameras view matrix.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoInvViewProjection</p></td>
+<td align="left" valign="top"><p class="table">float4x4</p></td>
+<td align="left" valign="top"><p class="table">The inverse transpose of the active cameras view matrix.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoInvView</p></td>
+<td align="left" valign="top"><p class="table">float4x4</p></td>
+<td align="left" valign="top"><p class="table">The inverse of the active cameras view matrix.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoInvProjection</p></td>
+<td align="left" valign="top"><p class="table">float4x4</p></td>
+<td align="left" valign="top"><p class="table">The inverse of the active cameras projection matrix.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoWorldViewInvTranspose</p></td>
+<td align="left" valign="top"><p class="table">float4x4</p></td>
+<td align="left" valign="top"><p class="table">The inverse transpose of the active camera and nodes world view matrix.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoSampler</p></td>
+<td align="left" valign="top"><p class="table">sampler2D, samplerCUBE</p></td>
+<td align="left" valign="top"><p class="table">Texture sampler. This auto must have a postfix number that matches a sampler within the material file. This index is also used to retrieve the texture from a materials technique using <code>MashTechniqueInstance::GetTexture(textureIndex)</code>. A sampler at index zero would look like: <code>autoSampler0</code>.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoCameraNearFar</p></td>
+<td align="left" valign="top"><p class="table">float2</p></td>
+<td align="left" valign="top"><p class="table">Holds the active cameras near and far values. Near is held in .x, Far is held in .y.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoLight</p></td>
+<td align="left" valign="top"><p class="table">struct sLight (Defined in MashLightStructures.eff)</p></td>
+<td align="left" valign="top"><p class="table">Contains all the data associated with the active light.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoLightWorldPosition</p></td>
+<td align="left" valign="top"><p class="table">float3</p></td>
+<td align="left" valign="top"><p class="table">Active lights world position.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoShadowsEnabled</p></td>
+<td align="left" valign="top"><p class="table">bool</p></td>
+<td align="left" valign="top"><p class="table">This is set to true if the active light has shadows enabled.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoSceneShadowMap</p></td>
+<td align="left" valign="top"><p class="table">sampler2D</p></td>
+<td align="left" valign="top"><p class="table">This is the current scenes shadow map for the current light pass. This is only valid when lighting and shadows are enabled.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoGBufferDiffuseSampler</p></td>
+<td align="left" valign="top"><p class="table">sampler2D</p></td>
+<td align="left" valign="top"><p class="table">This is only valid after a scene has been deferred rendered. This is the scene with only diffuse colour.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoGBufferSpecularSampler</p></td>
+<td align="left" valign="top"><p class="table">sampler2D</p></td>
+<td align="left" valign="top"><p class="table">This is only valid after a scene has been deferred rendered. This is the scene with only the specular value from a scenes specular maps.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoGBufferDepthSampler</p></td>
+<td align="left" valign="top"><p class="table">sampler2D</p></td>
+<td align="left" valign="top"><p class="table">This is only valid after a scene has been deferred rendered. Contains the depth buffer.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoGBufferNormalSampler</p></td>
+<td align="left" valign="top"><p class="table">sampler2D</p></td>
+<td align="left" valign="top"><p class="table">This is only valid after a scene has been deferred rendered. Contains the normal values from a scene.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoGBufferLightSampler</p></td>
+<td align="left" valign="top"><p class="table">sampler2D</p></td>
+<td align="left" valign="top"><p class="table">This is only valid after a scene has been deferred rendered. Contains the lighting values calculated from the specular, depth, and normal buffers. This is a one channel texture used to multiply with the diffuse sampler to produce the final lit colour.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoGBufferLightSpecularSampler</p></td>
+<td align="left" valign="top"><p class="table">sampler2D</p></td>
+<td align="left" valign="top"><p class="table">This is only valid after a scene has been deferred rendered. Contains the lighting specular values calculated from the specular, depth, and normal buffers. This is added to the final lit term to add specular lighting.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">autoBonePalette</p></td>
+<td align="left" valign="top"><p class="table">float4x4 array</p></td>
+<td align="left" valign="top"><p class="table">This can be used during skinning to get an Entity&#8217;s world bone offsets. These matrices are then multiplied by a meshes local vertices to produce the final transformed world space position. Each index in this array corresponds to a bone index in the vertices <a href="#vertex_usage_index">boneIndex</a> element. The size of this array should be set to the bone count of your model. For example, a model with 26 bones would have an auto parameter like: <code>autoBonePalette[26]</code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="eff_vert_inputs_index">3.3. Vertex Program Inputs</h3>
+<div class="paragraph"><p>Used in vertex programs only. Here you define the vertex layout of the CPU vertex data. This layout then becomes the input into the vertex shader. This must match the <a href="#mtr_vertex_index">vertex declaration</a> given in the material.</p></div>
+<div class="paragraph"><p>This should only be used for effects that want runtime lighting information. Other effects should just define a vertex shader input struct in the <a href="#eff_source_index">source</a> block in regular HLSL sm3 style.</p></div>
+<div class="paragraph"><p>Vertex input blocks have the following syntax:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>vertexInput
+{
+        &lt;data_type&gt; &lt;element_name&gt; : &lt;vertex_usage&gt;
+        /*Add a new line for each element in your declaration*/
+}</code></pre>
+</div></div>
+<div class="sect4">
+<h5 id="_lt_data_type_gt">&lt;data_type&gt;</h5>
+<div class="paragraph"><p>Data types can be found in the <a href="#eff_autos_index">auto</a> section. The data type needs to be compatible with the format set in the <a href="#vertex_usage_index">materials</a> element.</p></div>
+</div>
+<div class="sect4">
+<h5 id="_lt_element_name_gt">&lt;element_name&gt;</h5>
+<div class="paragraph"><p>A user defined name that will be used to access this element with the shader code.</p></div>
+</div>
+<div class="sect4">
+<h5 id="_lt_vertex_usage_gt">&lt;vertex_usage&gt;</h5>
+<div class="paragraph"><p>This usage must match the same element within the <a href="#vertex_usage_index">materials</a> vertex declaration.</p></div>
+</div>
+<div class="sect4">
+<h5 id="_example_2">Example</h5>
+<div class="paragraph"><p>A vertex input block with position, texture coordinates, and colour:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>vertexInput
+{
+        float3 vertPos : position
+        float2 vertTexcoords : texcoord
+        float4 colour : colour
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>This would match a materials vertex declaration of:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>vertex
+
+{
+        rgb32float position
+        rg32float texcoord
+        rgba8uint colour
+}</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="eff_vertex_outputs_index">3.4. Vertex Program Outputs</h3>
+<div class="paragraph"><p>Used in vertex programs only. Here you define the data you are handing onto the engine for processing and/or passing onto the pixel shader so you can process it further.</p></div>
+<div class="paragraph"><p>This should only be used for effects that want runtime lighting information. Other effects should just define a vertex shader output struct in the <a href="#eff_source_index">source</a> block in regular HLSL sm3 style.</p></div>
+<div class="paragraph"><p>Vertex outputs have a similar syntax as <a href="#eff_vert_inputs_index">vertex inputs</a>:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>vertexOutput
+{
+        &lt;data_type&gt; &lt;element_name&gt; : &lt;output_usage&gt; &lt;opt_param_pass&gt;
+        /*Add a new line for each output element*/
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>The difference here is <code>output_usage</code> and <code>opt_param_pass</code>.</p></div>
+<div class="sect4">
+<h5 id="_lt_output_usage_gt">&lt;output_usage&gt;</h5>
+<div class="paragraph"><p>The output usage tells the engine how the data should be used. For example, an element with the <code>viewnormal</code> semantic tells the engine that normal data in view space is contained within that element. That element can then be used as the surface normal for vertex or pixel lighting.</p></div>
+<div class="paragraph"><p>Valid values for <code>&lt;output_usage&gt;</code> are:</p></div>
+<div class="tableblock">
+<table rules="all"
+width="90%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="18%" />
+<col width="18%" />
+<col width="62%" />
+<thead>
+<tr>
+<th align="left" valign="top">Keyword </th>
+<th align="left" valign="top">Format </th>
+<th align="left" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">viewposition</p></td>
+<td align="left" valign="top"><p class="table">float4</p></td>
+<td align="left" valign="top"><p class="table"><strong>All vertex outputs must define at least this element</strong>. This is the world position multiplied by the active cameras view matrix.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">viewnormal</p></td>
+<td align="left" valign="top"><p class="table">float3</p></td>
+<td align="left" valign="top"><p class="table">A vertex normal multiplied by the active cameras view matrix.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">specular</p></td>
+<td align="left" valign="top"><p class="table">float4</p></td>
+<td align="left" valign="top"><p class="table">This will be used to calculate the specular value for vertex lighting. Elements x,y,z hold the specular colour while element w hold the specular intensity.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">colour</p></td>
+<td align="left" valign="top"><p class="table">float4</p></td>
+<td align="left" valign="top"><p class="table">For passing colour values to the pixel shader.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">texcoord</p></td>
+<td align="left" valign="top"><p class="table">float2</p></td>
+<td align="left" valign="top"><p class="table">For passing texture coordinates to the pixel shader.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">custom</p></td>
+<td align="left" valign="top"><p class="table">float, float2, float3, float4</p></td>
+<td align="left" valign="top"><p class="table">For passing a user defined value to the pixel shader.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">hposition</p></td>
+<td align="left" valign="top"><p class="table">float4</p></td>
+<td align="left" valign="top"><p class="table">Holds the final position of the vertex in screen space. This would be the world transform multiplied by the active cameras view projection matrix. Normally this is done for you automatically, but this gives you the option of calculating it yourself for special effects.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="eff_pass_param_index">&lt;opt_param_pass&gt;</h5>
+<div class="paragraph"><p>Defining usages for the outputs lets the engine know what you have calculated and how it should be used whether it be for lighting or positioning. If you actually want to pass that same data onto the pixel shader for your own purposes then you also need to add the <code>pass</code> keyword after the usage. If the keyword is not added then the data will not be passed onto the user pixel function.</p></div>
+</div>
+<div class="sect4">
+<h5 id="_example_3">Example</h5>
+<div class="paragraph"><p>Here is an output block with view position, view normal, and texture coordinates. The texture coordinates are passing onto the pixel shader:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>vertexOutput
+{
+        float4 myViewPosition : viewposition
+        float3 myViewNormal : viewnormal
+        float2 myTexcoords : texcoord pass
+}</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="eff_pixel_outputs_index">3.5. Pixel Programs Outputs</h3>
+<div class="paragraph"><p>Used for pixel programs only. This is similar to the <a href="#eff_vertex_outputs_index">vertex program outputs</a> block but for pixel programs. The parameters you define in this block will be used by the engine to process per pixel lighting or render a colour to the back buffer. Note that this block is optional.</p></div>
+<div class="paragraph"><p>This should only be used for effects that want runtime lighting information. Other effects should just define a pixel shader output struct in the <a href="#eff_source_index">source</a> block in regular HLSL sm3 style.</p></div>
+<div class="paragraph"><p>Pixel output blocks have the following syntax:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>pixelOutput
+{
+        &lt;data_type&gt; &lt;element_name&gt; : &lt;output_usage&gt;
+        /*Add a new line for each output element*/
+}</code></pre>
+</div></div>
+<div class="sect4">
+<h5 id="_lt_data_type_gt_2">&lt;data_type&gt;</h5>
+<div class="paragraph"><p>Data types can be found in the <a href="#eff_autos_index">auto</a> section, you would normally use <code>float4</code> in this block.</p></div>
+</div>
+<div class="sect4">
+<h5 id="_lt_element_name_gt_2">&lt;element_name&gt;</h5>
+<div class="paragraph"><p>A user defined name that will be used to access this element with the shader code.</p></div>
+</div>
+<div class="sect4">
+<h5 id="_lt_output_usage_gt_2">&lt;output_usage&gt;</h5>
+<div class="paragraph"><p>The output usage tells the engine how the data should be used. For example, an element with the <code>specular</code> semantic tells the engine that specular lighting information is contained within that element. That element would then be used to calculate specular lighting for that pixel.</p></div>
+<div class="paragraph"><p>Valid values for <code>&lt;output_usage&gt;</code> are:</p></div>
+<div class="tableblock">
+<table rules="all"
+width="90%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="18%" />
+<col width="18%" />
+<col width="62%" />
+<thead>
+<tr>
+<th align="left" valign="top">Keyword </th>
+<th align="left" valign="top">Format </th>
+<th align="left" valign="top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">diffuse</p></td>
+<td align="left" valign="top"><p class="table">float4</p></td>
+<td align="left" valign="top"><p class="table">The colour of this pixel. This could be sampled from a texture, passed in from the vertex shader, or simply hardcoded. If lighting is enabled, this value will be multiplied with the final lighting value.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">specular</p></td>
+<td align="left" valign="top"><p class="table">float4</p></td>
+<td align="left" valign="top"><p class="table">The specular value of this pixel for per pixel lighting. This could be sampled from a specular texture, passed in from the vertex shader, or simply hardcoded. Elements <em>rgb</em> contain the specular colour, and element <em>a</em> contains the specular intensity.</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">viewnormal</p></td>
+<td align="left" valign="top"><p class="table">float3</p></td>
+<td align="left" valign="top"><p class="table">This can be used to set the surface normal in view space for use in lighting calculations. You would use this for normal mapping. If your not performing normal mapping, then it&#8217;s best to simply calculate this in the <a href="#eff_vertex_outputs_index">vertex shader</a>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_example_4">Example</h5>
+<div class="paragraph"><p>A pixel output block with diffuse and specular values defined:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>pixelOutput
+{
+        float4 pixelColour : diffuse
+        float4 pixelSpec : specular
+}</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="eff_source_index">3.6. Program Source</h3>
+<div class="paragraph"><p>This block contains the main HLSL shader model 3 code. All code in this block is copied verbatim to the final shader (#defines, uniforms, comments, functions, structs, etc…). Within this code, among other things, you would access uniform parameters declared within the <a href="#eff_autos_index">auto block</a>.</p></div>
+<div class="paragraph"><p>The syntax of this block looks like:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>source
+{
+        /*Add HLSL code here*/
+}</code></pre>
+</div></div>
+<div class="sect3">
+<h4 id="_effects_without_runtime_lighting_generation_support">3.6.1. Effects Without Runtime Lighting Generation Support</h4>
+<div class="paragraph"><p>These are normally any effect that isn&#8217;t being applied to a lit scene node. Example usages would be GUI, post processing or non/custom lighting scene node. Here you define your entire HLSL sm3 source code including vertex shader inputs and outputs. The vertex input structure must match the materials <a href="#mtr_vertex_index">vertex declaration</a> in terms of the data type, size and semantic.</p></div>
+<div class="paragraph"><p>Semantic mapping table for vertex inputs:</p></div>
+<div class="tableblock">
+<table rules="all"
+width="60%"
+frame="border"
+cellspacing="0" cellpadding="4">
+<col width="50%" />
+<col width="50%" />
+<thead>
+<tr>
+<th align="left" valign="top">Material Semantic </th>
+<th align="left" valign="top">Map To HLSL Semantic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left" valign="top"><p class="table">position</p></td>
+<td align="left" valign="top"><p class="table">POSITION</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">tangent</p></td>
+<td align="left" valign="top"><p class="table">TANGENT</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">colour</p></td>
+<td align="left" valign="top"><p class="table">COLOR</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">texcoord</p></td>
+<td align="left" valign="top"><p class="table">TEXCOORD</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">custom</p></td>
+<td align="left" valign="top"><p class="table">TEXCOORD</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">normal</p></td>
+<td align="left" valign="top"><p class="table">NORMAL</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">blendindex</p></td>
+<td align="left" valign="top"><p class="table">BLENDINDICES</p></td>
+</tr>
+<tr>
+<td align="left" valign="top"><p class="table">blendweight</p></td>
+<td align="left" valign="top"><p class="table">BLENDWEIGHT</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="paragraph"><p>These effects still support <a href="#eff_include_index">include blocks</a> and <a href="#eff_autos_index">auto blocks</a>, they will be added with the code found in the source block to produce the final effect. <a href="#eff_vert_inputs_index">Vertex input</a> blocks and <a href="#eff_vertex_outputs_index">vertex output</a> blocks will be ignored.</p></div>
+<div class="paragraph"><p>The only difference to shader model 3 code and effect code is the SV_POSITION semantic. This must be used to define the element that holds the vertex screen position. See <a href="#example_two_index">this</a> effect for an example.</p></div>
+</div>
+<div class="sect3">
+<h4 id="_effects_with_runtime_lighting_generation_support">3.6.2. Effects With Runtime Lighting Generation Support</h4>
+<div class="paragraph"><p>Most scene nodes should have these effects. If creating effects to support runtime lighting, then your main entry point function <strong>must</strong> have specific input and output data types. You do not declare these structures, they are creating by the shader generator and are different for vertex and pixel programs. If you create structures with the same name then compile errors will occur. The entry point function name is user defined and the engine has no restrictions on it.</p></div>
+<div class="paragraph"><p>The engine uses the data defined in this file as a guide on how to create the final shader. It will basically build a wrapper shader around whats provided in an effect file and pass on the data you requested to your vertex and pixel functions. The data you output from these functions is used for lighting calculations, vertex positioning, and the final pixel colour.</p></div>
+<div class="sect4">
+<h5 id="_vertex_programs">Vertex Programs</h5>
+<div class="paragraph"><p>The input and output data types for vertex programs are <code>VOUT</code> and <code>VIN</code>.</p></div>
+<div class="paragraph"><p><code>VOUT</code> will contain the variables you declared within the <a href="#eff_vertex_outputs_index">vertex output</a> block. All variables declared should be <strong>filled in completely</strong> before leaving the main function. <code>VIN</code> contains the variables you declared within the <a href="#eff_vert_inputs_index">vertex input</a> block.</p></div>
+</div>
+<div class="sect4">
+<h5 id="_example_5">Example</h5>
+<div class="listingblock">
+<div class="content">
+<pre><code>VOUT vertexmain(VIN input)
+{
+        VOUT output;
+
+        /*Fill in the output structure then return the data*/
+
+        return output.
+}</code></pre>
+</div></div>
+</div>
+<div class="sect4">
+<h5 id="_pixel_programs">Pixel Programs</h5>
+<div class="paragraph"><p>The input and output data types for pixel programs are <code>POUT</code> and <code>PIN</code>.</p></div>
+<div class="paragraph"><p><code>POUT</code> will contain the variables you declared within the <a href="#eff_pixel_outputs_index">pixel output</a> block. All variables declared should be <strong>filled in completely</strong> before leaving the main function. <code>PIN</code> contains the variables you passed in via the <a href="#eff_vertex_outputs_index">vertex output</a> block. Note that pixel programs do not have a <a href="#eff_vert_inputs_index">vertex input</a> block equivalent. The inputs are generated automatically based on the elements you added a <a href="#eff_pass_param_index">pass</a> semantic to in the <a href="#eff_vertex_outputs_index">vertex output</a> block. These elements can be accessed within the pixel program from the <code>PIN</code> structure.</p></div>
+</div>
+<div class="sect4">
+<h5 id="_example_6">Example</h5>
+<div class="listingblock">
+<div class="content">
+<pre><code>POUT pixelmain(PIN input)
+{
+        VPUT output;
+
+        /*Fill in the output structure then return the data*/
+
+        return output.
+}</code></pre>
+</div></div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_source_limitations">3.6.3. Source Limitations</h4>
+<div class="paragraph"><p>Most HLSL shader model 3 (directx 9) operations work as expected. Internally, the shader generator is utilising  program called HLSL2GLSL to convert shaders into GLSL. Therefore the code within the <code>source</code> block has some limitations associated with it.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+Typedef are not supported.
+</p>
+</li>
+<li>
+<p>
+Default values for functions parameters are not supported.
+</p>
+</li>
+<li>
+<p>
+Arrays are not supported as arguments to the entry functions.
+</p>
+</li>
+<li>
+<p>
+Non square matrices are not supported.
+</p>
+</li>
+<li>
+<p>
+Const arrays with initialisation statements are not supported.
+</p>
+</li>
+<li>
+<p>
+Multi-dimensional arrays are not supported.
+</p>
+</li>
+<li>
+<p>
+float4(x,y)=float4 syntax is not supported.
+</p>
+</li>
+<li>
+<p>
+Evaluation of function calls in constant expressions not supported (e.g. const float rt3 = 1.0 / sqrt(3)).
+</p>
+</li>
+<li>
+<p>
+static keyword is not supported.
+</p>
+</li>
+<li>
+<p>
+Unsized array initialisation is not supported.
+</p>
+</li>
+<li>
+<p>
+Assigning to a matrix via swizzling doesn&#8217;t work too well and should be avoided if possible.
+</p>
+</li>
+</ul></div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_effect_examples">3.7. Effect Examples</h3>
+<div class="sect4">
+<h5 id="_example_1">Example 1</h5>
+<div class="paragraph"><p>An effect that supports runtime light generation and samples its colour from a texture in the pixel shader. Note, because this is an effect file, the HLSL code will be converted to GLSL if needed.</p></div>
+<div class="paragraph"><p>The vertex program.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>include
+{
+        MashTexCoords.eff
+}
+
+autos
+{
+        float4x4 autoWorldView
+}
+
+vertexInput
+{
+        float3 localposition : position
+        float2 texcood : texcoord
+}
+
+vertexOutput
+{
+        float4 viewposition : viewposition
+        float2 objtexcoords : texcoord pass
+}
+
+source
+{
+        VOUT vertexmain(VIN input)
+        {
+                VOUT output;
+
+                output.viewposition = mul(autoWorldView, float4(input.localposition, 1.0));
+
+                /*mashGetTexcoords transforms the texcoords based on whether we're using OpenGL or DirectX*/
+                output.objtexcoords = mashGetTexcoords(input.texcoord);
+
+                return output;
+        }
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>And the matching pixel program.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>autos
+{
+        sampler2D autoSampler0
+}
+
+pixelOutput
+{
+        float4 surfacecolour : diffuse
+}
+
+source
+{
+        POUT pixelmain(PIN input)
+        {
+                POUT output;
+                output.surfacecolour = tex2D(autoSampler0, input.objtexcoords);
+                return output;
+        }
+}</code></pre>
+</div></div>
+</div>
+<div class="sect4">
+<h5 id="example_two_index">Example 2</h5>
+<div class="paragraph"><p>The same effect as in example 1 but this would be used for GUI or post processing. It would not use runtime lighting.</p></div>
+<div class="paragraph"><p>The vertex program.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>include
+{
+        MashTexCoords.eff
+}
+
+autos
+{
+        float4x4 autoWorldView
+}
+
+source
+{
+        struct VS_INPUT
+        {
+                float3 position : POSITION0;
+                float2 texcoord : TEXCOORD0;
+        };
+
+        struct VS_OUTPUT
+        {
+                float2 texcoord : TEXCOORD0;
+                float4 positionH : SV_POSITION;
+        };
+
+        VS_OUTPUT vsmain( VS_INPUT input)
+        {
+                VS_OUTPUT output;
+                output.positionH = mul(autoWorldView, float4(input.position, 1.0));
+
+                /*mashGetTexcoords transforms the texcoords based on whether we're using OpenGL or DirectX*/
+                output.texcoord = mashGetTexcoords(input.texcoord);
+
+                return output;
+        }
+}</code></pre>
+</div></div>
+<div class="paragraph"><p>And the matching pixel program.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><code>autos
+{
+        sampler2D autoSampler0
+}
+
+source
+{
+        struct VS_OUTPUT
+        {
+                float2 texcoord : TEXCOORD0;
+        };
+
+        float4 psmain(VS_OUTPUT input) : SV_TARGET0
+        {
+                return tex2D(autoSampler0, input.texcoord);
+        }
+}</code></pre>
+</div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_information_for_artists">4. Information For Artists</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_exporting">4.1. Exporting</h3>
+<div class="paragraph"><p>Currently only the COLLADA file format is supported. The engine has been specifically made using openCOLLADA however other COLLADA exporters may work too.</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+In the COLLADA export options, you should tick at the very least <code>Normals</code> and <code>Triangulate</code> (or similar).
+</p>
+</li>
+<li>
+<p>
+<code>Tangents/Binormals</code> should be checked if normal mapping will be used.
+</p>
+</li>
+<li>
+<p>
+<code>Enable export</code> should be selected under <code>Animation</code> to export animation key frames if animation data is wanted.
+</p>
+</li>
+<li>
+<p>
+<code>Bake Matrices</code> shouldn&#8217;t be selected in most cases as it leads to larger file sizes. However, this option does remove some positional problems if they arise. So only select this option if you are experiencing any transform issues.
+</p>
+</li>
+</ul></div>
+</div>
+<div class="sect2">
+<h3 id="_supported_node_types">4.2. Supported Node Types</h3>
+<div class="paragraph"><p>The following node types can be imported from a COLLADA file into Mash:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><code>Camera
+Bone
+Mesh
+Light
+Dummy</code></pre>
+</div></div>
+<div class="paragraph"><p>Camera and Light nodes will need to have their settings reset once loaded into the engine.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_animations">4.3. Animations</h3>
+<div class="ulist"><ul>
+<li>
+<p>
+Single animation timelines can be split into different cycles using the scene viewer or in code using <code>MashControllerManager</code>.
+</p>
+</li>
+<li>
+<p>
+All supported node types can have their transforms animated.
+</p>
+</li>
+<li>
+<p>
+Skinning is supported with up to 4 bone influences per vertex.
+</p>
+</li>
+<li>
+<p>
+Morph targets are not supported.
+</p>
+</li>
+<li>
+<p>
+Node names do not need to be unique.
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>When moving skinned Entities around a scene, be aware it&#8217;s usually preferred to move both the Entity and their bones together. The best way to achieve this is to parent both the Entity and it&#8217;s bone structure to the same node (a Dummy node). Additional instances of this animated character would clone this hierarchy and would be independent from each other. This ensures you don&#8217;t end up with translation errors as skinned Entities move in the world. More advanced users could share a single bone structure with many Entities for techniques such as crowd rendering.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_materials_2">4.4. Materials</h3>
+<div class="paragraph"><p>Material data cannot be imported from modelling packages. So they will need to be created outside your modelling package and applied to objects using either the scene viewer, applied programatically, or by some other custom tool for material creation.</p></div>
+<div class="paragraph"><p>Multi subs are supported. A mesh will be broken down into sub meshes per material. These meshes can later be accessed via <code>MashModel::GetMesh()</code>.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_model_levels_of_detail">4.5. Model Levels Of Detail</h3>
+<div class="paragraph"><p>Artists can create meshes from their modelling package that will be grouped together to form a single model with each mesh representing a different lod. Mesh lod can significantly improve an applications performance by swapping out high poly meshes for lower poly versions as its distance from the camera changes.</p></div>
+<div class="paragraph"><p>To create a LODing model in your modelling package, all the meshes associated with it must share the same name postfixed with <code>__lod[n]</code>, where [n] is the lod that mesh should be assigned to. For example to create a model called <code>character</code> with two lods, you would create a high poly mesh called <code>character__lod0</code> and a low poly mesh called <code>character__lod1</code>. The postfix <code>__lod[n]</code> will be stripped from the name when loaded into the engine. Each lod can then be accessed via <code>MashModel::GetMesh()</code>.</p></div>
+<div class="paragraph"><p>The distance at which lods are swapped can be set per instance using <code>MashEntity::SetLodDistance()</code></p></div>
+<div class="paragraph"><p>If a model is skinned for animation, then all lods <strong>must</strong> share the same bone structure.</p></div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr /></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2017-01-27 12:03:39 AEDT
+</div>
+</div>
+</body>
+</html>

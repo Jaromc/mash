@@ -1,0 +1,51 @@
+material MashMeshParticleMaterial
+{	
+	vertex
+	{
+		position rgb32float 0 0
+		normal rgb32float 0 0
+		texcoord rg32float 0 0
+		
+		custom rgba32float 1 1
+		custom rgba32float 1 1
+		custom rgba32float 1 1
+		custom rgba32float 1 1
+		colour rgba8unorm 1 1
+	}
+
+	technique Standard
+	{
+		lighting auto
+		
+		vertexprogram "auto" "MashMeshParticleVertex.eff" "vertexmain"
+		pixelprogram "auto" "MashMeshParticlePixel.eff" "pixelmain"
+	}
+	
+	sampler2D DiffuseSampler
+	{
+		index 0
+		minmagfilter linear
+		mipfilter linear
+		addressu clamp
+		addressv clamp
+	}
+	
+	rasteriser
+	{
+		depthcmp lessequal
+		depthtestenabled true
+		depthwriteenabled true
+	}
+	
+	blendstate
+	{
+		blendingenabled false
+		srcblend srcalpha
+		destblend invsrcalpha
+		blendop add
+		srcblendalpha zero
+		destblendalpha zero
+		blendopalpha add
+		writemask all
+	}
+}

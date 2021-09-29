@@ -1,0 +1,23 @@
+autos
+{
+	float4x4 autoCascadeCamViewToLightView
+	float4x4 autoCascadeCamViewToLightVP
+}
+
+vertexOutput
+{
+	float4 posH : hposition
+	float lightViewSpacePos : custom pass
+}
+
+source
+{
+	SVOUT MashShadowCasterVertex(float3 viewSpacePosition)
+	{
+		SVOUT shadowOut;
+		//convert viewspace pos into light view space
+		shadowOut.lightViewSpacePos = mul(autoCascadeCamViewToLightView, float4(viewSpacePosition, 1.0f)).z;
+		shadowOut.posH = mul(autoCascadeCamViewToLightVP, float4(viewSpacePosition, 1.0f));
+		return shadowOut;
+	}
+}

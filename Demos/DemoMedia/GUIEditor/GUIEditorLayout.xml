@@ -1,0 +1,978 @@
+<root>
+    <guielement type="view" name="MainSceneView" hscrollenabled="1" vscrollenabled="1" clippingenabled="1" canhavefocus="1" renderenabled="1">
+        <destinationregion>
+            <left scale="0" offset="0" />
+            <right scale="1" offset="-300" />
+            <top scale="0" offset="0" />
+            <bottom scale="1" offset="0" />
+        </destinationregion>
+		<guielement type="menubar" name="MenuBar" clippingenabled="1" canhavefocus="1" renderenabled="1">
+			<destinationregion>
+				<left scale="0" offset="0" />
+				<right scale="1" offset="0" />
+				<top scale="0" offset="0" />
+				<bottom scale="0" offset="20" />
+			</destinationregion>
+			<menuitem text="File">
+				<item text="Save" value="0" />
+				<item text="Load" value="1" />
+				<item text="Clear" value="3" />
+				<item text="Quit" value="2" />
+			</menuitem>
+		</guielement>
+    </guielement>
+	<guielement type="view" name="Properties" vscrollenabled="0" hscrollenabled="0" clippingenabled="1" canhavefocus="1" renderenabled="1">
+        <destinationregion>
+            <left scale="1" offset="-300" />
+            <right scale="1" offset="0" />
+            <top scale="0" offset="0" />
+            <bottom scale="1" offset="0" />
+        </destinationregion>
+		<guielement type="window" mousedragenabled="0" closebuttonenabled="0" minimizebuttonenabled="0"  name="GlobalProperties" clippingenabled="1" canhavefocus="1" renderenabled="1">
+			<destinationregion>
+				<left scale="0" offset="0" />
+				<right scale="1" offset="0" />
+				<top scale="0" offset="0" />
+				<bottom scale="0" offset="200" />
+			</destinationregion>
+			<guielement type="statictext" name="NativeResolutionStaticText" text="Native Res" clippingenabled="1" canhavefocus="1" renderenabled="1">
+			<destinationregion>
+				<left scale="0" offset="10" />
+				<right scale="0" offset="100" />
+				<top scale="0" offset="10" />
+				<bottom scale="0" offset="30" />
+			</destinationregion>
+			</guielement>
+			<guielement type="textbox" name="NativeResolutionWidthTextBox" textformat="int" clippingenabled="1" canhavefocus="1" renderenabled="1">
+			<destinationregion>
+				<left scale="0" offset="115" />
+				<right scale="0" offset="175" />
+				<top scale="0" offset="10" />
+				<bottom scale="0" offset="30" />
+			</destinationregion>
+			</guielement>
+			<guielement type="textbox" name="NativeResolutionHeightTextBox" textformat="int" clippingenabled="1" canhavefocus="1" renderenabled="1">
+			<destinationregion>
+				<left scale="0" offset="180" />
+				<right scale="0" offset="240" />
+				<top scale="0" offset="10" />
+				<bottom scale="0" offset="30" />
+			</destinationregion>
+			</guielement>
+			<guielement type="statictext" name="EnableSnapToGridStaticText" text="Enable Grid" clippingenabled="1" canhavefocus="1" renderenabled="1">
+			<destinationregion>
+				<left scale="0" offset="10" />
+				<right scale="0" offset="100" />
+				<top scale="0" offset="40" />
+				<bottom scale="0" offset="60" />
+			</destinationregion>
+			</guielement>
+			<guielement type="checkbox" name="EnableGridCheckBox" clippingenabled="1" canhavefocus="1" renderenabled="1">
+			<destinationregion>
+				<left scale="0" offset="115" />
+				<right scale="0" offset="135" />
+				<top scale="0" offset="40" />
+				<bottom scale="0" offset="60" />
+			</destinationregion>
+			</guielement>
+			<guielement type="statictext" name="GridSizeStaticText" text="Grid Size" clippingenabled="1" canhavefocus="1" renderenabled="1">
+			<destinationregion>
+				<left scale="0" offset="10" />
+				<right scale="0" offset="100" />
+				<top scale="0" offset="70" />
+				<bottom scale="0" offset="90" />
+			</destinationregion>
+			</guielement>
+			<guielement type="textbox" name="GridSizeTextBox" textformat="int" clippingenabled="1" canhavefocus="1" renderenabled="1">
+			<destinationregion>
+				<left scale="0" offset="115" />
+				<right scale="0" offset="175" />
+				<top scale="0" offset="70" />
+				<bottom scale="0" offset="90" />
+			</destinationregion>
+			</guielement>
+		</guielement>
+		<guielement type="window" name="FocusedElementProperties" mousedragenabled="0" closebuttonenabled="0" minimizebuttonenabled="0" hscrollenabled="0" vscrollenabled="0" clippingenabled="1" canhavefocus="1" renderenabled="1">
+			<destinationregion>
+				<left scale="0" offset="0" />
+				<right scale="1" offset="0" />
+				<top scale="0" offset="460" />
+				<bottom scale="1" offset="0" />
+			</destinationregion>
+			<guielement type="view" name="ButtonProperties" clippingenabled="1" canhavefocus="1" renderenabled="0">
+				<destinationregion>
+					<left scale="0" offset="0" />
+					<right scale="1" offset="0" />
+					<top scale="0" offset="1" />
+					<bottom scale="1" offset="0" />
+				</destinationregion>
+				<guielement type="statictext" name="ButtonStaticText" text="Button Text" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="150" />
+						<top scale="0" offset="10" />
+						<bottom scale="0" offset="30" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="ButtonText" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="160" />
+						<right scale="0" offset="240" />
+						<top scale="0" offset="10" />
+						<bottom scale="0" offset="30" />
+					</destinationregion>
+				</guielement>
+			</guielement>
+			
+			<guielement type="view" name="CheckBoxProperties" clippingenabled="1" canhavefocus="1" renderenabled="0">
+				<destinationregion>
+					<left scale="0" offset="0" />
+					<right scale="1" offset="0" />
+					<top scale="0" offset="1" />
+					<bottom scale="1" offset="0" />
+				</destinationregion>
+				<guielement type="statictext" name="CheckBoxStaticText" text="Is Checked" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="150" />
+						<top scale="0" offset="10" />
+						<bottom scale="0" offset="30" />
+					</destinationregion>
+				</guielement>
+				<guielement type="checkbox" name="CheckBoxIsCheckedCheckBox" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="160" />
+						<right scale="0" offset="180" />
+						<top scale="0" offset="10" />
+						<bottom scale="0" offset="30" />
+					</destinationregion>
+				</guielement>
+			</guielement>
+			
+			<guielement type="view" name="WindowProperties" clippingenabled="1" canhavefocus="1" renderenabled="0">
+				<destinationregion>
+					<left scale="0" offset="0" />
+					<right scale="1" offset="0" />
+					<top scale="0" offset="1" />
+					<bottom scale="1" offset="0" />
+				</destinationregion>
+				<guielement type="statictext" name="WindowTitlebarTitleStaticText" text="Title" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="60" />
+						<top scale="0" offset="10" />
+						<bottom scale="0" offset="30" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="WindowTitlebarTitleTextBox" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="70" />
+						<right scale="0" offset="240" />
+						<top scale="0" offset="10" />
+						<bottom scale="0" offset="30" />
+					</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="WindowEnableMinimizeStaticText" text="Enable Min Button" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="150" />
+						<top scale="0" offset="40" />
+						<bottom scale="0" offset="60" />
+					</destinationregion>
+				</guielement>
+				<guielement type="checkbox" name="WindowEnableMinimizeCheckBox" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="160" />
+						<right scale="0" offset="180" />
+						<top scale="0" offset="40" />
+						<bottom scale="0" offset="60" />
+					</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="WindowEnableCloseStaticText" text="Enable Close Button" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="150" />
+						<top scale="0" offset="70" />
+						<bottom scale="0" offset="90" />
+					</destinationregion>
+				</guielement>
+				<guielement type="checkbox" name="WindowEnableCloseCheckBox" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="160" />
+						<right scale="0" offset="180" />
+						<top scale="0" offset="70" />
+						<bottom scale="0" offset="90" />
+					</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="WindowEnableDragStaticText" text="Enable Mouse Drag" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="150" />
+						<top scale="0" offset="100" />
+						<bottom scale="0" offset="120" />
+					</destinationregion>
+				</guielement>
+				<guielement type="checkbox" name="WindowEnableDragCheckBox" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="160" />
+						<right scale="0" offset="180" />
+						<top scale="0" offset="100" />
+						<bottom scale="0" offset="120" />
+					</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="" text="Enable Focus Lock" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="150" />
+						<top scale="0" offset="130" />
+						<bottom scale="0" offset="150" />
+					</destinationregion>
+				</guielement>
+				<guielement type="checkbox" name="WindowEnableFocusLockCheckBox" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="160" />
+						<right scale="0" offset="180" />
+						<top scale="0" offset="130" />
+						<bottom scale="0" offset="150" />
+					</destinationregion>
+				</guielement>
+			</guielement>
+			
+			<guielement type="view" name="StaticTextProperties" clippingenabled="1" canhavefocus="1" renderenabled="0">
+				<destinationregion>
+					<left scale="0" offset="0" />
+					<right scale="1" offset="0" />
+					<top scale="0" offset="1" />
+					<bottom scale="1" offset="0" />
+				</destinationregion>
+				<guielement type="statictext" name="StaticTextText" text="Text" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="60" />
+						<top scale="0" offset="10" />
+						<bottom scale="0" offset="30" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="StaticTextTextBox" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="70" />
+						<right scale="0" offset="240" />
+						<top scale="0" offset="10" />
+						<bottom scale="0" offset="30" />
+					</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="" text="Enable Word Wrap" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="200" />
+						<top scale="0" offset="40" />
+						<bottom scale="0" offset="60" />
+					</destinationregion>
+				</guielement>
+				<guielement type="checkbox" name="StaticTextEnableWordWrap" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="210" />
+						<right scale="0" offset="230" />
+						<top scale="0" offset="40" />
+						<bottom scale="0" offset="60" />
+					</destinationregion>
+				</guielement>
+			</guielement>
+			
+			<guielement type="view" name="TextBoxProperties" clippingenabled="1" canhavefocus="1" renderenabled="0">
+				<destinationregion>
+					<left scale="0" offset="0" />
+					<right scale="1" offset="0" />
+					<top scale="0" offset="1" />
+					<bottom scale="1" offset="0" />
+				</destinationregion>
+				<guielement type="statictext" name="" text="Text" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="60" />
+						<top scale="0" offset="10" />
+						<bottom scale="0" offset="30" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="TextBoxTextBox" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="70" />
+						<right scale="0" offset="240" />
+						<top scale="0" offset="10" />
+						<bottom scale="0" offset="30" />
+					</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="" text="Text Type" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="150" />
+						<top scale="0" offset="40" />
+						<bottom scale="0" offset="60" />
+					</destinationregion>
+				</guielement>
+				<guielement type="listbox" name="TextBoxTextType" clippingenabled="1" canhavefocus="1" renderenabled="1" itemheight="25" iconsenabled="0">
+					<destinationregion>
+						<left scale="0" offset="100" />
+						<right scale="0" offset="230" />
+						<top scale="0" offset="40" />
+						<bottom scale="0" offset="115" />
+					</destinationregion>
+					<itemiconregion>
+						<left scale="0" offset="0" />
+						<right scale="0" offset="20" />
+						<top scale="0" offset="0" />
+						<bottom scale="0" offset="20" />
+					</itemiconregion>
+					<itemtextregion>
+						<left scale="0" offset="5" />
+						<right scale="1" offset="-5" />
+						<top scale="0" offset="5" />
+						<bottom scale="1" offset="-5" />
+					</itemtextregion>
+					<item text="String" value="0" />
+					<item text="Int" value="1" />
+					<item text="Float" value="2" />
+				</guielement>
+				<guielement type="statictext" name="" text="Float Precision" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="150" />
+						<top scale="0" offset="125" />
+						<bottom scale="0" offset="145" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="TextBoxFloatPrecision" clippingenabled="1" canhavefocus="1" renderenabled="1" textformat="int">
+					<destinationregion>
+						<left scale="0" offset="160" />
+						<right scale="0" offset="240" />
+						<top scale="0" offset="125" />
+						<bottom scale="0" offset="145" />
+					</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="" text="Min Number" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="150" />
+						<top scale="0" offset="155" />
+						<bottom scale="0" offset="175" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="TextBoxMinNum" clippingenabled="1" canhavefocus="1" renderenabled="1" textformat="float">
+					<destinationregion>
+						<left scale="0" offset="160" />
+						<right scale="0" offset="240" />
+						<top scale="0" offset="155" />
+						<bottom scale="0" offset="175" />
+					</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="" text="Max Number" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="150" />
+						<top scale="0" offset="185" />
+						<bottom scale="0" offset="205" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="TextBoxMaxNum" clippingenabled="1" canhavefocus="1" renderenabled="1" textformat="float">
+					<destinationregion>
+						<left scale="0" offset="160" />
+						<right scale="0" offset="240" />
+						<top scale="0" offset="185" />
+						<bottom scale="0" offset="205" />
+					</destinationregion>
+				</guielement>
+				
+				<guielement type="statictext" name="" text="Enable Increment Buttons" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="200" />
+						<top scale="0" offset="215" />
+						<bottom scale="0" offset="235" />
+					</destinationregion>
+				</guielement>
+				<guielement type="checkbox" name="TextBoxEnableIncrementButtons" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="210" />
+						<right scale="0" offset="230" />
+						<top scale="0" offset="215" />
+						<bottom scale="0" offset="235" />
+					</destinationregion>
+				</guielement>
+			</guielement>
+			
+			<guielement type="view" name="TreeProperties" clippingenabled="1" canhavefocus="1" renderenabled="0">
+				<destinationregion>
+					<left scale="0" offset="0" />
+					<right scale="1" offset="0" />
+					<top scale="0" offset="1" />
+					<bottom scale="1" offset="0" />
+				</destinationregion>
+				<guielement type="statictext" name="TreeItemStaticText" text="Item Name" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="100" />
+						<top scale="0" offset="10" />
+						<bottom scale="0" offset="30" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="TreeItemTextBox" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="110" />
+						<right scale="0" offset="240" />
+						<top scale="0" offset="10" />
+						<bottom scale="0" offset="30" />
+					</destinationregion>
+				</guielement>
+				<guielement type="button" name="TreeInsertItemButton" text="Insert Item" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="120" />
+						<top scale="0" offset="40" />
+						<bottom scale="0" offset="60" />
+					</destinationregion>
+				</guielement>
+				<guielement type="button" name="TreeRemoveItemButton" text="Remove Item" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="130" />
+						<right scale="0" offset="240" />
+						<top scale="0" offset="40" />
+						<bottom scale="0" offset="60" />
+					</destinationregion>
+				</guielement>
+			</guielement>
+			
+			<guielement type="view" name="TabProperties" clippingenabled="1" canhavefocus="1" renderenabled="0">
+				<destinationregion>
+					<left scale="0" offset="0" />
+					<right scale="1" offset="0" />
+					<top scale="0" offset="1" />
+					<bottom scale="1" offset="0" />
+				</destinationregion>
+				<guielement type="statictext" name="TabStaticText" text="Tab Name" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="100" />
+						<top scale="0" offset="10" />
+						<bottom scale="0" offset="30" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="TabTextBox" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="110" />
+						<right scale="0" offset="240" />
+						<top scale="0" offset="10" />
+						<bottom scale="0" offset="30" />
+					</destinationregion>
+				</guielement>
+				<guielement type="button" name="TabInsertTabButton" text="Insert Item" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="120" />
+						<top scale="0" offset="40" />
+						<bottom scale="0" offset="60" />
+					</destinationregion>
+				</guielement>
+				<guielement type="button" name="TabRemoveItemButton" text="Remove Item" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="130" />
+						<right scale="0" offset="240" />
+						<top scale="0" offset="40" />
+						<bottom scale="0" offset="60" />
+					</destinationregion>
+				</guielement>
+			</guielement>
+			
+			<guielement type="view" name="ListBoxProperties" hscrollenabled="1" vscrollenabled="1" clippingenabled="1" canhavefocus="1" renderenabled="0">
+				<destinationregion>
+					<left scale="0" offset="0" />
+					<right scale="1" offset="0" />
+					<top scale="0" offset="1" />
+					<bottom scale="1" offset="0" />
+				</destinationregion>
+
+				<guielement type="statictext" name="ListBoxIconRegionStaticText" text="Item Icon Local Region" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="240" />
+						<top scale="0" offset="10" />
+						<bottom scale="0" offset="30" />
+					</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="ListBoxIconRegionLeftStaticText" text="Left" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="60" />
+						<top scale="0" offset="35" />
+						<bottom scale="0" offset="55" />
+					</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="ListBoxIconRegionTopStaticText" text="Top" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="65" />
+						<right scale="0" offset="115" />
+						<top scale="0" offset="35" />
+						<bottom scale="0" offset="55" />
+					</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="ListBoxIconRegionRightStaticText" text="Width" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="120" />
+						<right scale="0" offset="170" />
+						<top scale="0" offset="35" />
+						<bottom scale="0" offset="55" />
+					</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="ListBoxIconRegionBottomStaticText" text="Height" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="175" />
+						<right scale="0" offset="225" />
+						<top scale="0" offset="35" />
+						<bottom scale="0" offset="55" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="ListBoxIconRegionLeftTextBox" text="5" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="60" />
+						<top scale="0" offset="60" />
+						<bottom scale="0" offset="80" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="ListBoxIconRegionTopTextBox" text="5"clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="65" />
+						<right scale="0" offset="115" />
+						<top scale="0" offset="60" />
+						<bottom scale="0" offset="80" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="ListBoxIconRegionRightTextBox" text="10" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="120" />
+						<right scale="0" offset="170" />
+						<top scale="0" offset="60" />
+						<bottom scale="0" offset="80" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="ListBoxIconRegionBottomTextBox" text="10" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="175" />
+						<right scale="0" offset="225" />
+						<top scale="0" offset="60" />
+						<bottom scale="0" offset="80" />
+					</destinationregion>
+				</guielement>
+
+				<guielement type="statictext" name="ListBoxTextRegionStaticText" text="Item Text Local Region" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="240" />
+						<top scale="0" offset="90" />
+						<bottom scale="0" offset="110" />
+					</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="ListBoxTextRegionLeftStaticText" text="Left" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="60" />
+						<top scale="0" offset="115" />
+						<bottom scale="0" offset="135" />
+					</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="ListBoxTextRegionTopStaticText" text="Top" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="65" />
+						<right scale="0" offset="115" />
+						<top scale="0" offset="115" />
+						<bottom scale="0" offset="135" />
+					</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="ListBoxTextRegionRightStaticText" text="Width" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="120" />
+						<right scale="0" offset="170" />
+						<top scale="0" offset="115" />
+						<bottom scale="0" offset="135" />
+					</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="ListBoxTextRegionBottomStaticText" text="Height" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="175" />
+						<right scale="0" offset="225" />
+						<top scale="0" offset="115" />
+						<bottom scale="0" offset="135" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="ListBoxTextRegionLeftTextBox" text="15" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="60" />
+						<top scale="0" offset="140" />
+						<bottom scale="0" offset="160" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="ListBoxTextRegionTopTextBox" text="15"clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="65" />
+						<right scale="0" offset="115" />
+						<top scale="0" offset="140" />
+						<bottom scale="0" offset="160" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="ListBoxTextRegionRightTextBox" text="100" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="120" />
+						<right scale="0" offset="170" />
+						<top scale="0" offset="140" />
+						<bottom scale="0" offset="160" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="ListBoxTextRegionBottomTextBox" text="10" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="175" />
+						<right scale="0" offset="225" />
+						<top scale="0" offset="140" />
+						<bottom scale="0" offset="160" />
+					</destinationregion>
+				</guielement>
+
+				<guielement type="statictext" name="ListBoxItemIconEnabledStaticText" text="Enable Icons" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="120" />
+						<top scale="0" offset="170" />
+						<bottom scale="0" offset="190" />
+					</destinationregion>
+				</guielement>
+				<guielement type="checkbox" name="ListBoxItemIconEnabledCheckbox" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="130" />
+						<right scale="0" offset="150" />
+						<top scale="0" offset="170" />
+						<bottom scale="0" offset="190" />
+					</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="ListBoxItemHeightStaticText" text="Item Height" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="120" />
+						<top scale="0" offset="200" />
+						<bottom scale="0" offset="220" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="ListBoxItemHeightTextBox" text="30" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="130" />
+						<right scale="0" offset="240" />
+						<top scale="0" offset="200" />
+						<bottom scale="0" offset="220" />
+					</destinationregion>
+				</guielement>
+				
+				<guielement type="listbox" name="ListBoxItemsListBox" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="240" />
+						<top scale="0" offset="230" />
+						<bottom scale="0" offset="320" />
+					</destinationregion>
+				</guielement>
+				<guielement type="button" name="ListBoxInsertItem" text="Insert Item" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="120" />
+						<top scale="0" offset="330" />
+						<bottom scale="0" offset="350" />
+					</destinationregion>
+				</guielement>
+				<guielement type="button" name="ListBoxRemoveItemButton" text="Remove Item" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="125" />
+						<right scale="0" offset="235" />
+						<top scale="0" offset="330" />
+						<bottom scale="0" offset="350" />
+					</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="ListBoxItemStaticText" text="Item Name" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="100" />
+						<top scale="0" offset="360" />
+						<bottom scale="0" offset="380" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="ListBoxItemTextBox" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="110" />
+						<right scale="0" offset="240" />
+						<top scale="0" offset="360" />
+						<bottom scale="0" offset="380" />
+					</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="ListBoxItemValueStaticText" text="Item Value" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="100" />
+						<top scale="0" offset="390" />
+						<bottom scale="0" offset="410" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="ListBoxItemValueTextBox" clippingenabled="1" canhavefocus="1" renderenabled="1" textformat="int">
+					<destinationregion>
+						<left scale="0" offset="110" />
+						<right scale="0" offset="200" />
+						<top scale="0" offset="390" />
+						<bottom scale="0" offset="410" />
+					</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="ListBoxItemIconStaticText" text="Item Icon" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="100" />
+						<top scale="0" offset="420" />
+						<bottom scale="0" offset="440" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="ListBoxItemIconTextBox" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="110" />
+						<right scale="0" offset="200" />
+						<top scale="0" offset="420" />
+						<bottom scale="0" offset="440" />
+					</destinationregion>
+				</guielement>
+				<guielement type="button" name="ListBoxItemIconFileButton" text ="..." clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="205" />
+						<right scale="0" offset="225" />
+						<top scale="0" offset="420" />
+						<bottom scale="0" offset="440" />
+					</destinationregion>
+				</guielement>
+			</guielement>
+			
+			<guielement type="view" name="MenuBarProperties" hscrollenabled="1" clippingenabled="1" canhavefocus="1" renderenabled="0">
+				<destinationregion>
+					<left scale="0" offset="0" />
+					<right scale="1" offset="0" />
+					<top scale="0" offset="1" />
+					<bottom scale="1" offset="0" />
+				</destinationregion>
+				<guielement type="listbox" name="MenuBarListBox" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="240" />
+						<top scale="0" offset="10" />
+						<bottom scale="0" offset="100" />
+					</destinationregion>
+				</guielement>
+				<guielement type="button" name="MenuBarExitSubMenuButton" text="Exit" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="80" />
+						<top scale="0" offset="105" />
+						<bottom scale="0" offset="125" />
+					</destinationregion>
+				</guielement>
+				<guielement type="button" name="MenuBarAddItemButton" text="Insert" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="85" />
+						<right scale="0" offset="155" />
+						<top scale="0" offset="105" />
+						<bottom scale="0" offset="125" />
+					</destinationregion>
+				</guielement>
+				<guielement type="button" name="MenuBarRemoveItemButton" text="Remove" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="160" />
+						<right scale="0" offset="230" />
+						<top scale="0" offset="105" />
+						<bottom scale="0" offset="125" />
+					</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="MenuBarItemNameStaticText" text="Item Name" clippingenabled="1" canhavefocus="1" renderenabled="1">
+				<destinationregion>
+					<left scale="0" offset="10" />
+					<right scale="0" offset="90" />
+					<top scale="0" offset="135" />
+					<bottom scale="0" offset="155" />
+				</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="MenuBarItemNameTextBox" clippingenabled="1" canhavefocus="1" renderenabled="1">
+				<destinationregion>
+					<left scale="0" offset="95" />
+					<right scale="0" offset="240" />
+					<top scale="0" offset="135" />
+					<bottom scale="0" offset="155" />
+				</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="MenuBarItemValueStaticText" text="Item Value" clippingenabled="1" canhavefocus="1" renderenabled="1">
+				<destinationregion>
+					<left scale="0" offset="10" />
+					<right scale="0" offset="90" />
+					<top scale="0" offset="165" />
+					<bottom scale="0" offset="185" />
+				</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="MenuBarItemValueTextBox" clippingenabled="1" canhavefocus="1" renderenabled="1" textformat="int">
+				<destinationregion>
+					<left scale="0" offset="95" />
+					<right scale="0" offset="240" />
+					<top scale="0" offset="165" />
+					<bottom scale="0" offset="185" />
+				</destinationregion>
+				</guielement>
+			</guielement>
+			
+			<guielement type="view" name="SpriteProperties" hscrollenabled="1" clippingenabled="1" canhavefocus="1" renderenabled="0">
+				<destinationregion>
+					<left scale="0" offset="0" />
+					<right scale="1" offset="0" />
+					<top scale="0" offset="1" />
+					<bottom scale="1" offset="0" />
+				</destinationregion>
+				<guielement type="statictext" name="SpriteTextureStaticText" text="Texture" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="100" />
+						<top scale="0" offset="10" />
+						<bottom scale="0" offset="30" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="SpriteTextureTextBox" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="110" />
+						<right scale="0" offset="200" />
+						<top scale="0" offset="10" />
+						<bottom scale="0" offset="30" />
+					</destinationregion>
+				</guielement>
+				<guielement type="button" name="SpriteTextureFileButton" text ="..." clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="205" />
+						<right scale="0" offset="225" />
+						<top scale="0" offset="10" />
+						<bottom scale="0" offset="30" />
+					</destinationregion>
+				</guielement>
+			</guielement>
+			
+			<guielement type="view" name="ScrollbarProperties" hscrollenabled="1" clippingenabled="1" canhavefocus="1" renderenabled="0">
+				<destinationregion>
+					<left scale="0" offset="0" />
+					<right scale="1" offset="0" />
+					<top scale="0" offset="1" />
+					<bottom scale="1" offset="0" />
+				</destinationregion>
+				<guielement type="statictext" name="" text="Min Number" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="150" />
+						<top scale="0" offset="10" />
+						<bottom scale="0" offset="30" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="ScrollbarMinNumTB" clippingenabled="1" canhavefocus="1" renderenabled="1" text="0.00000" precision="5" textformat="float">
+					<destinationregion>
+						<left scale="0" offset="160" />
+						<right scale="0" offset="240" />
+						<top scale="0" offset="10" />
+						<bottom scale="0" offset="30" />
+					</destinationregion>
+				</guielement>
+				<guielement type="statictext" name="" text="Max Number" clippingenabled="1" canhavefocus="1" renderenabled="1">
+					<destinationregion>
+						<left scale="0" offset="10" />
+						<right scale="0" offset="150" />
+						<top scale="0" offset="40" />
+						<bottom scale="0" offset="60" />
+					</destinationregion>
+				</guielement>
+				<guielement type="textbox" name="ScrollbarMaxNumTB" clippingenabled="1" canhavefocus="1" renderenabled="1" text="1.00000" precision="5" textformat="float">
+					<destinationregion>
+						<left scale="0" offset="160" />
+						<right scale="0" offset="240" />
+						<top scale="0" offset="40" />
+						<bottom scale="0" offset="60" />
+					</destinationregion>
+				</guielement>
+			</guielement>
+			
+		</guielement>
+		<guielement type="window" name="CommonProperties" mousedragenabled="0" closebuttonenabled="0" minimizebuttonenabled="0"  clippingenabled="1" canhavefocus="1" renderenabled="1">
+			<destinationregion>
+				<left scale="0" offset="0" />
+				<right scale="1" offset="0" />
+				<top scale="0" offset="200" />
+				<bottom scale="0" offset="460" />
+			</destinationregion>
+			<guielement type="statictext" name="NameStaticText" text="Name" clippingenabled="1" canhavefocus="1" renderenabled="1">
+			<destinationregion>
+				<left scale="0" offset="10" />
+				<right scale="0" offset="80" />
+				<top scale="0" offset="10" />
+				<bottom scale="0" offset="30" />
+			</destinationregion>
+			</guielement>
+			<guielement type="textbox" name="NameTextBox" clippingenabled="1" canhavefocus="1" renderenabled="1">
+			<destinationregion>
+				<left scale="0" offset="85" />
+				<right scale="0" offset="240" />
+				<top scale="0" offset="10" />
+				<bottom scale="0" offset="30" />
+			</destinationregion>
+			</guielement>
+
+			<guielement type="statictext" name="LocalPosStaticText" text="x,y" clippingenabled="1" canhavefocus="1" renderenabled="1">
+			<destinationregion>
+				<left scale="0" offset="10" />
+				<right scale="0" offset="80" />
+				<top scale="0" offset="40" />
+				<bottom scale="0" offset="60" />
+			</destinationregion>
+			</guielement>
+			<guielement type="textbox" name="LocalPosXTextBox" textformat="int" clippingenabled="1" canhavefocus="1" renderenabled="1">
+			<destinationregion>
+				<left scale="0" offset="95" />
+				<right scale="0" offset="165" />
+				<top scale="0" offset="40" />
+				<bottom scale="0" offset="60" />
+			</destinationregion>
+			</guielement>
+			<guielement type="textbox" name="LocalPosYTextBox" textformat="int" clippingenabled="1" canhavefocus="1" renderenabled="1">
+			<destinationregion>
+				<left scale="0" offset="170" />
+				<right scale="0" offset="240" />
+				<top scale="0" offset="40" />
+				<bottom scale="0" offset="60" />
+			</destinationregion>
+			</guielement>
+			
+			<guielement type="statictext" name="ElementWidthHeightStaticText" text="w,h" clippingenabled="1" canhavefocus="1" renderenabled="1">
+			<destinationregion>
+				<left scale="0" offset="10" />
+				<right scale="0" offset="80" />
+				<top scale="0" offset="70" />
+				<bottom scale="0" offset="90" />
+			</destinationregion>
+			</guielement>
+			<guielement type="textbox" name="ElementWidthTextBox" textformat="int" clippingenabled="1" canhavefocus="1" renderenabled="1">
+			<destinationregion>
+				<left scale="0" offset="95" />
+				<right scale="0" offset="165" />
+				<top scale="0" offset="70" />
+				<bottom scale="0" offset="90" />
+			</destinationregion>
+			</guielement>
+			<guielement type="textbox" name="ElementHeightTextBox" textformat="int" clippingenabled="1" canhavefocus="1" renderenabled="1">
+			<destinationregion>
+				<left scale="0" offset="170" />
+				<right scale="0" offset="240" />
+				<top scale="0" offset="70" />
+				<bottom scale="0" offset="90" />
+			</destinationregion>
+			</guielement>
+			
+		</guielement>
+	</guielement>
+</root>

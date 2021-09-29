@@ -1,0 +1,24 @@
+autos
+{
+	float4 autoPointLightPositionRange //.xyz = worldpos, .w = range
+	float4x4 autoPointLightVP
+	float4x4 autoInvView
+}
+
+vertexOutput
+{
+	float4 posH : hposition
+	float3 distanceToLight : custom pass
+}
+
+source
+{
+	SVOUT MashShadowCasterVertex(float3 viewSpacePosition)
+	{	
+		SVOUT shadowOut;
+		float3 worldSpacePosition = mul(autoInvView, float4(viewSpacePosition, 1.0f)).xyz;										
+		shadowOut.distanceToLight = autoPointLightPositionRange.xyz - worldSpacePosition;
+		shadowOut.posH = mul(autoPointLightVP, float4(worldSpacePosition, 1.0));
+		return shadowOut;
+	}
+}

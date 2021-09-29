@@ -1,0 +1,95 @@
+
+material BarrelMaterial
+{	
+	vertex
+	{
+		position rgb32float
+		normal rgb32float
+		texcoord rg32float
+	}
+	
+	technique Standard
+	{
+		vertexprogram "auto" "BarrelVertexProgram.eff" "vertexmain"
+		pixelprogram "auto" "BarrelPixelProgram.eff" "pixelmain"
+
+		lighting auto
+		
+		lodlevel 1 2 3
+		
+		sampler2D DiffuseSampler
+		{
+			index 0
+			texture "BarrelDiffuse.DDS"
+			minmagfilter linear
+			mipfilter linear
+			addressu wrap
+			addressv wrap
+		}
+	}
+}
+
+material BarrelHWInstanceMaterial
+{	
+	vertex
+	{
+		position rgb32float 0 0
+		normal rgb32float 0 0
+		texcoord rg32float 0 0
+		
+		texcoord rgba32float 1 1
+		texcoord rgba32float 1 1
+		texcoord rgba32float 1 1
+		texcoord rgba32float 1 1
+	}
+	
+	technique Standard
+	{
+		vertexprogram "auto" "BarrelHWInstancingVertexProgram.eff" "vertexmain"
+		pixelprogram "auto" "BarrelPixelProgram.eff" "pixelmain"
+
+		lighting auto
+		
+		lodlevel 1 2 3
+		
+		sampler2D DiffuseSampler
+		{
+			index 0
+			texture "BarrelDiffuse.DDS"
+			minmagfilter linear
+			mipfilter linear
+			addressu wrap
+			addressv wrap
+		}
+	}
+}
+
+material BarrelBatchMaterial
+{	
+	vertex
+	{
+		position rgb32float
+		normal rgb32float
+		texcoord rg32float
+	}
+	
+	technique Standard
+	{
+		vertexprogram "auto" "BarrelBatchVertexProgram.eff" "vertexmain"
+		pixelprogram "auto" "BarrelPixelProgram.eff" "pixelmain"
+
+		lighting auto
+		
+		lodlevel 1 2 3
+		
+		sampler2D DiffuseSampler
+		{
+			index 0
+			texture "BarrelDiffuse.DDS"
+			minmagfilter linear
+			mipfilter linear
+			addressu wrap
+			addressv wrap
+		}
+	}
+}

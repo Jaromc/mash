@@ -1,0 +1,129 @@
+material StandardSkinningMaterial
+{	
+	vertex
+	{
+		position rgb32float
+		normal rgb32float
+		blendweight rgba32float
+		blendindex rgba32float
+		texcoord rg32float
+	}
+
+	technique Standard
+	{
+		vertexprogram "auto" "StandardVertexSkinningShader.eff" "vertexmain"
+		pixelprogram "auto" "PixelShader.eff" "pixelmain"
+
+		lighting auto
+		
+		blendstate
+		{
+			blendingenabled false
+			srcblend one
+			destblend zero
+			blendop add
+			srcblendalpha zero
+			destblendalpha zero
+			blendopalpha add
+			writemask all
+		}
+		
+		rasteriser
+		{
+			depthcmp lessequal
+			depthtestenabled true
+			depthwriteenabled true
+		}
+	}
+}
+
+material BoneArraySkinningMaterial
+{	
+	vertex
+	{
+		position rgb32float 0 0
+		normal rgb32float 0 0
+		blendweight rgba32float 0 0
+		blendindex rgba32float 0 0
+		texcoord rg32float 0 0
+		
+		custom r32float 1 1
+	}
+
+	technique Standard
+	{
+		vertexprogram "auto" "BoneArrayVertexSkinningShader.eff" "vertexmain"
+		pixelprogram "auto" "PixelShader.eff" "pixelmain"
+
+		lighting auto
+		
+		blendstate
+		{
+			blendingenabled false
+			srcblend one
+			destblend zero
+			blendop add
+			srcblendalpha zero
+			destblendalpha zero
+			blendopalpha add
+			writemask all
+		}
+		
+		rasteriser
+		{
+			depthcmp lessequal
+			depthtestenabled true
+			depthwriteenabled true
+		}
+	}
+}
+
+material TextureFetchSkinningMaterial
+{	
+	vertex
+	{
+		position rgb32float 0 0
+		normal rgb32float 0 0
+		blendweight rgba32float 0 0
+		blendindex rgba32float 0 0
+		texcoord rg32float 0 0
+		
+		custom r32float 1 1
+	}
+
+	technique Standard
+	{
+		vertexprogram "auto" "TextureFetchVertexSkinningShader.eff" "vertexmain"
+		pixelprogram "auto" "PixelShader.eff" "pixelmain"
+
+		lighting auto
+
+		sampler2D BoneSampler
+		{
+			index 1
+			minmagfilter point
+			mipfilter none
+			addressu clamp
+			addressv clamp
+		}
+		
+		blendstate
+		{
+			blendingenabled false
+			srcblend one
+			destblend zero
+			blendop add
+			srcblendalpha zero
+			destblendalpha zero
+			blendopalpha add
+			writemask all
+		}
+		
+		rasteriser
+		{
+			depthcmp lessequal
+			depthtestenabled true
+			depthwriteenabled true
+		}
+	}
+}

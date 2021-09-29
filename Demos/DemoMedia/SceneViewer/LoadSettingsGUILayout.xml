@@ -1,0 +1,74 @@
+<root>
+    <guielement type="window" name="LoadSettingsWindow" clippingenabled="1" canhavefocus="1" renderenabled="1" closebuttonenabled="0" minimizebuttonenabled="0" mousedragenabled="1" hscrollenabled="1" vscrollenabled="1" renderbackground="1" focuslock="1">
+        <destinationregion>
+            <left scale="0" offset="70" />
+            <right scale="0" offset="470" />
+            <top scale="0" offset="80" />
+            <bottom scale="0" offset="280" />
+        </destinationregion>
+		<guielement type="textbox" name="FrameRateTextBox" clippingenabled="1" canhavefocus="1" renderenabled="1" text="30" textformat="int">
+			<destinationregion>
+				<left scale="0" offset="160" />
+				<right scale="0" offset="210" />
+				<top scale="0" offset="60" />
+				<bottom scale="0" offset="80" />
+			</destinationregion>
+		</guielement>
+		<guielement type="button" name="FilePathButton" clippingenabled="1" canhavefocus="1" renderenabled="1" text="..." isswitch="0">
+			<destinationregion>
+				<left scale="0" offset="160" />
+				<right scale="0" offset="210" />
+				<top scale="0" offset="30" />
+				<bottom scale="0" offset="50" />
+			</destinationregion>
+		</guielement>
+		<guielement type="statictext" clippingenabled="1" canhavefocus="1" renderenabled="1" text="File To Load">
+			<destinationregion>
+				<left scale="0" offset="20" />
+				<right scale="0" offset="130" />
+				<top scale="0" offset="30" />
+				<bottom scale="0" offset="50" />
+			</destinationregion>
+		</guielement>
+		<guielement type="statictext" clippingenabled="1" canhavefocus="1" renderenabled="1" text="Frame Rate">
+			<destinationregion>
+				<left scale="0" offset="20" />
+				<right scale="0" offset="120" />
+				<top scale="0" offset="60" />
+				<bottom scale="0" offset="80" />
+			</destinationregion>
+		</guielement>
+		<guielement type="checkbox" name="CreateRootNodeCheckBox" clippingenabled="1" canhavefocus="1" renderenabled="1" checked="1">
+			<destinationregion>
+				<left scale="0" offset="160" />
+				<right scale="0" offset="180" />
+				<top scale="0" offset="90" />
+				<bottom scale="0" offset="110" />
+			</destinationregion>
+		</guielement>
+		<guielement type="statictext" clippingenabled="1" canhavefocus="1" renderenabled="1" text="Create Root Node">
+			<destinationregion>
+				<left scale="0" offset="20" />
+				<right scale="0" offset="157" />
+				<top scale="0" offset="90" />
+				<bottom scale="0" offset="108" />
+			</destinationregion>
+		</guielement>
+		<guielement type="button" name="LoadButton" clippingenabled="1" canhavefocus="1" renderenabled="1" text="Load" isswitch="0">
+			<destinationregion>
+				<left scale="0" offset="200" />
+				<right scale="0" offset="290" />
+				<top scale="0" offset="130" />
+				<bottom scale="0" offset="160" />
+			</destinationregion>
+		</guielement>
+		<guielement type="button" name="CancelButton" clippingenabled="1" canhavefocus="1" renderenabled="1" text="Cancel" isswitch="0">
+			<destinationregion>
+				<left scale="0" offset="300" />
+				<right scale="0" offset="390" />
+				<top scale="0" offset="130" />
+				<bottom scale="0" offset="160" />
+			</destinationregion>
+		</guielement>
+    </guielement>
+</root>

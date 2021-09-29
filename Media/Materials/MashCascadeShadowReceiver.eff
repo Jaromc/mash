@@ -1,0 +1,158 @@
+include
+{
+	MashTexCoords.eff
+	MashShadowPoissonDisks.eff
+}
+
+autos
+{
+	sampler2D autoSceneShadowMap
+	float2 autoCameraNearFar
+}
+
+source
+{
+#ifndef MASH_SPLIT_COUNT
+#define MASH_SPLIT_COUNT 1
+#endif
+
+#ifndef MASH_INV_SPLIT
+#define MASH_INV_SPLIT 1
+#endif
+
+#ifndef MASH_BLEND_DIST
+#define MASH_BLEND_DIST 0.1
+#endif
+
+	uniform float4x4 autoCascadeCamViewToLightVPArray[MASH_SPLIT_COUNT];
+	uniform float4x4 autoCascadeCamViewToLightView;
+	uniform float2 autoCascadeClipPlanes[MASH_SPLIT_COUNT];
+
+#ifndef MASH_SHADOW_BIAS
+#define MASH_SHADOW_BIAS 0.0002
+#endif
+
+#ifndef MASH_FILTER_SIZE
+#define MASH_FILTER_SIZE 0.0009
+#endif
+
+#ifdef MASH_USE_ESM
+
+#ifndef MASH_DARKENING
+#define MASH_DARKENING 10
+#endif
+
+float GetShadowAmount(float2 uv, float depth)
+{
+	float lit = 0.0f;
+	float occ = 0.0f;
+	float litTemp = 0.0f;
+	for(int i = 0; i < MASH_SAMPLES; ++i)
+	{
+		occ = tex2Dlod(autoSceneShadowMap, float4(uv + (poissonDisk[i] * MASH_FILTER_SIZE  * float2(MASH_INV_SPLIT, 1)), 1, 1)).r + MASH_SHADOW_BIAS;		
+		litTemp = exp(MASH_DARKENING * (occ - depth));
+		lit += saturate(litTemp);
+	}
+	
+	lit /= MASH_SAMPLES;
+	return lit;
+}
+
+#else
+
+float GetShadowAmount(float2 uv, float depth)
+{	
+	float shadowAmount = 0.0;
+	for(int i = 0; i < MASH_SAMPLES; ++i)
+	{
+		float2 texCoord = uv + ((poissonDisk[i] * MASH_FILTER_SIZE) * float2(MASH_INV_SPLIT, 1));
+		if (depth < tex2Dlod(autoSceneShadowMap, float4(texCoord, 1, 1)).r + MASH_SHADOW_BIAS)
+			shadowAmount += 1.0f;
+	}
+	
+	return shadowAmount / MASH_SAMPLES;
+}
+
+#endif
+
+	float MashDirectionalShadows(float3 viewSpacePos)
+	{
+		int cascade = 0;
+		for(int i = (MASH_SPLIT_COUNT-1); i > 0; --i)
+		{
+			cascade += (int)(viewSpacePos.z > autoCascadeClipPlanes[i].x); 
+		}
+		
+		float4x4 camViewToLightVP = autoCascadeCamViewToLightVPArray[cascade];
+		
+		//converts cam view space pos into light view proj coords
+		/*
+			Note we can skip the perspective divide since the w component is 1 anyway.
+			This also makes things easier for calculating view depth!
+		*/
+		float4 shadowTexCoords = mul(camViewToLightVP, float4(viewSpacePos , 1.0f));
+		
+		//early out
+		if (shadowTexCoords.x < -1.0f || shadowTexCoords.x > 1.0f ||
+			shadowTexCoords.y < -1.0f || shadowTexCoords.y > 1.0f ||
+			shadowTexCoords.z < 0.0f || shadowTexCoords.z > 1.0f)
+		{
+			return 1.0f;
+		}
+		
+		//convert the coords into tex coords
+		shadowTexCoords.x = 0.5f*shadowTexCoords.x+0.5f;
+		shadowTexCoords.y = -0.5f*shadowTexCoords.y+0.5f;
+
+		//adjust texcoords so we access the correct texture in the texture atlas
+		shadowTexCoords.x = (shadowTexCoords.x * MASH_INV_SPLIT) + (MASH_INV_SPLIT * (float)cascade);
+		
+		//normalize the linear depth
+		float3 lightSpacePos = mul(autoCascadeCamViewToLightView, float4(viewSpacePos, 1.0f)).xyz;
+		float depth = lightSpacePos.z;
+		depth = (depth - autoCameraNearFar.x) / (autoCameraNearFar.y - autoCameraNearFar.x);
+		
+		float shadowAmount = GetShadowAmount(mashGetTexcoords(shadowTexCoords.xy), depth);
+		
+		//This part blends cascade edges so that transitions aren't so apparent.
+		int nextCascade = min(MASH_SPLIT_COUNT - 1, cascade + 1);
+		float nextCascadeShadowValue = 0.0f;
+		float blendNextCascadeAmount = 0.0;
+		//this will only fail if only 1 cascade exists or the current cascade is the last cascade
+		if (nextCascade > cascade)
+		{
+			float normalizedViewPixelDepth = viewSpacePos.z / autoCascadeClipPlanes[cascade].y;
+			float blendBandStartTex = 1.0 - MASH_BLEND_DIST;
+			//tests if the pixel is near a cascade edge, otherwise no blending is needed
+			if (normalizedViewPixelDepth > blendBandStartTex)
+			{
+				/*
+					Ideally the screen pos we should be sampling should extend back to the next cascade boundary.
+					However simply sampling the current view pos looks fine so there is no need to do any extra
+					processing. The only issue that may arise is if the current view pos doesn't exist on the
+					next cascade, however, we clamp (instead of wrap) the texcoords so there shouldn't be an issue.
+				*/
+				float4 blendLightScreenPos = mul(autoCascadeCamViewToLightVPArray[nextCascade], float4(viewSpacePos, 1.0f));
+				
+				//normalize the linear distance
+				float3 blendLightSpacePos = mul(autoCascadeCamViewToLightView, float4(viewSpacePos, 1.0f)).xyz;
+				float blendDepth = blendLightSpacePos.z;
+				blendDepth = (blendDepth - autoCameraNearFar.x) / (autoCameraNearFar.y - autoCameraNearFar.x);
+				
+				//convert the coords into tex coords
+				float2 blendTexCoords = blendLightScreenPos.xy;
+				blendTexCoords.x = 0.5f*blendTexCoords.x+0.5f;
+				blendTexCoords.y = -0.5f*blendTexCoords.y+0.5f;
+				
+				//adjust texcoords so we access the correct texture in the texture atlas
+				blendTexCoords.x = (blendTexCoords.x * MASH_INV_SPLIT) + (MASH_INV_SPLIT * (float)nextCascade);
+				
+				nextCascadeShadowValue = GetShadowAmount(mashGetTexcoords(blendTexCoords), blendDepth);
+				blendNextCascadeAmount = (normalizedViewPixelDepth - blendBandStartTex) / MASH_BLEND_DIST;
+			}
+		}
+		
+		//blends the current cascade value with the next cascade
+		return ((shadowAmount * (1.0 - blendNextCascadeAmount)) + (nextCascadeShadowValue * blendNextCascadeAmount));
+	}
+}

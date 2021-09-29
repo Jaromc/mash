@@ -1,0 +1,45 @@
+material MashCPUParticleMaterial
+{	
+	vertex
+	{
+		position rgb32float 0 0
+		texcoord rg32float 0 0
+		colour rgba8unorm 0 0
+	}
+
+	technique Standard
+	{
+		lighting auto
+		
+		vertexprogram "auto" "MashCPUParticleVertex.eff" "vertexmain"
+		pixelprogram "auto" "MashCPUParticlePixel.eff" "pixelmain"
+	}
+	
+	sampler2D DiffuseSampler
+	{
+		index 0
+		minmagfilter linear
+		mipfilter linear
+		addressu clamp
+		addressv clamp
+	}
+	
+	rasteriser
+	{
+		depthcmp lessequal
+		depthtestenabled true
+		depthwriteenabled false
+	}
+	
+	blendstate
+	{
+		blendingenabled true
+		srcblend srcalpha
+		destblend invsrcalpha
+		blendop add
+		srcblendalpha zero
+		destblendalpha zero
+		blendopalpha add
+		writemask all
+	}
+}

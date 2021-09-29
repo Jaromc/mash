@@ -1,0 +1,5 @@
+<scene>
+    <shadowcasters>
+        <caster lighttype="2" castertype="0" bias="0.0" textureformat="0" texturesize="2048" samples="25" samplesize="0.003" usebackface="1" esmdarkening="30" cascadedivider="0.5" cascadecount="2" cascadeblenddistance="0.1" />
+    </shadowcasters>
+</scene>

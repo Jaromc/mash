@@ -1,0 +1,42 @@
+material MashDrawTextureMaterial
+{	
+	vertex
+	{
+		position rgb32float
+		texcoord rg32float
+	}
+
+	technique Standard
+	{
+        vertexprogram "auto" "MashDrawTexture_Vertex.eff" "vsmain"
+		pixelprogram "auto" "MashDrawTexture_Pixel.eff" "psmain"
+	}
+
+	sampler2D DiffuseSampler
+	{
+		index 0
+		minmagfilter linear
+		mipfilter linear
+		addressu clamp
+		addressv clamp
+	}
+	
+	blendstate
+	{
+		blendingenabled false
+		srcblend one
+		destblend zero
+		blendop add
+		srcblendalpha zero
+		destblendalpha zero
+		blendopalpha add
+		writemask all
+	}
+	
+	rasteriser
+	{
+		depthtestenabled false
+		depthwriteenabled false
+		depthcmp never
+	}
+}

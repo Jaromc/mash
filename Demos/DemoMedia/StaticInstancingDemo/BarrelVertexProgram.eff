@@ -1,0 +1,36 @@
+include
+{
+	MashTexCoords.eff
+}
+
+vertexInput
+{
+	float3 position : position
+	float3 normal : normal
+	float2 texcoord : texcoord
+}
+
+vertexOutput
+{
+	float4 viewposition : viewposition
+	float3 viewnormal : viewnormal
+	float2 texcoord : texcoord pass
+}
+
+autos
+{
+	float4x4 autoWorldView
+}
+
+source
+{	
+	VOUT vertexmain(VIN input)
+	{
+		VOUT output;
+		output.viewposition = mul(autoWorldView, float4(input.position, 1.0f));
+		output.viewnormal = mul(autoWorldView, float4(input.normal, 0.0f)).xyz;
+		output.texcoord = mashGetTexcoords(input.texcoord);
+		
+		return output;
+	}
+}

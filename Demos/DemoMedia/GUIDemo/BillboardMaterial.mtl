@@ -1,0 +1,36 @@
+
+material BillboardMaterial
+{	
+	vertex
+	{
+		position rgb32float //stream  stepRate
+		texcoord rg32float
+	}
+
+	technique Standard
+	{
+		vertexprogram "auto" "BillboardVertexShader.eff" "vertexmain"
+		pixelprogram "auto" "BillboardPixelShader.eff" "pixelmain"
+
+		lighting none
+		
+		blendstate
+		{
+			blendingenabled false
+			srcblend one
+			destblend zero
+			blendop add
+			srcblendalpha zero
+			destblendalpha zero
+			blendopalpha add
+			writemask all
+		}
+		
+		rasteriser
+		{
+			depthcmp lessequal
+			depthtestenabled true
+			depthwriteenabled true
+		}
+	}
+}

@@ -1,0 +1,36 @@
+
+vertexInput
+{
+	float3 position : position;
+	float3 normal : normal;
+	float2 texcoord : texcoord;
+}
+
+vertexOutput
+{
+	float4 viewposition : viewposition
+	float3 viewnormal : viewnormal
+	float4 specular : specular
+	float2 texcoord : texcoord pass
+}
+
+autos
+{
+	float4x4 autoView
+}
+
+source
+{	
+	VOUT vertexmain(VIN input)
+	{
+		VOUT output;
+		//input position and normal are transformed into world space on the cpu
+		output.viewposition = mul(autoView, float4(input.position, 1.0f));
+		output.viewnormal = mul(autoView, float4(input.normal,0.0)).xyz;
+		output.texcoord = input.texcoord;
+		//set specular here incase of vertex lighting
+		output.specular = float4(1.0f,1.0f,1.0f,1.0f);
+		
+		return output;
+	}
+}

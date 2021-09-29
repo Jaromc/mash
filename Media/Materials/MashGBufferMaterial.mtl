@@ -1,0 +1,281 @@
+
+material MashGBufferDirectionalLight
+{	
+	vertex
+	{
+		position rgb32float
+		texcoord rg32float
+	}
+	
+	technique Standard
+	{
+		vertexprogram "auto" "MashGBufferLight_Vertex.eff" "vsmain"
+		pixelprogram "auto" "MashGBufferDirectionalLight_Pixel.eff" "psmain"
+	}
+	
+	sampler2D DepthSampler
+	{
+		index 0
+		minmagfilter point
+		mipfilter none
+		addressu clamp
+		addressv clamp
+	}
+	
+	sampler2D NormalSampler
+	{
+		index 1
+		minmagfilter point
+		mipfilter none
+		addressu clamp
+		addressv clamp
+	}
+	
+	sampler2D SpecularSampler
+	{
+		index 2
+		minmagfilter point
+		mipfilter none
+		addressu clamp
+		addressv clamp
+	}
+	
+	sampler2D ShadowSampler
+	{
+		index 3
+		minmagfilter point
+		mipfilter none
+		addressu clamp
+		addressv clamp
+	}
+	
+	rasteriser
+	{
+		depthcmp never
+		depthtestenabled false
+		depthwriteenabled false
+	}
+	
+	blendstate
+	{
+		blendingenabled true
+		srcblend one
+		destblend one
+		blendop add
+		srcblendalpha zero
+		destblendalpha zero
+		blendopalpha add
+		writemask all
+	}
+}
+
+material MashGBufferPointLight
+{	
+	vertex
+	{
+		position rgb32float
+		texcoord rg32float
+	}
+	
+	technique Standard
+	{
+		vertexprogram "auto" "MashGBufferLight_Vertex.eff" "vsmain"
+		pixelprogram "auto" "MashGBufferPointLight_Pixel.eff" "psmain"
+	}
+	
+	sampler2D DepthSampler
+	{
+		index 0
+		minmagfilter point
+		mipfilter none
+		addressu clamp
+		addressv clamp
+	}
+	
+	sampler2D NormalSampler
+	{
+		index 1
+		minmagfilter point
+		mipfilter none
+		addressu clamp
+		addressv clamp
+	}
+	
+	sampler2D SpecularSampler
+	{
+		index 2
+		minmagfilter point
+		mipfilter none
+		addressu clamp
+		addressv clamp
+	}
+	
+	sampler2D ShadowSampler
+	{
+		index 3
+		minmagfilter point
+		mipfilter none
+		addressu clamp
+		addressv clamp
+	}
+	
+	rasteriser
+	{
+		depthcmp never
+		depthtestenabled false
+		depthwriteenabled false
+	}
+	
+	blendstate
+	{
+		blendingenabled true
+		srcblend one
+		destblend one
+		blendop add
+		srcblendalpha zero
+		destblendalpha zero
+		blendopalpha add
+		writemask all
+	}
+}
+
+material MashGBufferSpotLight
+{	
+	vertex
+	{
+		position rgb32float
+		texcoord rg32float
+	}
+	
+	technique Standard
+	{
+		vertexprogram "auto" "MashGBufferLight_Vertex.eff" "vsmain"
+		pixelprogram "auto" "MashGBufferSpotLight_Pixel.eff" "psmain"
+	}
+	
+	sampler2D DepthSampler
+	{
+		index 0
+		minmagfilter point
+		mipfilter none
+		addressu clamp
+		addressv clamp
+	}
+	
+	sampler2D NormalSampler
+	{
+		index 1
+		minmagfilter point
+		mipfilter none
+		addressu clamp
+		addressv clamp
+	}
+	
+	sampler2D SpecularSampler
+	{
+		index 2
+		minmagfilter point
+		mipfilter none
+		addressu clamp
+		addressv clamp
+	}
+	
+	sampler2D ShadowSampler
+	{
+		index 3
+		minmagfilter point
+		mipfilter none
+		addressu clamp
+		addressv clamp
+	}
+	
+	rasteriser
+	{
+		depthcmp never
+		depthtestenabled false
+		depthwriteenabled false
+	}
+	
+	blendstate
+	{
+		blendingenabled true
+		srcblend one
+		destblend one
+		blendop add
+		srcblendalpha zero
+		destblendalpha zero
+		blendopalpha add
+		writemask all
+	}
+}
+
+material MashGBufferCombine
+{	
+	vertex
+	{
+		position rgb32float
+		texcoord rg32float
+	}
+	
+	technique Standard
+	{
+		vertexprogram "auto" "MashGBufferCombine_Vertex.eff" "vsmain"
+		pixelprogram "auto" "MashGBufferCombine_Pixel.eff" "psmain"
+	}
+	
+	sampler2D DiffuseSampler
+	{
+		index 0
+		minmagfilter point
+		mipfilter none
+		addressu clamp
+		addressv clamp
+	}
+	
+	sampler2D LightSampler
+	{
+		index 1
+		minmagfilter point
+		mipfilter none
+		addressu clamp
+		addressv clamp
+	}
+	
+	sampler2D SpecularSampler
+	{
+		index 2
+		minmagfilter point
+		mipfilter none
+		addressu clamp
+		addressv clamp
+	}
+	
+	rasteriser
+	{
+		depthcmp never
+		depthtestenabled false
+		depthwriteenabled false
+	}
+}
+
+material MashGBufferClear
+{	
+	vertex
+	{
+		position rgb32float
+		texcoord rg32float
+	}
+	
+	technique Standard
+	{
+		vertexprogram "auto" "MashGBufferClear_Vertex.eff" "vsmain"
+		pixelprogram "auto" "MashGBufferClear_Pixel.eff" "psmain"
+	}
+
+	rasteriser
+	{
+		depthcmp never
+		depthtestenabled false
+		depthwriteenabled false
+	}
+}

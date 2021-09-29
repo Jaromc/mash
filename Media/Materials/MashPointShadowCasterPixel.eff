@@ -1,0 +1,13 @@
+
+autos
+{
+	float4 autoPointLightPositionRange
+}
+
+source
+{
+	float4 MashShadowCasterPixel(PIN input)
+	{
+		return saturate(length(input.distanceToLight) * autoPointLightPositionRange.w);
+	}
+}

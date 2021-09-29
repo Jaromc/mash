@@ -1,0 +1,20 @@
+source
+{
+	struct PS_OUTPUT
+	{
+		float4 colour : SV_TARGET0;
+		float4 normal : SV_TARGET1;
+		float4 specular : SV_TARGET2;
+		float4 depth : SV_TARGET3;
+	};
+
+	PS_OUTPUT psmain()
+	{
+		PS_OUTPUT output;
+		output.colour = float4(0.0f, 0.0f, 0.0f, 0.0f);
+		output.normal = float4(0.5f, 0.5f, 0.5f, 0.5f);
+		output.specular = float4(0.0f, 0.0f, 0.0f, 0.0f);
+		output.depth = float4(1.0f, 1.0f, 1.0f, 1.0f);
+		return output;
+	}
+}

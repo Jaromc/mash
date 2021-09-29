@@ -1,0 +1,72 @@
+<root>
+    <guielement type="menubar" name="MenuBar" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0">
+        <destinationregion>
+            <left scale="0" offset="0" />
+            <right scale="1" offset="-300" />
+            <top scale="0" offset="0" />
+            <bottom scale="0" offset="20" />
+        </destinationregion>
+        <menuitem text="File" value="0">
+			<item text="Load" value="1" />
+            <item text="Save" value="0" />
+			<item text="Load Shadow Settings" value="6" />
+			<item text="Save Shadow Settings" value="5" />
+			<!--<item text="Save Standard Materials Only" value="3" /> -->
+			<item text="Clear" value="4" />
+            <item text="Quit" value="2" />
+        </menuitem>
+		<menuitem text="Edit" value="3">
+            <item text="Preferred Lighting Mode" value="0" />
+            <item text="Configure Materials" value="1" />
+			<item text="Configure Shadows" value="2" />
+        </menuitem>
+        <menuitem text="View" value="1">
+            <item text="Log" value="0" />
+			<item text="Scene Info" value="1" />
+			<item text="FPS" value="2" />
+			<item text="Scene Tree" value="3" />
+        </menuitem>
+        <menuitem text="Add" value="2">
+            <item text="Particle System" value="0" />
+			<item text="Light" value="1" />
+			<item text="Camera" value="2" />
+        </menuitem>
+    </guielement>
+    <guielement type="viewport" name="MainSceneViewport" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0">
+        <destinationregion>
+            <left scale="0" offset="0" />
+            <right scale="1" offset="-300" />
+            <top scale="0" offset="20" />
+            <bottom scale="1" offset="-25" />
+        </destinationregion>
+    </guielement>
+    <guielement type="listbox" name="LogMessageLB" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" itemheight="25" iconsenabled="1">
+        <destinationregion>
+            <left scale="0" offset="0" />
+            <right scale="1" offset="-300" />
+            <top scale="1" offset="-25" />
+            <bottom scale="1" offset="0" />
+        </destinationregion>
+        <itemiconregion>
+            <left scale="0" offset="0" />
+            <right scale="0" offset="20" />
+            <top scale="0" offset="0" />
+            <bottom scale="0" offset="20" />
+        </itemiconregion>
+        <itemtextregion>
+            <left scale="0" offset="5" />
+            <right scale="1" offset="-5" />
+            <top scale="0" offset="5" />
+            <bottom scale="1" offset="-5" />
+        </itemtextregion>
+        <item text="No messages" value="0" />
+    </guielement>
+    <guielement type="view" name="Properties" clippingenabled="1" canhavefocus="1" renderenabled="1" focuslock="0" hscrollenabled="0" vscrollenabled="1" renderbackground="1">
+        <destinationregion>
+            <left scale="1" offset="-300" />
+            <right scale="1" offset="0" />
+            <top scale="0" offset="0" />
+            <bottom scale="1" offset="0" />
+        </destinationregion>
+    </guielement>
+</root>

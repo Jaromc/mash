@@ -1,0 +1,122 @@
+include
+{
+	MashTexCoords.eff
+}
+
+autos
+{
+	samplerCUBE autoSceneShadowMap
+	float4 autoPointLightPositionRange //.xyz = worldpos, .w = range
+	float4x4 autoInvView
+}
+
+source
+{		
+#ifndef MASH_SHADOW_BIAS
+#define MASH_SHADOW_BIAS 0.005
+#endif
+
+#if defined(MASH_USE_ESM) || defined(MASH_USE_FILTER)
+
+#ifndef MASH_DARKENING
+#define MASH_DARKENING 10
+#endif
+
+#ifndef MASH_TEX_SIZE
+#define MASH_TEX_SIZE 1
+#endif
+
+#ifndef MASH_INV_T_SIZE
+#define MASH_INV_T_SIZE 1
+#endif
+
+#endif
+
+	float MashPointShadows(float3 viewSpacePos)
+	{	
+
+#if defined(MASH_USE_ESM) || defined(MASH_USE_FILTER)
+		float3 worldPos = mul(autoInvView, float4(viewSpacePos, 1.0f)).xyz;
+		float3 shadowTexCoords = worldPos - autoPointLightPositionRange.xyz;
+		float depth = saturate(length(shadowTexCoords) * autoPointLightPositionRange.w);
+		shadowTexCoords = normalize(shadowTexCoords);
+		
+		float3 textureSize = float3(MASH_TEX_SIZE,MASH_TEX_SIZE, MASH_TEX_SIZE);
+		float3 invTextureSize = float3(MASH_INV_T_SIZE, MASH_INV_T_SIZE, MASH_INV_T_SIZE);
+
+		// transform tex coords by texture size
+		float3 texPos = shadowTexCoords * textureSize;
+		//get first tex pos
+		float3 texPos0 = floor(texPos);
+		//get next tex pos
+		float3 texPos1 = texPos0 + float3(1.0, 1.0, 1.0);
+		//transform tex pos back into tex coords using inverse texture size
+		texPos0 = texPos0 * invTextureSize;
+		texPos1 = texPos1 * invTextureSize;
+		//get lerp amount between values
+		float3 blend = frac(texPos);
+
+		float3 texPos000 = mashGetCubeTexcoords(texPos0);
+		float3 texPos001 = mashGetCubeTexcoords(float3(texPos0.x, texPos0.y, texPos1.z));
+		float3 texPos010 = mashGetCubeTexcoords(float3(texPos0.x, texPos1.y, texPos0.z));
+		float3 texPos011 = mashGetCubeTexcoords(float3(texPos0.x, texPos1.y, texPos1.z));
+		float3 texPos100 = mashGetCubeTexcoords(float3(texPos1.x, texPos0.y, texPos0.z));
+		float3 texPos101 = mashGetCubeTexcoords(float3(texPos1.x, texPos0.y, texPos1.z));
+		float3 texPos110 = mashGetCubeTexcoords(float3(texPos1.x, texPos1.y, texPos0.z));
+		float3 texPos111 = mashGetCubeTexcoords(texPos1);
+		
+#ifdef MASH_USE_ESM
+		float d1 = texCUBE(autoSceneShadowMap, texPos000).r;
+		float d2 = texCUBE(autoSceneShadowMap, texPos001).r;
+		float d3 = texCUBE(autoSceneShadowMap, texPos010).r;
+		float d4 = texCUBE(autoSceneShadowMap, texPos011).r;
+		float d5 = texCUBE(autoSceneShadowMap, texPos100).r;
+		float d6 = texCUBE(autoSceneShadowMap, texPos101).r;
+		float d7 = texCUBE(autoSceneShadowMap, texPos110).r;
+		float d8 = texCUBE(autoSceneShadowMap, texPos111).r;
+		
+		float blendedDepth = lerp(lerp(lerp(d1, d3, blend.y),lerp(d5, d7, blend.y),blend.x),
+			lerp(lerp(d2, d4, blend.y),lerp(d6, d8, blend.y),blend.x),
+			blend.z);
+		
+		float occ = blendedDepth + MASH_SHADOW_BIAS;		
+		float lit = exp(MASH_DARKENING * (occ - depth));
+		lit = saturate(lit);
+		return lit;
+#else
+
+		float sum = 0.0f;
+		if (depth <= texCUBE(autoSceneShadowMap, texPos000).r + MASH_SHADOW_BIAS)
+			sum += 1.0f;
+		if (depth <= texCUBE(autoSceneShadowMap, texPos001).r + MASH_SHADOW_BIAS)
+			sum += 1.0f;
+		if (depth <= texCUBE(autoSceneShadowMap, texPos010).r + MASH_SHADOW_BIAS)
+			sum += 1.0f;
+		if (depth <= texCUBE(autoSceneShadowMap, texPos011).r + MASH_SHADOW_BIAS)
+			sum += 1.0f;
+		if (depth <= texCUBE(autoSceneShadowMap, texPos100).r + MASH_SHADOW_BIAS)
+			sum += 1.0f;
+		if (depth <= texCUBE(autoSceneShadowMap, texPos101).r + MASH_SHADOW_BIAS)
+			sum += 1.0f;
+		if (depth <= texCUBE(autoSceneShadowMap, texPos110).r + MASH_SHADOW_BIAS)
+			sum += 1.0f;
+		if (depth <= texCUBE(autoSceneShadowMap, texPos111).r + MASH_SHADOW_BIAS)
+			sum += 1.0f;
+			
+		sum *= 0.125; // sum /= 8.0
+		
+		return sum;
+#endif
+
+#else
+		//no blur
+		float3 worldPos = mul(autoInvView, float4(viewSpacePos, 1.0f)).xyz;
+		float3 shadowTexCoords = worldPos - autoPointLightPositionRange.xyz;
+		float depth = saturate(length(shadowTexCoords) * autoPointLightPositionRange.w);			
+		if (depth >= (texCUBE(autoSceneShadowMap, mashGetCubeTexcoords(shadowTexCoords)).r + MASH_SHADOW_BIAS))
+			return 0.0f;
+		else
+			return 1.0f;
+#endif
+	}
+}

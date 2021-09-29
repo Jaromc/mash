@@ -1,0 +1,46 @@
+material MashStaticDecalMaterial
+{	
+	vertex
+	{
+		position rgb32float
+		normal rgb32float
+		texcoord rg32float
+	}
+
+	technique NormalTech
+	{
+		vertexprogram "auto" "MashStaticDecalVertexProgram.eff" "vertexmain"
+		pixelprogram "auto" "MashDecalPixelProgram.eff" "pixelmain"
+
+		lighting auto
+		
+		sampler2D Sampler
+		{
+			index 0
+			minmagfilter linear
+			mipfilter linear
+			addressu clamp
+			addressv clamp
+		}
+		
+		blendstate
+		{
+			blendingenabled true
+			srcblend srcalpha
+			destblend invsrcalpha
+			blendop add
+			srcblendalpha zero
+			destblendalpha zero
+			blendopalpha add
+			writemask all
+		}
+		
+		rasteriser
+		{
+			depthbias -10
+			depthcmp lessequal
+			depthtestenabled true
+			depthwriteenabled false
+		}
+	}
+}

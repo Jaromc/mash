@@ -1,0 +1,34 @@
+material MashPrimitiveMaterial
+{	
+	vertex
+	{
+		position rgb32float
+		colour rgba8unorm
+	}
+
+	technique DepthTestingOn
+	{
+		vertexprogram "auto" "MashPrimitive_Vertex.eff" "vsmain"
+		pixelprogram "auto" "MashPrimitive_Pixel.eff" "psmain"
+		
+		rasteriser
+		{
+			depthtestenabled true
+		}
+		
+		group "DepthTestingOn"
+	}
+	
+	technique DepthTestingOff
+	{
+		vertexprogram "auto" "MashPrimitive_Vertex.eff" "vsmain"
+		pixelprogram "auto" "MashPrimitive_Pixel.eff" "psmain"
+		
+		rasteriser
+		{
+			depthtestenabled false
+		}
+		
+		group "DepthTestingOff"
+	}
+}
