@@ -3,7 +3,11 @@
 Mash is a cross-platform, realtime, 3D engine written in C++ for games and simulation development. The engine currently runs on Windows, Mac and Ubuntu and supports DirectX and OpenGL. Mash can simplify and reduce the workload of cross-platform development by allowing you to write your shaders once and compile them to your target platform(s).
 
 The repository serves as a great reference for 2D and 3D maths, physics, collision detection, rendering, shaders, scene management, input devices, skeletal animation, 3d mesh file loading and so much more. 
-The repositiory contains no make files. It is here for historical and reference purposes only. 
+The repositiory contains no make files. It is here for historical and reference purposes only.
+
+### Demos ###
+
+Example code and videos can be found in the Demos folder
 
 ### Features ###
 
