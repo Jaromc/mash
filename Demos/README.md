@@ -8,7 +8,7 @@ This folder is a showcase of this engines technical abilities and a demonstratio
 ### DemoAnimation ###
 - Skeletal animation tracks and callbacks.
 - Adding sounds on particular frames. Here 'Tap' text is shown when the foot hits the ground.
-- Attaching objects to limbs. Here a bat and be added to the hand.
+- Attaching objects to limbs. Shown here a bat can be added to the hand.
 
 https://github.com/Jaromc/mash/assets/89912906/61e3033f-9f41-4caf-a95c-0f12afcf494b
 
